@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Demos.MusicTheory
 {
-    public enum IntervalQuality
+    public enum IntervalChromaticQuality
     {
         Perfect,
         Minor,

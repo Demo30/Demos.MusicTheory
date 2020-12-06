@@ -6,19 +6,8 @@ using System.Threading.Tasks;
 
 namespace Demos.MusicTheory
 {
-    public class Interval
+    abstract public class Interval
     {
-        public int Number { get; }
-
-        public Interval(int number)
-        {
-            if (number > 0)
-            {
-                this.Number = number;
-            } else
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-        }
+        
     }
 }
