@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Data;
 using Demos.DemosHelpers;
@@ -15,12 +13,8 @@ namespace Demos.MusicTheory
         {
             get
             {
-                if (NoteProvider._instance == null)
-                {
-                    NoteProvider._instance = new NoteProvider();
-                }
-
-                return NoteProvider._instance;
+                _instance = _instance ?? new NoteProvider();
+                return _instance;
             }
         }
 
@@ -35,52 +29,22 @@ namespace Demos.MusicTheory
             this.InitializeTones();
         }
 
-        public Tone GetTone(ChromaticNote chromaticNote)
-        {
-            foreach (Tone curTone in this._allTones)
-            {
-                foreach (ChromaticNote curChNote in curTone.EnharmonicNotes)
-                {
-                    if (curChNote.CompareTo(chromaticNote))
-                    {
-                        return curTone;
-                    }
-                }
-            }
+        public Tone GetTone(ChromaticNote searchedChromaticNote) =>
+            _allTones
+                .Where(tone => tone.EnharmonicNotes.Any(chromatic => chromatic.IsEqual(searchedChromaticNote)))
+                .FirstOrDefault();
 
-            return null;
-        }
+        public ChromaticNote[] GetNotesByStaffPosition(int staffPositionIndex) =>
+            _allTones
+                .SelectMany(tone => tone.EnharmonicNotes)
+                .Where(chromatic => chromatic.StaffPositionIndex == staffPositionIndex)
+                .Distinct()
+                .ToArray();
 
-        public ChromaticNote[] GetNotesByStaffPosition(int staffPositionIndex)
-        {
-            List<ChromaticNote> notes = new List<ChromaticNote>();
-            foreach(Tone curTone in this._allTones)
-            {
-                foreach(ChromaticNote note in curTone.EnharmonicNotes)
-                {
-                    if (note.StaffPositionIndex == staffPositionIndex && !this.DoesSetContainNote(notes, note))
-                    {
-
-                        notes.Add(note);
-                    }
-                }
-            }
-
-            return notes.ToArray();
-        }
-
-        public Tone GetToneByMidiIndex(int midiIndex)
-        {
-            foreach (Tone curTone in this._allTones)
-            {
-                if (curTone.MidiMapping == midiIndex)
-                {
-                    return curTone;
-                }
-            }
-
-            return null;
-        }
+        public Tone GetToneByMidiIndex(int midiIndex) => 
+            _allTones
+            .Where(tone => tone.MidiMapping == midiIndex)
+            .FirstOrDefault();
 
         public Tuple<ElementaryChromaticNotes, NotationSymbols>[] GetNotesFromKeySignature(KeySignatures key)
         {
@@ -143,97 +107,33 @@ namespace Demos.MusicTheory
             return notes.ToArray();
         }
 
-        public bool DoesSetContainTone(ICollection<Tone> set, Tone note)
-        {
-            if (set == null || set.Count == 0)
-            {
-                return false;
-            }
+        public bool DoesSetContainTone(ICollection<Tone> set, Tone note) => (set ?? new Tone[0]).Any(currentNote => currentNote.IsEqual(note));
 
-            foreach (Tone curNote in set)
-            {
-                if (curNote.IsSameTone(note))
-                {
-                    return true;
-                }
-            }
+        public bool DoesSetContainTone(ICollection<ChromaticNote> set, Tone tone) => (set ?? new ChromaticNote[0]).Any(currentChromaticNote => tone.EnharmonicNotes.Any(enharmonicNote => enharmonicNote.IsEqual(currentChromaticNote)));
 
-            return false;
-        }
+        public bool DoesSetContainNote(ICollection<Tone> set, ChromaticNote note) => (set ?? new Tone[0]).SelectMany(tone => tone.EnharmonicNotes).Any(chromaticTone => chromaticTone.IsEqual(note));
 
-        public bool DoesSetContainTone(ICollection<ChromaticNote> set, Tone tone)
-        {
-            foreach (ChromaticNote curChrNote in set)
-            {
-                foreach (ChromaticNote curChrNote2 in tone.EnharmonicNotes)
-                {
-                    if (curChrNote.CompareTo(curChrNote2))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        public bool DoesSetContainNote(ICollection<Tone> set, ChromaticNote note)
-        {
-            foreach(Tone curTone in set)
-            {
-                foreach(ChromaticNote curChrNote in curTone.EnharmonicNotes)
-                {
-                    if (curChrNote.CompareTo(note))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-
-        public bool DoesSetContainNote(ICollection<ChromaticNote> set, ChromaticNote note)
-        {
-            foreach (ChromaticNote curNote in set)
-            {
-                if (curNote.CompareTo(note))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+        public bool DoesSetContainNote(ICollection<ChromaticNote> set, ChromaticNote note) => (set ?? new ChromaticNote[0]).Any(currentNote => currentNote.IsEqual(note));
 
         public ChromaticNote GetChromaticNote(ElementaryChromaticNotes elNote, int octaveOrder, NotationSymbols modifier)
         {
-            foreach(Tone curTone in this._allTones)
-            {
-                foreach(ChromaticNote chromaticNote in curTone.EnharmonicNotes)
-                {
-                    bool conds =
-                        chromaticNote.ElementaryNote == elNote &&
-                        chromaticNote.OctaveOrder == octaveOrder &&
-                        chromaticNote.NoteModifierSymbol == modifier;
-                    
-                    if (conds)
-                    {
-                        return chromaticNote;
-                    }
-                }
-            }
-
-            return null;
+            Func<ChromaticNote, bool> matchingExpression = (enharmonic) =>
+                    enharmonic.ElementaryNote == elNote &&
+                    enharmonic.OctaveOrder == octaveOrder &&
+                    enharmonic.NoteModifierSymbol == modifier;
+            return _allTones.SelectMany(tone => tone.EnharmonicNotes).Where(matchingExpression).SingleOrDefault();
         }
-
 
         private void InitializeTones()
         {
+            this._allTones = GetAllTones();
+        }
+
+        private Tone[] GetAllTones()
+        {
             DataTable data = null;
 
-            using (IDbConnection conn = new SQLiteConnection("Data Source=MusicTheory.db;Version=3;"))
+            using (IDbConnection conn = GetMusicTheoryDbConnection())
             {
                 conn.Open();
 
@@ -248,27 +148,30 @@ namespace Demos.MusicTheory
                 data = UnifiedDatabaseHelperClass.GetResultsDataTable(query, conn);
             }
 
-            List<Tone> tones = new List<Tone>();
-
-            foreach(DataRow dr in data.Rows)
+            int dataRowsCount = data.Rows.Count;
+            Tone[] tones = new Tone[dataRowsCount];
+            
+            for(int i = 0; i < dataRowsCount; i++)
             {
-                double frequency = Double.Parse(dr["FREQUENCY"].ToString());
-                int octaveOrder = dr["OCTAVE_ORDER"].ToInt32(GeneralHelperClass.ToInt32ConversionTypes.IntOrException);
-                ElementaryChromaticNotes elementaryNote = DatabaseValuesCodec.DecodeElementaryChromaticNote(dr["ELEMENTARY_NOTE"].ToString());
-                NotationSymbols modifier = DatabaseValuesCodec.DecodeNotationSymbol(dr["MODIFIER"].ToString());
-                int overallOrder = dr["OVERALL_ORDER"].ToInt32(GeneralHelperClass.ToInt32ConversionTypes.IntOrException);
-                int midiMapping = dr["MIDI_MAPPING"].ToInt32(GeneralHelperClass.ToInt32ConversionTypes.IntOrException);
+                DataRow dataRow = data.Rows[i];
+
+                double frequency = Double.Parse(dataRow["FREQUENCY"].ToString());
+                int octaveOrder = dataRow["OCTAVE_ORDER"].ToInt32(GeneralHelperClass.ToInt32ConversionTypes.IntOrException);
+                ElementaryChromaticNotes elementaryNote = DatabaseValuesCodec.DecodeElementaryChromaticNote(dataRow["ELEMENTARY_NOTE"].ToString());
+                NotationSymbols modifier = DatabaseValuesCodec.DecodeNotationSymbol(dataRow["MODIFIER"].ToString());
+                int overallOrder = dataRow["OVERALL_ORDER"].ToInt32(GeneralHelperClass.ToInt32ConversionTypes.IntOrException);
+                int midiMapping = dataRow["MIDI_MAPPING"].ToInt32(GeneralHelperClass.ToInt32ConversionTypes.IntOrException);
 
                 ChromaticNote curNote = new ChromaticNote(elementaryNote, octaveOrder, modifier, overallOrder);
+#warning TODO there can be more rows for one tone...currently not supported....
+                Tone currentTone = new Tone(frequency, new ChromaticNote[] { curNote }, midiMapping);
 
-#warning there can be more rows for one tone...currently not supported....
-                Tone curTone = new Tone(frequency, new ChromaticNote[] { curNote }, midiMapping);
-
-                tones.Add(curTone);
+                tones[i] = currentTone;
             }
 
-
-            this._allTones = tones.ToArray();
+            return tones.ToArray();
         }
+
+        private IDbConnection GetMusicTheoryDbConnection() => new SQLiteConnection("Data Source=MusicTheory.db;Version=3;");
     }
 }

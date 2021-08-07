@@ -40,20 +40,18 @@ namespace Demos.MusicTheory
             this.StaffPositionIndex = staffPosition;
         }
 
-        public bool CompareTo(ChromaticNote comparedNote)
+        public bool IsEqual(ChromaticNote comparedNote)
         {
-            bool conds =
+            return
                 comparedNote.ElementaryNote == this.ElementaryNote &&
                 comparedNote.NoteModifierSymbol == this.NoteModifierSymbol &&
                 comparedNote.OctaveOrder == this.OctaveOrder;
-
-            return conds;
         }
 
         public override string ToString()
         {
             string modifier = this.NoteModifierSymbol == NotationSymbols.None ? "" : this.NoteModifierSymbol.ToString();
-            return $"{this.ElementaryNote.ToString()}{this.OctaveOrder.ToString()}{modifier}";
+            return $"{this.ElementaryNote}{this.OctaveOrder}{modifier}";
         }
     }
 }

@@ -19,13 +19,9 @@ namespace Demos.MusicTheory
             this.MidiMapping = midiMapping;
         }
 
-        public bool IsSameTone(Tone comparedNote)
+        public bool IsEqual(Tone comparedNote)
         {
-            if (comparedNote == null)
-            {
-                throw new ArgumentNullException();
-            }
-
+            comparedNote = comparedNote ?? throw new ArgumentNullException();
             return this.Frequency == comparedNote.Frequency;
         }
     }
