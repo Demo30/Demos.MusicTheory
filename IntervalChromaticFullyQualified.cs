@@ -9,26 +9,26 @@ namespace Demos.MusicTheory
     /// <summary>
     /// Fully qualified ordinary (chromatic) interval
     /// </summary>
-    public class IntervalChromatic : IntervalChromaticBase
+    public class IntervalChromaticFullyQualified : IntervalChromaticBase
     {
         public IntervalChromaticQuality Quality { get; }
 
-        protected bool PerfectType { get { return this.IsPerfectType(this.Number); } }
+        protected bool PerfectType { get { return this.IsPerfectType(this.IntervalBaseNumber); } }
 
         /// <summary>
         /// Starting from 0. One octave has one suboctave.
         /// </summary>
-        protected int Suboctaves { get { return this.GetSuboctaves(this.Number); } }
+        protected int Suboctaves { get { return this.GetSuboctaves(this.IntervalBaseNumber); } }
 
         /// <summary>
         /// Subtracts compound octave intervals from the overal base number.
         /// </summary>
         /// <returns></returns>
-        protected int SimpleBaseNumber { get { return this.GetSimpleBaseNumber(this.Number); } }
+        protected int SimpleBaseNumber { get { return this.GetSimpleBaseNumber(this.IntervalBaseNumber); } }
 
-        public IntervalChromatic(int number, IntervalChromaticQuality quality) : base(number)
+        public IntervalChromaticFullyQualified(int intervalBaseNumber, IntervalChromaticQuality quality) : base(intervalBaseNumber)
         {
-            if (this.IsCombinationValid(number, quality))
+            if (this.IsNumberQualityCombinationValid(intervalBaseNumber, quality))
             {
                 this.Quality = quality;
             } else
@@ -44,7 +44,7 @@ namespace Demos.MusicTheory
             diffs[IntervalChromaticQuality.Major] = 0;
             diffs[IntervalChromaticQuality.Minor] = -1;
             diffs[IntervalChromaticQuality.Augmented] = 1;
-            if (this.Number == 1)
+            if (this.IntervalBaseNumber == 1)
             {
                 diffs[IntervalChromaticQuality.Diminished] = 0;
             } else if (this.PerfectType)
@@ -62,25 +62,25 @@ namespace Demos.MusicTheory
             return semitones;
         }
 
-        protected int GetSimpleBaseNumber(int number)
+        protected int GetSimpleBaseNumber(int intervalBaseNumber)
         {
-            return number - (this.GetSuboctaves(number) * 7);
+            return intervalBaseNumber - (this.GetSuboctaves(intervalBaseNumber) * 7);
         }
 
-        protected int GetSuboctaves(int number)
+        protected int GetSuboctaves(int intervalBaseNumber)
         {
             /* Beware changing this - affects both perfect type evaluation and semitone count */
-            return (int)((number - 1) / 7);
+            return (int)((intervalBaseNumber - 1) / 7);
         }
 
-        private bool IsCombinationValid(int number, IntervalChromaticQuality quality)
+        private bool IsNumberQualityCombinationValid(int intervalBaseNumber, IntervalChromaticQuality quality)
         {
-            if (number == 1 && quality == IntervalChromaticQuality.Diminished)
+            if (intervalBaseNumber == 1 && quality == IntervalChromaticQuality.Diminished)
             {
                 return false;
             } else
             {
-                bool perfectType = this.IsPerfectType(number);
+                bool perfectType = this.IsPerfectType(intervalBaseNumber);
                 Dictionary<bool, IntervalChromaticQuality[]> validQualities = new Dictionary<bool, IntervalChromaticQuality[]>()
                 {
                     { true, new IntervalChromaticQuality[] {

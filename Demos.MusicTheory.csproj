@@ -55,7 +55,7 @@
     <Compile Include="DatabaseValuesCodec.cs" />
     <Compile Include="ElementaryChromaticNotes.cs" />
     <Compile Include="Interval.cs" />
-    <Compile Include="IntervalChromatic.cs" />
+    <Compile Include="IntervalChromaticFullyQualified.cs" />
     <Compile Include="IntervalChromaticBase.cs" />
     <Compile Include="IntervalChromaticQuality.cs" />
     <Compile Include="KeySignatures.cs" />

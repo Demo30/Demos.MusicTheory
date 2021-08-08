@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 using System;
 
-namespace Demos.MusicTheory.Tests
+namespace Demos.MusicTheory.Tests.Tests
 {
     [TestFixture]
-    public class NoteCreationTests
+    public class ChromaticNoteCreation
     {
         [Theory]
         [TestCase(ElementaryChromaticNotes.E, 1, NotationSymbols.None, 1)]
@@ -25,9 +25,9 @@ namespace Demos.MusicTheory.Tests
         }
 
         [Theory]
-        [TestCase(ElementaryChromaticNotes.E, -1, NotationSymbols.None, 1)]
-        [TestCase(ElementaryChromaticNotes.E, 1, NotationSymbols.WholeNote, 1)]
-        [TestCase(ElementaryChromaticNotes.E, 1, NotationSymbols.None, -1)]
+        [TestCase(ElementaryChromaticNotes.E, -1, NotationSymbols.None, 1)] // invalid octave order
+        [TestCase(ElementaryChromaticNotes.E, 1, NotationSymbols.WholeNote, 1)] // invalid notation symbol
+        [TestCase(ElementaryChromaticNotes.E, 1, NotationSymbols.None, -1)] // invalid staff position number
         public void TestChromaticNoteInvalidNoteCreation(
             ElementaryChromaticNotes elementaryChromaticNote,
             int octaveOrder,

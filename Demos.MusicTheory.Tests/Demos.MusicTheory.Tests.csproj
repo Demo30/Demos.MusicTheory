@@ -8,8 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{401F37F4-1F04-4C55-A6C1-1709FCBE5AA0}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Demos.MusicTheory.Tests</RootNamespace>
-    <AssemblyName>Demos.MusicTheory.Tests</AssemblyName>
+    <RootNamespace>Demos.MusicTheory.UnitTests</RootNamespace>
+    <AssemblyName>Demos.MusicTheory.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -55,7 +55,9 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\NoteCreationTests.cs" />
+    <Compile Include="Tests\IntervalChromaticFullyQualifiedCreation.cs" />
+    <Compile Include="Tests\IntervalChromaticFullyQualifiedSemitoneCount.cs" />
+    <Compile Include="Tests\ChromaticNoteCreation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -11,14 +11,26 @@ namespace Demos.MusicTheory
     /// </summary>
     public class IntervalChromaticBase : Interval
     {
-        public int Number { get; }
+        public int IntervalBaseNumber
+        { 
+            get => _number;
+            set
+            {
+                CheckValidIntervalNumber(value);
+                _number = value;
+            }
+        }
+
+        private int _number;
 
         public IntervalChromaticBase(int number)
         {
-            if (number > 0)
-            {
-                this.Number = number;
-            } else
+            this.IntervalBaseNumber = number;
+        }
+
+        private void CheckValidIntervalNumber(int number)
+        {
+            if (number <= 0)
             {
                 throw new ArgumentOutOfRangeException();
             }
