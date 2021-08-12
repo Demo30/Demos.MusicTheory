@@ -39,25 +39,10 @@ namespace Demos.MusicTheory
 
         public int GetSemitoneCount()
         {
-            Dictionary<IntervalChromaticQuality, int> diffs = new Dictionary<IntervalChromaticQuality, int>();
-            diffs[IntervalChromaticQuality.Perfect] = 0;
-            diffs[IntervalChromaticQuality.Major] = 0;
-            diffs[IntervalChromaticQuality.Minor] = -1;
-            diffs[IntervalChromaticQuality.Augmented] = 1;
-            if (this.IntervalBaseNumber == 1)
-            {
-                diffs[IntervalChromaticQuality.Diminished] = 0;
-            } else if (this.PerfectType)
-            {
-                diffs[IntervalChromaticQuality.Diminished] = -1;
-            } else
-            {
-                diffs[IntervalChromaticQuality.Diminished] = -2;
-            }
-
+            var basicSemitoneCountCorrections = GetBasicSemitoneCountCorrections();
             int diatonicCorrection = this.SimpleBaseNumber / 4;
             int baseSemitoneCount = ((this.SimpleBaseNumber - 1) * 2);
-            int semitones = (this.Suboctaves * 12) + baseSemitoneCount - diatonicCorrection + diffs[this.Quality];
+            int semitones = (this.Suboctaves * 12) + baseSemitoneCount - diatonicCorrection + basicSemitoneCountCorrections[this.Quality];
 
             return semitones;
         }
@@ -73,31 +58,67 @@ namespace Demos.MusicTheory
             return (int)((intervalBaseNumber - 1) / 7);
         }
 
+        private Dictionary<IntervalChromaticQuality, int> GetBasicSemitoneCountCorrections()
+        {
+            Dictionary<IntervalChromaticQuality, int> diffs = new Dictionary<IntervalChromaticQuality, int>()
+            {
+                { IntervalChromaticQuality.Perfect, 0 },
+                { IntervalChromaticQuality.Major, 0 },
+                { IntervalChromaticQuality.Minor, - 1},
+                { IntervalChromaticQuality.Augmented, 1},
+            };
+            if (this.IntervalBaseNumber == 1)
+            {
+                diffs[IntervalChromaticQuality.Diminished] = 0;
+            }
+            else if (this.PerfectType)
+            {
+                diffs[IntervalChromaticQuality.Diminished] = -1;
+            }
+            else
+            {
+                diffs[IntervalChromaticQuality.Diminished] = -2;
+            }
+
+            return diffs;
+        }
+
         private bool IsNumberQualityCombinationValid(int intervalBaseNumber, IntervalChromaticQuality quality)
         {
             if (intervalBaseNumber == 1 && quality == IntervalChromaticQuality.Diminished)
             {
                 return false;
-            } else
-            {
-                bool perfectType = this.IsPerfectType(intervalBaseNumber);
-                Dictionary<bool, IntervalChromaticQuality[]> validQualities = new Dictionary<bool, IntervalChromaticQuality[]>()
-                {
-                    { true, new IntervalChromaticQuality[] {
-                        IntervalChromaticQuality.Perfect,
-                        IntervalChromaticQuality.Diminished,
-                        IntervalChromaticQuality.Augmented
-                    } },
-                    { false, new IntervalChromaticQuality[]
-                    {
-                        IntervalChromaticQuality.Major,
-                        IntervalChromaticQuality.Minor,
-                        IntervalChromaticQuality.Diminished,
-                        IntervalChromaticQuality.Augmented
-                    }}
-                };
-                return validQualities[perfectType].Contains(quality);
             }
+            else
+            {
+                return GetValidIntervalChromaticQualitiesForIntervalBaseNumber(intervalBaseNumber).Contains(quality);
+            }
+        }
+
+        private IntervalChromaticQuality[] GetValidIntervalChromaticQualitiesForIntervalBaseNumber(int intervalBaseNumber)
+        {
+            IntervalChromaticQuality[] validQualities;
+            bool isPerfectType = this.IsPerfectType(intervalBaseNumber);
+            if (isPerfectType)
+            {
+                validQualities = new IntervalChromaticQuality[]
+                {
+                    IntervalChromaticQuality.Perfect,
+                    IntervalChromaticQuality.Diminished,
+                    IntervalChromaticQuality.Augmented
+                };
+            }
+            else
+            {
+                validQualities = new IntervalChromaticQuality[]
+                {
+                    IntervalChromaticQuality.Major,
+                    IntervalChromaticQuality.Minor,
+                    IntervalChromaticQuality.Diminished,
+                    IntervalChromaticQuality.Augmented
+                };
+            }
+            return validQualities;
         }
 
         /// <summary>
