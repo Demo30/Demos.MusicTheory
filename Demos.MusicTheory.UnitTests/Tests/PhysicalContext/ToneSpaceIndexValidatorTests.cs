@@ -78,8 +78,8 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void ThrowOnIncompatibleEntityAdded()
         {
             // Given
-            Contexts.ChromaticContext.ChromaticNote entity = new Contexts.ChromaticContext.ChromaticNote(2);
-            IEnumerable<Contexts.ChromaticContext.ChromaticNote> entitites = Array.Empty<Contexts.ChromaticContext.ChromaticNote>();
+            Contexts.ChromaticContext.ChromaticEntity entity = new Contexts.ChromaticContext.ChromaticEntity(2);
+            IEnumerable<Contexts.ChromaticContext.ChromaticEntity> entitites = Array.Empty<Contexts.ChromaticContext.ChromaticEntity>();
 
             ToneSpaceFrequencyValidator validator = GetValidator();
 

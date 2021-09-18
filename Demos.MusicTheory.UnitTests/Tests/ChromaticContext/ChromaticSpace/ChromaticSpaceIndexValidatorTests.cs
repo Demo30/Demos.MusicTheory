@@ -15,12 +15,12 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void ValidationShouldThrowException_OnConflictingIndexes()
         {
             // Given
-            IChromaticNote entity = new Contexts.ChromaticContext.ChromaticNote(2);
+            IChromaticNote entity = new Contexts.ChromaticContext.ChromaticEntity(2);
             IEnumerable<IChromaticNote> entitites = new[]
             {
-                new Contexts.ChromaticContext.ChromaticNote(1),
-                new Contexts.ChromaticContext.ChromaticNote(2),
-                new Contexts.ChromaticContext.ChromaticNote(3)
+                new ChromaticEntity(1),
+                new ChromaticEntity(2),
+                new ChromaticEntity(3)
             };
 
             ChromaticSpaceIndexValidator indexValidator = new ChromaticSpaceIndexValidator();
@@ -36,12 +36,12 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void ValidationShouldSucceed_WhenNoConflictingNotes()
         {
             // Given
-            IChromaticNote entity = new Contexts.ChromaticContext.ChromaticNote(2);
+            IChromaticNote entity = new Contexts.ChromaticContext.ChromaticEntity(2);
             IEnumerable<IChromaticNote> entitites = new[]
             {
-                new Contexts.ChromaticContext.ChromaticNote(1),
-                new Contexts.ChromaticContext.ChromaticNote(3),
-                new Contexts.ChromaticContext.ChromaticNote(4)
+                new ChromaticEntity(1),
+                new ChromaticEntity(3),
+                new ChromaticEntity(4)
             };
 
             ChromaticSpaceIndexValidator indexValidator = new ChromaticSpaceIndexValidator();
@@ -57,7 +57,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void ValidationShouldSucceed_WhenArrayEmpty()
         {
             // Given
-            IChromaticNote entity = new Contexts.ChromaticContext.ChromaticNote(2);
+            IChromaticNote entity = new Contexts.ChromaticContext.ChromaticEntity(2);
             IEnumerable<IChromaticNote> entitites = Array.Empty<IChromaticNote>();
 
             ChromaticSpaceIndexValidator indexValidator = new ChromaticSpaceIndexValidator();

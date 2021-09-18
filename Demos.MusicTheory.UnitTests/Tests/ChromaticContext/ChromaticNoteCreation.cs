@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using Demos.MusicTheory.ChromaticContext;
+using Demos.MusicTheory.Commons;
+using NUnit.Framework;
 using System;
 
 namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext
@@ -7,36 +9,32 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext
     public class ChromaticNoteCreation
     {
         [Theory]
-        [TestCase(ElementaryChromaticNotes.E, 1, NotationSymbols.None, 1)]
-        [TestCase(ElementaryChromaticNotes.D, 5, NotationSymbols.Sharp, 20)]
+        [TestCase(ChromaticNoteQuality.E, 1, NotationSymbols.None)]
+        [TestCase(ChromaticNoteQuality.D, 5, NotationSymbols.Sharp)]
         public void TestChromaticNoteNormalNoteCreation(
-            ElementaryChromaticNotes elementaryChromaticNote,
+            ChromaticNoteQuality elementaryChromaticNote,
             int octaveOrder,
-            NotationSymbols modifier,
-            int staffPosition)
+            NotationSymbols modifier)
         {
             // When
-            ChromaticNote chromaticNote = new ChromaticNote(elementaryChromaticNote, octaveOrder, modifier, staffPosition);
+            ChromaticNoteFullyQualified chromaticNote = new ChromaticNoteFullyQualified(elementaryChromaticNote, octaveOrder, modifier);
 
             // Then
             Assert.IsNotNull(chromaticNote);
-            Assert.AreEqual(elementaryChromaticNote, chromaticNote.ElementaryNote);
-            Assert.AreEqual(octaveOrder, chromaticNote.OctaveOrder);
-            Assert.AreEqual(modifier, chromaticNote.NoteModifierSymbol);
-            Assert.AreEqual(staffPosition, chromaticNote.StaffPositionIndex);
+            Assert.AreEqual(elementaryChromaticNote, chromaticNote.Quality);
+            Assert.AreEqual(octaveOrder, chromaticNote.Order);
+            Assert.AreEqual(modifier, chromaticNote.Modifier);
         }
 
-        [TestCase(ElementaryChromaticNotes.E, -1, NotationSymbols.None, 1)] // invalid octave order
-        [TestCase(ElementaryChromaticNotes.E, 1, NotationSymbols.WholeNote, 1)] // invalid notation symbol
-        [TestCase(ElementaryChromaticNotes.E, 1, NotationSymbols.None, -1)] // invalid staff position number
+        [TestCase(ChromaticNoteQuality.E, -1, NotationSymbols.None)] // invalid octave order
+        [TestCase(ChromaticNoteQuality.E, 1, NotationSymbols.WholeNote)] // invalid notation symbol
         public void TestChromaticNoteInvalidNoteCreation(
-            ElementaryChromaticNotes elementaryChromaticNote,
+            ChromaticNoteQuality elementaryChromaticNote,
             int octaveOrder,
-            NotationSymbols modifier,
-            int staffPosition)
+            NotationSymbols modifier)
         {
             // When
-            TestDelegate invalidConstruction = () => new ChromaticNote(elementaryChromaticNote, octaveOrder, modifier, staffPosition);
+            TestDelegate invalidConstruction = () => new ChromaticNoteFullyQualified(elementaryChromaticNote, octaveOrder, modifier);
 
             // Then
             Assert.Throws<ArgumentException>(invalidConstruction);

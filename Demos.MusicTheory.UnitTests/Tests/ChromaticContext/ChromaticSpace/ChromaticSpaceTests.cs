@@ -17,7 +17,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void ValidatorsRunOnEntityAdd()
         {
             // Given
-            var chromaticNote = new Contexts.ChromaticContext.ChromaticNote(1);
+            var chromaticNote = new Contexts.ChromaticContext.ChromaticEntity(1);
 
             Mock<IChromaticSpaceIndexValidator> indexValidator = new Mock<IChromaticSpaceIndexValidator>();
             indexValidator
@@ -43,7 +43,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void EvaluatesValidatorOnAdd()
         {
             // Given
-            var chromaticNote = new Contexts.ChromaticContext.ChromaticNote(1);
+            var chromaticNote = new Contexts.ChromaticContext.ChromaticEntity(1);
 
             Mock<IChromaticSpaceIndexValidator> indexValidator = new Mock<IChromaticSpaceIndexValidator>();
             indexValidator
@@ -72,10 +72,10 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
             // Given
             IEnumerable<IChromaticNote> notes = new[]
             {
-                new Contexts.ChromaticContext.ChromaticNote(1),
-                new Contexts.ChromaticContext.ChromaticNote(2),
-                new Contexts.ChromaticContext.ChromaticNote(3),
-                new Contexts.ChromaticContext.ChromaticNote(5)
+                new Contexts.ChromaticContext.ChromaticEntity(1),
+                new Contexts.ChromaticContext.ChromaticEntity(2),
+                new Contexts.ChromaticContext.ChromaticEntity(3),
+                new Contexts.ChromaticContext.ChromaticEntity(5)
             };
             int numberOfNotes = notes.Count();
 

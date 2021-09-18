@@ -17,6 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Demos.MusicTheory.ChromaticContext\Demos.MusicTheory.ChromaticContext.csproj" />
+    <ProjectReference Include="..\Demos.MusicTheory.PhysicalContext\Demos.MusicTheory.PhysicalContext.csproj" />
     <ProjectReference Include="..\Demos.MusicTheory\Demos.MusicTheory.csproj" />
   </ItemGroup>
 

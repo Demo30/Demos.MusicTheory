@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Demos.MusicTheory.Abstractions\Demos.MusicTheory.Abstractions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="OldImplementation\" />
+    <ProjectReference Include="..\Demos.MusicTheory.ChromaticContext\Demos.MusicTheory.ChromaticContext.csproj" />
+    <ProjectReference Include="..\Demos.MusicTheory.Commons\Demos.MusicTheory.Commons.csproj" />
   </ItemGroup>
 
   <ItemGroup>
