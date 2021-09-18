@@ -22,8 +22,8 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
             Mock<IChromaticSpaceIndexValidator> indexValidator = new Mock<IChromaticSpaceIndexValidator>();
             indexValidator
                 .Setup(mock => mock.ValidateEntityCompatibility(
-                    It.IsAny<IChromaticNote>(),
-                    It.IsAny<IChromaticNote[]>()))
+                    It.IsAny<IChromaticEntity>(),
+                    It.IsAny<IChromaticEntity[]>()))
                 .Returns(true);
 
             Contexts.ChromaticContext.ChromaticSpace chromaticSpace = new Contexts.ChromaticContext.ChromaticSpace(indexValidator.Object);
@@ -34,8 +34,8 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
             // Then
             indexValidator.Verify(mock =>
                 mock.ValidateEntityCompatibility(
-                    It.IsAny<IChromaticNote>(),
-                    It.IsAny<IChromaticNote[]>()),
+                    It.IsAny<IChromaticEntity>(),
+                    It.IsAny<IChromaticEntity[]>()),
                 Times.Once);
         }
 
@@ -48,8 +48,8 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
             Mock<IChromaticSpaceIndexValidator> indexValidator = new Mock<IChromaticSpaceIndexValidator>();
             indexValidator
                 .Setup(mock => mock.ValidateEntityCompatibility(
-                    It.IsAny<IChromaticNote>(),
-                    It.IsAny<IChromaticNote[]>()))
+                    It.IsAny<IChromaticEntity>(),
+                    It.IsAny<IChromaticEntity[]>()))
                 .Returns(false);
 
             Contexts.ChromaticContext.ChromaticSpace chromaticSpace = new Contexts.ChromaticContext.ChromaticSpace(indexValidator.Object);
@@ -61,8 +61,8 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
             act.Should().Throw<MusicalEntityValidatorException>();
             indexValidator.Verify(mock =>
                 mock.ValidateEntityCompatibility(
-                    It.IsAny<IChromaticNote>(),
-                    It.IsAny<IChromaticNote[]>()),
+                    It.IsAny<IChromaticEntity>(),
+                    It.IsAny<IChromaticEntity[]>()),
                 Times.Once);
         }
 
@@ -70,7 +70,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void ChromaticNotesAdded()
         {
             // Given
-            IEnumerable<IChromaticNote> notes = new[]
+            IEnumerable<IChromaticEntity> notes = new[]
             {
                 new Contexts.ChromaticContext.ChromaticEntity(1),
                 new Contexts.ChromaticContext.ChromaticEntity(2),
@@ -82,8 +82,8 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
             Mock<IChromaticSpaceIndexValidator> indexValidator = new Mock<IChromaticSpaceIndexValidator>();
             indexValidator
                 .Setup(mock => mock.ValidateEntityCompatibility(
-                    It.IsAny<IChromaticNote>(),
-                    It.IsAny<IChromaticNote[]>()))
+                    It.IsAny<IChromaticEntity>(),
+                    It.IsAny<IChromaticEntity[]>()))
                 .Returns(true);
 
             Contexts.ChromaticContext.ChromaticSpace chromaticSpace = new Contexts.ChromaticContext.ChromaticSpace(indexValidator.Object);
@@ -94,8 +94,8 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
             // Then
             indexValidator.Verify(mock =>
                 mock.ValidateEntityCompatibility(
-                    It.IsAny<IChromaticNote>(),
-                    It.IsAny<IChromaticNote[]>()),
+                    It.IsAny<IChromaticEntity>(),
+                    It.IsAny<IChromaticEntity[]>()),
                 Times.Exactly(numberOfNotes));
             chromaticSpace.MusicalEntities.Should().HaveCount(numberOfNotes);
         }

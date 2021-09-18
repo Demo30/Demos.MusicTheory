@@ -3,7 +3,7 @@ using Demos.MusicTheory.Abstractions.Commons;
 
 namespace Demos.MusicTheory.Contexts.ChromaticContext
 {
-    public class ChromaticEntity : IContentEqual<ChromaticEntity>, IChromaticNote
+    public class ChromaticEntity : IContentEqual<ChromaticEntity>, IChromaticEntity
     {
         public int ChromaticContextIndex { get; }
 
@@ -12,7 +12,7 @@ namespace Demos.MusicTheory.Contexts.ChromaticContext
             ChromaticContextIndex = chromaticContextIndex;
         }
 
-        public bool IsEqualByContent(ChromaticEntity comparedObject) => 
+        public virtual bool IsEqualByContent(ChromaticEntity comparedObject) => 
             ChromaticContextIndex.Equals(comparedObject?.ChromaticContextIndex);
     }
 }

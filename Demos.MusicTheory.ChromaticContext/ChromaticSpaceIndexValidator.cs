@@ -8,15 +8,15 @@ namespace Demos.MusicTheory.Contexts.ChromaticContext
 {
     public class ChromaticSpaceIndexValidator : MusicalEntitySpaceValidator, IChromaticSpaceIndexValidator
     {
-        public override Type CompatibleType => typeof(IChromaticNote);
+        public override Type CompatibleType => typeof(IChromaticEntity);
 
         public override bool ValidateEntityCompatibility<T>(T entity, IEnumerable<T> compatibleEntities)
         {
             base.ValidateEntityCompatibility(entity, compatibleEntities);
 
-            IChromaticNote chromaticNote = (IChromaticNote)entity;
-            IEnumerable<IChromaticNote> compatibleChromaticNotes =
-                compatibleEntities.Select(entity => (IChromaticNote)entity);
+            IChromaticEntity chromaticNote = (IChromaticEntity)entity;
+            IEnumerable<IChromaticEntity> compatibleChromaticNotes =
+                compatibleEntities.Select(entity => (IChromaticEntity)entity);
 
             bool noConflictingNotes = compatibleChromaticNotes
                 .Count(note => note.ChromaticContextIndex.Equals(chromaticNote.ChromaticContextIndex))

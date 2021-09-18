@@ -3,12 +3,12 @@
     public enum ChromaticNoteQuality
     {
         UNKNOWN = 0,
-        C,
-        D,
-        E,
-        F,
-        G,
-        A,
-        B
+        C = 1,
+        D = 2,
+        E = 3,
+        F = 4,
+        G = 5,
+        A = 6,
+        B = 7
     }
 }

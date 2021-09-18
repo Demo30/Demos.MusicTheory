@@ -2,7 +2,7 @@
 
 namespace Demos.MusicTheory.Abstractions.ChromaticContext
 {
-    public interface IChromaticNote : IMusicalEntity
+    public interface IChromaticEntity : IMusicalEntity
     {
         public int ChromaticContextIndex { get; }
     }

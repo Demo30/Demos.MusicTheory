@@ -15,8 +15,8 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void ValidationShouldThrowException_OnConflictingIndexes()
         {
             // Given
-            IChromaticNote entity = new Contexts.ChromaticContext.ChromaticEntity(2);
-            IEnumerable<IChromaticNote> entitites = new[]
+            IChromaticEntity entity = new Contexts.ChromaticContext.ChromaticEntity(2);
+            IEnumerable<IChromaticEntity> entitites = new[]
             {
                 new ChromaticEntity(1),
                 new ChromaticEntity(2),
@@ -36,8 +36,8 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void ValidationShouldSucceed_WhenNoConflictingNotes()
         {
             // Given
-            IChromaticNote entity = new Contexts.ChromaticContext.ChromaticEntity(2);
-            IEnumerable<IChromaticNote> entitites = new[]
+            IChromaticEntity entity = new Contexts.ChromaticContext.ChromaticEntity(2);
+            IEnumerable<IChromaticEntity> entitites = new[]
             {
                 new ChromaticEntity(1),
                 new ChromaticEntity(3),
@@ -57,8 +57,8 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void ValidationShouldSucceed_WhenArrayEmpty()
         {
             // Given
-            IChromaticNote entity = new Contexts.ChromaticContext.ChromaticEntity(2);
-            IEnumerable<IChromaticNote> entitites = Array.Empty<IChromaticNote>();
+            IChromaticEntity entity = new Contexts.ChromaticContext.ChromaticEntity(2);
+            IEnumerable<IChromaticEntity> entitites = Array.Empty<IChromaticEntity>();
 
             ChromaticSpaceIndexValidator indexValidator = new ChromaticSpaceIndexValidator();
 

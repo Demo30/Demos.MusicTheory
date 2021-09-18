@@ -3,7 +3,7 @@ using System;
 
 namespace Demos.MusicTheory.Abstractions.ChromaticContext
 {
-    public interface IChromaticSpace : IMusicalEntitySpace<IChromaticNote>
+    public interface IChromaticSpace : IMusicalEntitySpace<IChromaticEntity>
     {
     }
 }

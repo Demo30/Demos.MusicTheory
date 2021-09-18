@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Demos.MusicTheory.Contexts.ChromaticContext
 {
-    public class ChromaticSpace : MusicalEntitySpace<IChromaticNote>, IChromaticSpace
+    public class ChromaticSpace : MusicalEntitySpace<IChromaticEntity>, IChromaticSpace
     {
         public ChromaticSpace(
             IChromaticSpaceIndexValidator indexValidator)
@@ -12,7 +12,7 @@ namespace Demos.MusicTheory.Contexts.ChromaticContext
             AddValidator(indexValidator);
         }
 
-        public IChromaticNote GetNoteByChromaticIndex(int chromaticIndex)
+        public IChromaticEntity GetNoteByChromaticIndex(int chromaticIndex)
         {
             return MusicalEntities.FirstOrDefault(note => note.ChromaticContextIndex.Equals(chromaticIndex));
         }
