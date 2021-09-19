@@ -1,4 +1,4 @@
-﻿using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualifiedInterval;
+﻿using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
 using NUnit.Framework;
 using System;
 
@@ -37,7 +37,7 @@ namespace Demos.MusicTheory.UnitTests.Tests
         [TestCase(8, ChromaticNoteIntervalQuality.Diminished)]
         public void ValidCreationArgumentsOneOctave(int intervalBaseNumber, ChromaticNoteIntervalQuality intervalChromaticQuality)
         {
-            TestDelegate validCreation = () => new ChromaticNoteFullyQualifiedInterval(intervalBaseNumber, intervalChromaticQuality);
+            TestDelegate validCreation = () => new ChromaticNoteIntervalFullyQualified(intervalBaseNumber, intervalChromaticQuality);
             Assert.DoesNotThrow(validCreation);
         }
 
@@ -62,7 +62,7 @@ namespace Demos.MusicTheory.UnitTests.Tests
         [TestCase(16, ChromaticNoteIntervalQuality.Diminished)]
         public void ValidCreationArgumentsCompoundOctave(int intervalBaseNumber, ChromaticNoteIntervalQuality intervalChromaticQuality)
         {
-            TestDelegate validCreation = () => new ChromaticNoteFullyQualifiedInterval(intervalBaseNumber, intervalChromaticQuality);
+            TestDelegate validCreation = () => new ChromaticNoteIntervalFullyQualified(intervalBaseNumber, intervalChromaticQuality);
             Assert.DoesNotThrow(validCreation);
         }
 
@@ -81,7 +81,7 @@ namespace Demos.MusicTheory.UnitTests.Tests
         [TestCase(4, ChromaticNoteIntervalQuality.Minor)]
         public void InvalidCreationArgumentsOneOctave(int intervalBaseNumber, ChromaticNoteIntervalQuality intervalChromaticQuality)
         {
-            TestDelegate invalidCreation = () => new ChromaticNoteFullyQualifiedInterval(intervalBaseNumber, intervalChromaticQuality);
+            TestDelegate invalidCreation = () => new ChromaticNoteIntervalFullyQualified(intervalBaseNumber, intervalChromaticQuality);
             Assert.Throws(Is.InstanceOf<Exception>(), invalidCreation);
         }
 

@@ -1,25 +1,26 @@
-﻿using Demos.MusicTheory.Abstractions.ChromaticContext;
-using Demos.MusicTheory.ChromaticContext;
+﻿using Demos.MusicTheory.ChromaticContext;
 using System;
 using System.Linq;
 
 namespace Demos.MusicTheory.Contexts.ChromaticContext
 {
-    public class ChromaticNoteEnharmonicCluster :
-        IChromaticEntity
+    public class ChromaticNoteEnharmonicCluster : ChromaticEntity
     {
-        public int ChromaticContextIndex => Cluster.First().ChromaticContextIndex;
-
         public ChromaticNoteFullyQualified[] Cluster { get; }
 
-        public ChromaticNoteEnharmonicCluster(ChromaticNoteFullyQualified[] enharmonicNotes)
+        public ChromaticNoteEnharmonicCluster(ChromaticNoteFullyQualified[] enharmonicNotes) : base(GetChromaticContextIndex(enharmonicNotes))
         {
             enharmonicNotes = enharmonicNotes != null && enharmonicNotes.Length > 0 ?
                 enharmonicNotes :
                 throw new ArgumentNullException(nameof(enharmonicNotes));
 
             CheckEnharmonicNoteCompatibility(enharmonicNotes);
+
+            Cluster = enharmonicNotes;
         }
+
+        private static int GetChromaticContextIndex(ChromaticNoteFullyQualified[] enharmonicNotes) =>
+            (enharmonicNotes != null && enharmonicNotes.Length > 0) ? enharmonicNotes.First().ChromaticContextIndex : -1;
 
         private void CheckEnharmonicNoteCompatibility(ChromaticNoteFullyQualified[] enharmonicNotes)
         {
@@ -30,7 +31,7 @@ namespace Demos.MusicTheory.Contexts.ChromaticContext
 
             if (!valid)
             {
-                throw new ArgumentException("Supplied collection of chromatic notes cannot form an enharmonic cluster.");
+                throw new ArgumentException("Supplied collection of chromatic notes cannot form an enharmonic cluster due to unmatching chromatic context index.");
             }
         }
     }

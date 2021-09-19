@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualifiedInterval
+namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
 {
-    public abstract class ChromaticNoteFullyQualifiedIntervalBase
+    public abstract class ChromaticNoteIntervalFullyQualifiedBase : ChromaticNoteInterval
     {
         public ChromaticNoteIntervalQuality Quality { get; }
 
@@ -23,12 +23,12 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualifiedInterval
 
         private int _intervalBaseNumber;
 
-        protected ChromaticIndexRangeCounter _chromaticIndexRangeCounter => new ChromaticIndexRangeCounter(IsPerfectType, IntervalBaseNumber, Quality);
+        protected static ChromaticIndexSpanCounter _chromaticIndexSpanCounter => new ChromaticIndexSpanCounter(IsPerfectType);
 
         private Validations _validations => new Validations(IsPerfectType);
         
 
-        public ChromaticNoteFullyQualifiedIntervalBase(int intervalBaseNumber, ChromaticNoteIntervalQuality quality)
+        public ChromaticNoteIntervalFullyQualifiedBase(int intervalBaseNumber, ChromaticNoteIntervalQuality quality) : base(GetChromaticIndexSpan(intervalBaseNumber, quality))
         {
             if (!_validations.IsNumberQualityCombinationValid(intervalBaseNumber, quality))
                 throw new ArgumentException("Invalid combination of interval base number and quality.");
@@ -37,41 +37,40 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualifiedInterval
             this.IntervalBaseNumber = intervalBaseNumber;
         }
 
+        private static int GetChromaticIndexSpan(int intervalBaseNumber, ChromaticNoteIntervalQuality quality) =>
+            _chromaticIndexSpanCounter.GetChromaticIndexSpan(intervalBaseNumber, quality);
+
         /// <summary>
         /// This distinction probably does not exist in proper music theory, but seems reasonable enough and a handy one too
         /// </summary>
         /// <param name="intervalBaseNumber"></param>
         /// <returns></returns>
-        private bool IsPerfectType(int intervalBaseNumber)
+        public static bool IsPerfectType(int intervalBaseNumber)
         {
-            return new int[] { 1, 4, 5 }.Contains(_chromaticIndexRangeCounter.GetSimpleBaseNumber(intervalBaseNumber));
+            return new int[] { 1, 4, 5 }.Contains(_chromaticIndexSpanCounter.GetSimpleBaseNumber(intervalBaseNumber));
         }
 
-        protected class ChromaticIndexRangeCounter
+        protected class ChromaticIndexSpanCounter
         {
             internal delegate bool IsPerfectType(int intervalBaseNumber);
 
             private readonly IsPerfectType _isPerfectTypeCallback;
-            private readonly int _intervalBaseNumber;
-            private readonly ChromaticNoteIntervalQuality _quality;
 
-            internal ChromaticIndexRangeCounter(IsPerfectType callback, int intervalBaseNumber, ChromaticNoteIntervalQuality quality)
+            internal ChromaticIndexSpanCounter(IsPerfectType callback)
             {
                 _isPerfectTypeCallback = callback;
-                _intervalBaseNumber = intervalBaseNumber;
-                _quality = quality;
             }
 
-            internal int GetChromaticIndexRange()
+            internal int GetChromaticIndexSpan(int intervalBaseNumber, ChromaticNoteIntervalQuality quality)
             {
-                var basicSemitoneCountCorrections = GetBasicSemitoneCountCorrections();
-                int diatonicCorrection = GetSimpleBaseNumber(_intervalBaseNumber) / 4;
-                int baseSemitoneCount = ((GetSimpleBaseNumber(_intervalBaseNumber) - 1) * 2);
+                var basicSemitoneCountCorrections = GetBasicSemitoneCountCorrections(intervalBaseNumber);
+                int diatonicCorrection = GetSimpleBaseNumber(intervalBaseNumber) / 4;
+                int baseSemitoneCount = ((GetSimpleBaseNumber(intervalBaseNumber) - 1) * 2);
                 int semitones =
-                    (GetSuboctaves(_intervalBaseNumber) * 12) + 
+                    (GetSuboctaves(intervalBaseNumber) * 12) + 
                     baseSemitoneCount - 
                     diatonicCorrection + 
-                    basicSemitoneCountCorrections[_quality];
+                    basicSemitoneCountCorrections[quality];
 
                 return semitones;
             }
@@ -87,7 +86,7 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualifiedInterval
             internal int GetSuboctaves(int intervalBaseNumber) =>
                 ((intervalBaseNumber - 1) / 7);
 
-            internal Dictionary<ChromaticNoteIntervalQuality, int> GetBasicSemitoneCountCorrections()
+            internal Dictionary<ChromaticNoteIntervalQuality, int> GetBasicSemitoneCountCorrections(int intervalBaseNumber)
             {
                 Dictionary<ChromaticNoteIntervalQuality, int> diffs = new Dictionary<ChromaticNoteIntervalQuality, int>()
             {
@@ -96,11 +95,11 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualifiedInterval
                 { ChromaticNoteIntervalQuality.Minor, - 1},
                 { ChromaticNoteIntervalQuality.Augmented, 1},
             };
-                if (_intervalBaseNumber == 1)
+                if (intervalBaseNumber == 1)
                 {
                     diffs[ChromaticNoteIntervalQuality.Diminished] = 0;
                 }
-                else if (_isPerfectTypeCallback(_intervalBaseNumber))
+                else if (_isPerfectTypeCallback(intervalBaseNumber))
                 {
                     diffs[ChromaticNoteIntervalQuality.Diminished] = -1;
                 }

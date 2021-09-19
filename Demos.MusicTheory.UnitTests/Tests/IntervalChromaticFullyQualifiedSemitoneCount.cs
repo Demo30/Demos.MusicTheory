@@ -1,4 +1,4 @@
-﻿using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualifiedInterval;
+﻿using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
 using NUnit.Framework;
 
 namespace Demos.MusicTheory.UnitTests.Tests
@@ -36,7 +36,7 @@ namespace Demos.MusicTheory.UnitTests.Tests
         [TestCase(8, ChromaticNoteIntervalQuality.Augmented, 13)]
         public void TestSemitoneCountOneOctave(int intervalBaseNumber, ChromaticNoteIntervalQuality intervalChromaticQuality, int expectedSemitoneCount)
         {
-            var interval = new ChromaticNoteFullyQualifiedInterval(intervalBaseNumber, intervalChromaticQuality);
+            var interval = new ChromaticNoteIntervalFullyQualified(intervalBaseNumber, intervalChromaticQuality);
             Assert.AreEqual(expectedSemitoneCount, interval.SemitoneCount);
         }
 
@@ -72,7 +72,7 @@ namespace Demos.MusicTheory.UnitTests.Tests
         [TestCase(16, ChromaticNoteIntervalQuality.Augmented, 27)]
         public void TestSemitoneCountCompound(int intervalBaseNumber, ChromaticNoteIntervalQuality intervalChromaticQuality, int expectedSemitoneCount)
         {
-            var interval = new ChromaticNoteFullyQualifiedInterval(intervalBaseNumber, intervalChromaticQuality);
+            var interval = new ChromaticNoteIntervalFullyQualified(intervalBaseNumber, intervalChromaticQuality);
             Assert.AreEqual(expectedSemitoneCount, interval.SemitoneCount);
         }
     }
