@@ -21,11 +21,12 @@ namespace Demos.MusicTheory
             }
         }
 
+        private int _intervalBaseNumber;
+
         protected SemitoneCounter _semitoneCounter => new SemitoneCounter(IsPerfectType, IntervalBaseNumber, Quality);
 
-        private int _intervalBaseNumber;
         private Validations _validations => new Validations(IsPerfectType);
-
+        
 
         public ChromaticNoteFullyQualifiedIntervalBase(int intervalBaseNumber, ChromaticNoteIntervalQuality quality)
         {
