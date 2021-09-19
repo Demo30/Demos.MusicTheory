@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualifiedInterval;
+using NUnit.Framework;
 
 namespace Demos.MusicTheory.UnitTests.Tests
 {

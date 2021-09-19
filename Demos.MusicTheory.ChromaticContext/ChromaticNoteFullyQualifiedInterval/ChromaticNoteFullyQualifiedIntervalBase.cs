@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Demos.MusicTheory
+namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualifiedInterval
 {
     public abstract class ChromaticNoteFullyQualifiedIntervalBase
     {
@@ -23,7 +23,7 @@ namespace Demos.MusicTheory
 
         private int _intervalBaseNumber;
 
-        protected SemitoneCounter _semitoneCounter => new SemitoneCounter(IsPerfectType, IntervalBaseNumber, Quality);
+        protected ChromaticIndexRangeCounter _chromaticIndexRangeCounter => new ChromaticIndexRangeCounter(IsPerfectType, IntervalBaseNumber, Quality);
 
         private Validations _validations => new Validations(IsPerfectType);
         
@@ -44,10 +44,10 @@ namespace Demos.MusicTheory
         /// <returns></returns>
         private bool IsPerfectType(int intervalBaseNumber)
         {
-            return new int[] { 1, 4, 5 }.Contains(_semitoneCounter.GetSimpleBaseNumber(intervalBaseNumber));
+            return new int[] { 1, 4, 5 }.Contains(_chromaticIndexRangeCounter.GetSimpleBaseNumber(intervalBaseNumber));
         }
 
-        protected class SemitoneCounter
+        protected class ChromaticIndexRangeCounter
         {
             internal delegate bool IsPerfectType(int intervalBaseNumber);
 
@@ -55,14 +55,14 @@ namespace Demos.MusicTheory
             private readonly int _intervalBaseNumber;
             private readonly ChromaticNoteIntervalQuality _quality;
 
-            internal SemitoneCounter(IsPerfectType callback, int intervalBaseNumber, ChromaticNoteIntervalQuality quality)
+            internal ChromaticIndexRangeCounter(IsPerfectType callback, int intervalBaseNumber, ChromaticNoteIntervalQuality quality)
             {
                 _isPerfectTypeCallback = callback;
                 _intervalBaseNumber = intervalBaseNumber;
                 _quality = quality;
             }
 
-            internal int GetSemitoneCount()
+            internal int GetChromaticIndexRange()
             {
                 var basicSemitoneCountCorrections = GetBasicSemitoneCountCorrections();
                 int diatonicCorrection = GetSimpleBaseNumber(_intervalBaseNumber) / 4;
