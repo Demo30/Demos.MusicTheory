@@ -20,12 +20,24 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext
         [TestCase(5, 4, ChromaticNoteIntervalQuality.Perfect)]
         [TestCase(5, 3, ChromaticNoteIntervalQuality.Augmented)]
         [TestCase(6, 4, ChromaticNoteIntervalQuality.Augmented)]
-        [TestCase(6, 5, ChromaticNoteIntervalQuality.Minor)]
+        [TestCase(6, 5, ChromaticNoteIntervalQuality.Diminished)]
         [TestCase(7, 5, ChromaticNoteIntervalQuality.Perfect)]
+        [TestCase(7, 6, ChromaticNoteIntervalQuality.Diminished)]
+        [TestCase(8, 5, ChromaticNoteIntervalQuality.Augmented)]
+        [TestCase(8, 6, ChromaticNoteIntervalQuality.Minor)]
         [TestCase(9, 6, ChromaticNoteIntervalQuality.Major)]
+        [TestCase(9, 6, ChromaticNoteIntervalQuality.Major)]
+        [TestCase(9, 7, ChromaticNoteIntervalQuality.Diminished)]
+        [TestCase(10, 6, ChromaticNoteIntervalQuality.Augmented)]
+        [TestCase(10, 7, ChromaticNoteIntervalQuality.Minor)]
         [TestCase(11, 7, ChromaticNoteIntervalQuality.Major)]
+        [TestCase(11, 8, ChromaticNoteIntervalQuality.Diminished)]
         [TestCase(12, 8, ChromaticNoteIntervalQuality.Perfect)]
-        public void ValidResults(int chromaticIndexSpan, int expectedIntervalBaseNumber, ChromaticNoteIntervalQuality expectedQuality)
+        [TestCase(12, 9, ChromaticNoteIntervalQuality.Diminished)]
+        [TestCase(13, 8, ChromaticNoteIntervalQuality.Augmented)]
+        [TestCase(13, 9, ChromaticNoteIntervalQuality.Minor)]
+        [TestCase(19, 12, ChromaticNoteIntervalQuality.Perfect)]
+        public void ValidResults(int chromaticIndexSpan, int expectedDiatonicScaleDegree, ChromaticNoteIntervalQuality expectedQuality)
         {
             // Given
             ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan provider = new();
@@ -35,7 +47,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext
 
             // Then
             result.Should().Contain(x => 
-                    x.IntervalBaseNumber.Equals(expectedIntervalBaseNumber) &&
+                    x.DiatonicScaleDegree.Equals(expectedDiatonicScaleDegree) &&
                     x.Quality.Equals(expectedQuality));
         }
     }

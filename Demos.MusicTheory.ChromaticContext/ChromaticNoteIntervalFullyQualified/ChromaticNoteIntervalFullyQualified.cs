@@ -10,15 +10,15 @@
         /// <summary>
         /// Starting from 0. One full octave has one suboctave.
         /// </summary>
-        public int Suboctaves => _chromaticIndexSpanCounter.GetSuboctaves(IntervalBaseNumber);
+        public int Suboctaves => _chromaticIndexSpanCounter.GetSuboctaves(DiatonicScaleDegree);
 
         /// <summary>
         /// Subtracts compound octave intervals from the overal base number.
         /// </summary>
         /// <returns></returns>
-        public int SimpleBaseNumber => _chromaticIndexSpanCounter.GetSimpleBaseNumber(IntervalBaseNumber);
+        public int SimpleBaseNumber => _chromaticIndexSpanCounter.GetSimpleBaseNumber(DiatonicScaleDegree);
 
-        public ChromaticNoteIntervalFullyQualified(int intervalBaseNumber, ChromaticNoteIntervalQuality quality) : base(intervalBaseNumber, quality)
+        public ChromaticNoteIntervalFullyQualified(int diatonicScaleDegree, ChromaticNoteIntervalQuality quality) : base(diatonicScaleDegree, quality)
         {
 
         }

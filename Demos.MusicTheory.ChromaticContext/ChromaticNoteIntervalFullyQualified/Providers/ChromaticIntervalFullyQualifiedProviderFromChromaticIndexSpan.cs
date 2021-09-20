@@ -11,8 +11,8 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
             public int ChromaticIndexSpan { get; set; }
             public bool IsBlackKey { get; set; }
             public int DiatonicCorrection { get; set; }
-            public int MainIntervalNumber { get; set; }
-            public int BaseIntervalNumber { get; set; }
+            public int MainDiatonicScaleDegree { get; set; }
+            public int BaseDiatonicScaleDegree { get; set; }
             public int Suboctaves { get; set; }
             public bool IsPerfectType { get; set; }
         }
@@ -25,19 +25,25 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
 
             if (report.IsBlackKey)
             {
-                enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainIntervalNumber, ChromaticNoteIntervalQuality.Augmented));
-                enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainIntervalNumber + 1, ChromaticNoteIntervalQuality.Minor));                
+                enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainDiatonicScaleDegree, ChromaticNoteIntervalQuality.Augmented));
+
+                int nextDiatonicScaleDegree = report.MainDiatonicScaleDegree + 1;
+                var quality = IsPerfectType(nextDiatonicScaleDegree) ?
+                    ChromaticNoteIntervalQuality.Diminished :
+                    ChromaticNoteIntervalQuality.Minor;
+                    
+                enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(nextDiatonicScaleDegree, quality));
             }
             else
             {
                 ChromaticNoteIntervalQuality quality =  report.IsPerfectType?
                     ChromaticNoteIntervalQuality.Perfect :
                     ChromaticNoteIntervalQuality.Major;
-                enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainIntervalNumber, quality));
-                enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainIntervalNumber + 1, ChromaticNoteIntervalQuality.Diminished));
-                if (report.IsPerfectType && report.MainIntervalNumber > 1)
+                enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainDiatonicScaleDegree, quality));
+                enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainDiatonicScaleDegree + 1, ChromaticNoteIntervalQuality.Diminished));
+                if (report.IsPerfectType && report.MainDiatonicScaleDegree > 1)
                 {
-                    enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainIntervalNumber - 1, ChromaticNoteIntervalQuality.Augmented));
+                    enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainDiatonicScaleDegree - 1, ChromaticNoteIntervalQuality.Augmented));
                 }
             }
 
@@ -65,8 +71,8 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
             {
                 ChromaticIndexSpan = chromaticIndexSpan,
                 DiatonicCorrection = diatonicCorrection,
-                MainIntervalNumber = intervalBaseNumber,
-                BaseIntervalNumber = baseIntervalBaseNumber,
+                MainDiatonicScaleDegree = intervalBaseNumber,
+                BaseDiatonicScaleDegree = baseIntervalBaseNumber,
                 IsBlackKey = isBlackKey,
                 Suboctaves = suboctaves,
                 IsPerfectType = IsPerfectType(intervalBaseNumber)

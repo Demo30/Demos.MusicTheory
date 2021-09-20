@@ -11,17 +11,17 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
         /// <summary>
         /// Basic interval number identification such as: second, third, sixth etc.
         /// </summary>
-        public int IntervalBaseNumber
+        public int DiatonicScaleDegree
         {
-            get => _intervalBaseNumber;
+            get => _diatonicScaleDegree;
             init
             {
-                _validations.CheckValidIntervalNumber(value);
-                _intervalBaseNumber = value;
+                _validations.CheckValidDiatonicScaleDegree(value);
+                _diatonicScaleDegree = value;
             }
         }
 
-        private int _intervalBaseNumber;
+        private int _diatonicScaleDegree;
 
         protected static ChromaticIndexSpanCounter _chromaticIndexSpanCounter => new ChromaticIndexSpanCounter(IsPerfectType);
 
@@ -34,7 +34,7 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
                 throw new ArgumentException("Invalid combination of interval base number and quality.");
 
             this.Quality = quality;
-            this.IntervalBaseNumber = intervalBaseNumber;
+            this.DiatonicScaleDegree = intervalBaseNumber;
         }
 
         private static int GetChromaticIndexSpan(int intervalBaseNumber, ChromaticNoteIntervalQuality quality) =>
@@ -123,7 +123,7 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
                 _isPerfectTypeCallback = callback;
             }
 
-            internal void CheckValidIntervalNumber(int number)
+            internal void CheckValidDiatonicScaleDegree(int number)
             {
                 if (number <= 0)
                 {
@@ -131,18 +131,18 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
                 }
             }
 
-            internal bool IsNumberQualityCombinationValid(int intervalBaseNumber, ChromaticNoteIntervalQuality quality)
+            internal bool IsNumberQualityCombinationValid(int diatonicScaleDegree, ChromaticNoteIntervalQuality quality)
             {
-                bool primaDeviation = intervalBaseNumber == 1 && quality == ChromaticNoteIntervalQuality.Diminished;
+                bool primaDeviation = diatonicScaleDegree == 1 && quality == ChromaticNoteIntervalQuality.Diminished;
                 return !primaDeviation ?
-                    GetValidIntervalChromaticQualitiesForIntervalBaseNumber(intervalBaseNumber).Contains(quality) :
+                    GetValidIntervalChromaticQualitiesForDiatonicScaleDegree(diatonicScaleDegree).Contains(quality) :
                     false;
             }
 
-            private ChromaticNoteIntervalQuality[] GetValidIntervalChromaticQualitiesForIntervalBaseNumber(int intervalBaseNumber)
+            private ChromaticNoteIntervalQuality[] GetValidIntervalChromaticQualitiesForDiatonicScaleDegree(int diatonicScaleDegree)
             {
                 ChromaticNoteIntervalQuality[] validQualities;
-                bool isPerfectType = _isPerfectTypeCallback(intervalBaseNumber);
+                bool isPerfectType = _isPerfectTypeCallback(diatonicScaleDegree);
                 if (isPerfectType)
                 {
                     validQualities = new ChromaticNoteIntervalQuality[]
