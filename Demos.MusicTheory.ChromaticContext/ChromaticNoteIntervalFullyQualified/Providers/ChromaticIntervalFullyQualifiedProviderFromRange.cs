@@ -14,7 +14,7 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
 
         public ChromaticNoteIntervalFullyQualified[] GetIntervals(ChromaticNoteFullyQualifiedRange range)
         {
-            ChromaticNoteIntervalFullyQualified[] intervals = _chromaticIndexLengthProvider.GetIntervals(range.ChromaticIndexLength);
+            ChromaticNoteIntervalFullyQualified[] intervals = _chromaticIndexLengthProvider.GetIntervals(range.ChromaticIndexSpan);
             return intervals;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Demos.MusicTheory.ChromaticContext.Constants;
 using System.Collections.Generic;
+using System.Linq;
 using static Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.ChromaticNoteIntervalFullyQualifiedBase;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers
@@ -19,6 +20,8 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
 
         public ChromaticNoteIntervalFullyQualified[] GetIntervals(int chromaticIndexSpan)
         {
+            // I'm sure there can be a nicer cleaner implementeation... all these ifs ain't no good :)
+
             List<ChromaticNoteIntervalFullyQualified> enharmonicIntervalCluster = new();
 
             SpanAnalysisReport report = Analyse(chromaticIndexSpan);
@@ -40,8 +43,12 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
                     ChromaticNoteIntervalQuality.Perfect :
                     ChromaticNoteIntervalQuality.Major;
                 enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainDiatonicScaleDegree, quality));
-                enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainDiatonicScaleDegree + 1, ChromaticNoteIntervalQuality.Diminished));
-                if (report.IsPerfectType && report.MainDiatonicScaleDegree > 1)
+                
+                if (report.BaseDiatonicScaleDegree != (int)ChromaticNoteQuality.F)
+                {
+                    enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainDiatonicScaleDegree + 1, ChromaticNoteIntervalQuality.Diminished));
+                }
+                if ((new int[] { (int)ChromaticNoteQuality.C, (int)ChromaticNoteQuality.F }).Contains(report.BaseDiatonicScaleDegree) && report.MainDiatonicScaleDegree > 1)
                 {
                     enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainDiatonicScaleDegree - 1, ChromaticNoteIntervalQuality.Augmented));
                 }

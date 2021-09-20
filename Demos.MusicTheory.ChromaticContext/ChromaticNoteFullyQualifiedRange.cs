@@ -6,7 +6,7 @@ namespace Demos.MusicTheory.ChromaticContext
     {
         public ChromaticNoteFullyQualified ChromaticNoteStart { get; }
         public ChromaticNoteFullyQualified ChromaticNoteEnd { get; }
-        public int ChromaticIndexLength => 
+        public int ChromaticIndexSpan => 
             Math.Abs(ChromaticNoteStart.ChromaticContextIndex - ChromaticNoteEnd.ChromaticContextIndex);
 
         public ChromaticNoteFullyQualifiedRange(ChromaticNoteFullyQualified start, ChromaticNoteFullyQualified end)
