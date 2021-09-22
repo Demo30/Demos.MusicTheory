@@ -2,6 +2,7 @@
 using Demos.MusicTheory.Commons;
 using System.Collections.Generic;
 using System.Linq;
+using ChromaticNote = Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 
 namespace Demos.MusicTheory.ChromaticContext.Providers
 {
@@ -12,9 +13,9 @@ namespace Demos.MusicTheory.ChromaticContext.Providers
         {
         }
 
-        public ChromaticNoteFullyQualified[] GetNotes(KeySignatures key, int count)
+        public ChromaticNote.ChromaticNoteFullyQualified[] GetNotes(KeySignatures key, int count)
         {
-            List<ChromaticNoteFullyQualified> notes = new();
+            List<ChromaticNote.ChromaticNoteFullyQualified> notes = new();
 
             int order = -1;
             ChromaticNoteElementary[] characteristics = GetBaseCharacteristics(key).ToArray();
@@ -23,7 +24,7 @@ namespace Demos.MusicTheory.ChromaticContext.Providers
                 int repeatingCharacteristicIndex = i % characteristics.Length;
                 order += repeatingCharacteristicIndex == 0 ? 1 : 0;
                 ChromaticNoteElementary characteristic = characteristics[repeatingCharacteristicIndex];
-                var note = new ChromaticNoteFullyQualified(characteristic.Quality, order, characteristic.Modifier);
+                var note = new ChromaticNote.ChromaticNoteFullyQualified(characteristic.Quality, order, characteristic.Modifier);
                 notes.Add(note);
             }
             return notes.ToArray();

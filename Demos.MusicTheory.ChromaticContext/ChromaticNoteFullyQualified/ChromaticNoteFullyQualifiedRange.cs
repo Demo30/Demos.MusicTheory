@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Demos.MusicTheory.ChromaticContext
+namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified
 {
     public class ChromaticNoteFullyQualifiedRange
     {

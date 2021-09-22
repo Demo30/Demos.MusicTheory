@@ -46,7 +46,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext
             var result = provider.GetIntervals(chromaticIndexSpan);
 
             // Then
-            result.Should().Contain(x => 
+            result.Cluster.Should().Contain(x => 
                     x.DiatonicScaleDegree.Equals(expectedDiatonicScaleDegree) &&
                     x.Quality.Equals(expectedQuality));
         }

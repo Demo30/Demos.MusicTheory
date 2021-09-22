@@ -2,7 +2,7 @@
 
 namespace Demos.MusicTheory.ChromaticContext
 {
-    public class ChromaticNoteInterval
+    public class ChromaticNoteInterval : IChromaticIndexSpan
     {
         public int ChromaticIndexSpan
         {

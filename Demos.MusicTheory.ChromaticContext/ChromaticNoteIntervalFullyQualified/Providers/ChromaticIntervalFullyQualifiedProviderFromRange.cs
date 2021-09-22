@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers
 {
@@ -12,10 +12,7 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
             _chromaticIndexLengthProvider = chromaticIndexLengthProvider;
         }
 
-        public ChromaticNoteIntervalFullyQualified[] GetIntervals(ChromaticNoteFullyQualifiedRange range)
-        {
-            ChromaticNoteIntervalFullyQualified[] intervals = _chromaticIndexLengthProvider.GetIntervals(range.ChromaticIndexSpan);
-            return intervals;
-        }
+        public ChromaticNoteIntervalFullyQualifiedCluster GetIntervals(ChromaticNoteFullyQualifiedRange range) =>
+            _chromaticIndexLengthProvider.GetIntervals(range.ChromaticIndexSpan);
     }
 }

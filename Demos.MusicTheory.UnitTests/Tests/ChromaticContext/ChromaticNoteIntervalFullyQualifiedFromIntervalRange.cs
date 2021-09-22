@@ -1,4 +1,5 @@
 ﻿using Demos.MusicTheory.ChromaticContext;
+using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
 using Demos.MusicTheory.Commons;
 using FluentAssertions;
@@ -42,8 +43,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext
             var result = provider.GetIntervals(range);
 
             // Then
-
-            var distinctChromaticIndexSpans = result.Select(x => x.ChromaticIndexSpan).Distinct();
+            var distinctChromaticIndexSpans = result.Cluster.Select(x => x.ChromaticIndexSpan).Distinct();
 
             distinctChromaticIndexSpans.Should().HaveCount(1);
             distinctChromaticIndexSpans.First().Should().Be(expectedChromaticIndexSpan);

@@ -18,7 +18,7 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
             public bool IsPerfectType { get; set; }
         }
 
-        public ChromaticNoteIntervalFullyQualified[] GetIntervals(int chromaticIndexSpan)
+        public ChromaticNoteIntervalFullyQualifiedCluster GetIntervals(int chromaticIndexSpan)
         {
             // I'm sure there can be a nicer cleaner implementeation... all these ifs ain't no good :)
 
@@ -54,7 +54,7 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
                 }
             }
 
-            return enharmonicIntervalCluster.ToArray();
+            return new ChromaticNoteIntervalFullyQualifiedCluster(enharmonicIntervalCluster.ToArray());
         }
 
         private SpanAnalysisReport Analyse(int chromaticIndexSpan)

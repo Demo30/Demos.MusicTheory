@@ -1,6 +1,6 @@
 ﻿using Demos.MusicTheory.Commons;
 
-namespace Demos.MusicTheory.ChromaticContext
+namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified
 {
     public class ChromaticNoteFullyQualified : ChromaticNoteFullyQualifiedBase
     {

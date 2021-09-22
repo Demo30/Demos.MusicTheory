@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using static Demos.MusicTheory.ChromaticContext.Constants.ChromaticContextConstants;
 
-namespace Demos.MusicTheory.ChromaticContext
+namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified
 {
     public abstract class ChromaticNoteFullyQualifiedBase : 
         IContentEqual<ChromaticNoteFullyQualified>,

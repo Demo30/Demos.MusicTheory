@@ -1,8 +1,8 @@
-﻿using Demos.MusicTheory.ChromaticContext;
+﻿using Demos.MusicTheory.Contexts.ChromaticContext;
 using System;
 using System.Linq;
 
-namespace Demos.MusicTheory.Contexts.ChromaticContext
+namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified
 {
     public class ChromaticNoteEnharmonicCluster : ChromaticEntity
     {
