@@ -1,6 +1,0 @@
-﻿namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
-
-public interface IChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan
-{
-    public ChromaticNoteIntervalFullyQualifiedCluster GetIntervals(int chromaticIndexSpan);
-}

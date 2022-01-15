@@ -5,7 +5,7 @@ using static Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualif
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
 
-public class ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan : IChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan
+public class ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan
 {
     private struct SpanAnalysisReport
     {

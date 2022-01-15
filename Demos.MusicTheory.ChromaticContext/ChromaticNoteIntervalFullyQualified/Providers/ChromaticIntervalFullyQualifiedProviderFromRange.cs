@@ -2,12 +2,12 @@
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
 
-public class ChromaticIntervalFullyQualifiedProviderFromRange : IChromaticIntervalFullyQualifiedProviderFromRange
+public class ChromaticIntervalFullyQualifiedProviderFromRange
 {
-    private readonly IChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan _chromaticIndexLengthProvider;
+    private readonly ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan _chromaticIndexLengthProvider;
 
     public ChromaticIntervalFullyQualifiedProviderFromRange(
-        IChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan chromaticIndexLengthProvider)
+        ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan chromaticIndexLengthProvider)
     {
         _chromaticIndexLengthProvider = chromaticIndexLengthProvider;
     }
