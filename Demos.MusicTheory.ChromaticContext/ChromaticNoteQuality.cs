@@ -2,7 +2,7 @@
 {
     public enum ChromaticNoteQuality
     {
-        UNKNOWN = 0,
+        Unknown = 0,
         C = 1,
         D = 2,
         E = 3,

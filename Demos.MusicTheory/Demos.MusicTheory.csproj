@@ -1,18 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>10</LangVersion>
+    <PackageVersion>1.0.0</PackageVersion>
+    <AssemblyVersion></AssemblyVersion>
+    <FileVersion></FileVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Demos.MusicTheory.ChromaticContext\Demos.MusicTheory.ChromaticContext.csproj" />
-    <ProjectReference Include="..\Demos.MusicTheory.Commons\Demos.MusicTheory.Commons.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Demos.DemosHelpers" Version="0.0.6" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
-    <PackageReference Include="System.Data.SQLite" Version="1.0.115" />
+    <ProjectReference Include="..\Demos.MusicTheory.ChromaticContext\Demos.MusicTheory.ChromaticContext.csproj" />
   </ItemGroup>
 
 </Project>

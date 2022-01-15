@@ -1,0 +1,8 @@
+﻿using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
+
+namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
+
+public interface IChromaticIntervalFullyQualifiedProviderFromRange
+{
+    public ChromaticNoteIntervalFullyQualifiedCluster GetIntervals(ChromaticNoteFullyQualifiedRange range);
+}

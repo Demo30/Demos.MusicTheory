@@ -1,6 +1,5 @@
 ﻿using Demos.MusicTheory.ChromaticContext;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
-using Demos.MusicTheory.Contexts.ChromaticContext;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

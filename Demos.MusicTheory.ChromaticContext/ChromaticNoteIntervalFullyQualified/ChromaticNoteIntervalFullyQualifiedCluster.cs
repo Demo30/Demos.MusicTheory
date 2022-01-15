@@ -18,12 +18,12 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
 
         private void Validate(IEnumerable<ChromaticNoteIntervalFullyQualified> cluster)
         {
-            if (cluster == null || cluster.Count() == 0)
+            if (cluster == null || !cluster.Any())
             {
                 throw new ArgumentNullException("Cluster cannot be empty.");
             }
 
-            bool sharedIndexSpan = cluster
+            var sharedIndexSpan = cluster
                 .Select(interval => interval.ChromaticIndexSpan)
                 .Distinct()
                 .Count() == 1;

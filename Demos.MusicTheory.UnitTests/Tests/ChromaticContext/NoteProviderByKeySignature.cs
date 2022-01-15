@@ -1,7 +1,6 @@
 ﻿using Demos.MusicTheory.ChromaticContext;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 using Demos.MusicTheory.ChromaticContext.DiatonicSubcontext;
-using Demos.MusicTheory.ChromaticContext.Providers;
 using Demos.MusicTheory.Commons;
 using FluentAssertions;
 using NUnit.Framework;

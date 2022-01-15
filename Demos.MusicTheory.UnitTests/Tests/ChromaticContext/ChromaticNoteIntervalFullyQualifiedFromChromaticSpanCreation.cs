@@ -1,4 +1,5 @@
-﻿using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
+﻿using Demos.MusicTheory.ChromaticContext;
+using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
 using FluentAssertions;
 using NUnit.Framework;
 

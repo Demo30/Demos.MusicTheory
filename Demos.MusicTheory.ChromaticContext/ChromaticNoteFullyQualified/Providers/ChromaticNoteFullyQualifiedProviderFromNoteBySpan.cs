@@ -12,7 +12,7 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Provide
             List<ChromaticNoteFullyQualified> enharmonicNotes = new();
 
             int noteIndex = note.ChromaticContextIndex;
-            int noteSimpleIndex = noteIndex % ChromaticContextConstants.CHROMATIC_STEPS_FULL_OCTAVE;
+            int noteSimpleIndex = noteIndex % ChromaticContextConstants.ChromaticStepsFullOctave;
 
 
 

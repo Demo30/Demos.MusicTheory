@@ -1,7 +1,6 @@
-﻿namespace Demos.MusicTheory.Abstractions.Commons
+﻿namespace Demos.MusicTheory.Abstractions.Commons;
+
+public interface IContentEqual<in T>
 {
-    public interface IContentEqual<T>
-    {
-        bool IsEqualByContent(T comparedObject);
-    }
+    bool IsEqualByContent(T comparedObject);
 }

@@ -1,28 +1,24 @@
-﻿using Demos.MusicTheory.Abstractions.ChromaticContext;
-using Demos.MusicTheory.Commons;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Demos.MusicTheory.Abstractions.ChromaticContext;
+using Demos.MusicTheory.Commons;
 
-namespace Demos.MusicTheory.Contexts.ChromaticContext
+namespace Demos.MusicTheory.ChromaticContext;
+
+public class ChromaticSpaceIndexValidator : MusicalEntitySpaceValidator, IChromaticSpaceIndexValidator
 {
-    public class ChromaticSpaceIndexValidator : MusicalEntitySpaceValidator, IChromaticSpaceIndexValidator
+    public override Type CompatibleType => typeof(IChromaticEntity);
+
+    public override bool ValidateEntityCompatibility<T>(T entity, IEnumerable<T> compatibleEntities)
     {
-        public override Type CompatibleType => typeof(IChromaticEntity);
+        compatibleEntities = compatibleEntities.ToList();
+        base.ValidateEntityCompatibility(entity, compatibleEntities);
 
-        public override bool ValidateEntityCompatibility<T>(T entity, IEnumerable<T> compatibleEntities)
-        {
-            base.ValidateEntityCompatibility(entity, compatibleEntities);
-
-            IChromaticEntity chromaticNote = (IChromaticEntity)entity;
-            IEnumerable<IChromaticEntity> compatibleChromaticNotes =
-                compatibleEntities.Select(entity => (IChromaticEntity)entity);
-
-            bool noConflictingNotes = compatibleChromaticNotes
-                .Count(note => note.ChromaticContextIndex.Equals(chromaticNote.ChromaticContextIndex))
-                .Equals(0);
-            
-            return noConflictingNotes ? true : throw new MusicalEntityValidatorException(this);
-        }
+        var chromaticNote = (IChromaticEntity)entity;
+        var compatibleChromaticNotes = compatibleEntities.Select(e => (IChromaticEntity) e);
+        var noConflictingNotes = !compatibleChromaticNotes.Any(note => note.ChromaticContextIndex.Equals(chromaticNote.ChromaticContextIndex));
+        
+        return noConflictingNotes ? true : throw new MusicalEntityValidatorException(this);
     }
 }

@@ -1,10 +1,10 @@
 ﻿using Demos.MusicTheory.Abstractions.ChromaticContext;
 using Demos.MusicTheory.Commons;
-using Demos.MusicTheory.Contexts.ChromaticContext;
 using FluentAssertions;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using Demos.MusicTheory.ChromaticContext;
 
 namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
 {
@@ -15,7 +15,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void ValidationShouldThrowException_OnConflictingIndexes()
         {
             // Given
-            IChromaticEntity entity = new Contexts.ChromaticContext.ChromaticEntity(2);
+            IChromaticEntity entity = new ChromaticEntity(2);
             IEnumerable<IChromaticEntity> entitites = new[]
             {
                 new ChromaticEntity(1),
@@ -36,7 +36,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void ValidationShouldSucceed_WhenNoConflictingNotes()
         {
             // Given
-            IChromaticEntity entity = new Contexts.ChromaticContext.ChromaticEntity(2);
+            IChromaticEntity entity = new ChromaticEntity(2);
             IEnumerable<IChromaticEntity> entitites = new[]
             {
                 new ChromaticEntity(1),
@@ -54,16 +54,17 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         }
 
         [Theory]
+        [Test]
         public void ValidationShouldSucceed_WhenArrayEmpty()
         {
             // Given
-            IChromaticEntity entity = new Contexts.ChromaticContext.ChromaticEntity(2);
-            IEnumerable<IChromaticEntity> entitites = Array.Empty<IChromaticEntity>();
+            IChromaticEntity entity = new ChromaticEntity(2);
+            IEnumerable<IChromaticEntity> entities = Array.Empty<IChromaticEntity>();
 
-            ChromaticSpaceIndexValidator indexValidator = new ChromaticSpaceIndexValidator();
+            var indexValidator = new ChromaticSpaceIndexValidator();
 
             // When
-            Action act = () => { indexValidator.ValidateEntityCompatibility(entity, entitites); };
+            var act = () => { indexValidator.ValidateEntityCompatibility(entity, entities); };
 
             // Then
             act.Should().NotThrow();

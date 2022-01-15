@@ -1,18 +1,17 @@
 ﻿using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 
-namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers
+namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
+
+public class ChromaticIntervalFullyQualifiedProviderFromRange : IChromaticIntervalFullyQualifiedProviderFromRange
 {
-    public class ChromaticIntervalFullyQualifiedProviderFromRange
+    private readonly IChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan _chromaticIndexLengthProvider;
+
+    public ChromaticIntervalFullyQualifiedProviderFromRange(
+        IChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan chromaticIndexLengthProvider)
     {
-        private readonly ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan _chromaticIndexLengthProvider;
-
-        public ChromaticIntervalFullyQualifiedProviderFromRange(
-            ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan chromaticIndexLengthProvider)
-        {
-            _chromaticIndexLengthProvider = chromaticIndexLengthProvider;
-        }
-
-        public ChromaticNoteIntervalFullyQualifiedCluster GetIntervals(ChromaticNoteFullyQualifiedRange range) =>
-            _chromaticIndexLengthProvider.GetIntervals(range.ChromaticIndexSpan);
+        _chromaticIndexLengthProvider = chromaticIndexLengthProvider;
     }
+
+    public ChromaticNoteIntervalFullyQualifiedCluster GetIntervals(ChromaticNoteFullyQualifiedRange range) =>
+        _chromaticIndexLengthProvider.GetIntervals(range.ChromaticIndexSpan);
 }

@@ -1,8 +1,7 @@
 ﻿using Demos.MusicTheory.Abstractions.Commons;
 
-namespace Demos.MusicTheory.Abstractions.PhysicalContext
+namespace Demos.MusicTheory.Abstractions.PhysicalContext;
+
+public interface IToneSpace : IMusicalEntitySpace<ITone>
 {
-    public interface IToneSpace : IMusicalEntitySpace<ITone>
-    {
-    }
 }

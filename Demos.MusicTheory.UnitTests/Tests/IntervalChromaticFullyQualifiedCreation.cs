@@ -1,6 +1,7 @@
 ﻿using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
 using NUnit.Framework;
 using System;
+using Demos.MusicTheory.ChromaticContext;
 
 namespace Demos.MusicTheory.UnitTests.Tests
 {

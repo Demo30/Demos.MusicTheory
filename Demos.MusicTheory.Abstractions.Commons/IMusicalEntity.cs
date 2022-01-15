@@ -1,6 +1,5 @@
-﻿namespace Demos.MusicTheory.Abstractions.Commons
+﻿namespace Demos.MusicTheory.Abstractions.Commons;
+
+public interface IMusicalEntity
 {
-    public interface IMusicalEntity
-    {
-    }
 }

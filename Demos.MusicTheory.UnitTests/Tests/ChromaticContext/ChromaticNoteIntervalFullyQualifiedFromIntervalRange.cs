@@ -43,7 +43,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext
             var result = provider.GetIntervals(range);
 
             // Then
-            var distinctChromaticIndexSpans = result.Cluster.Select(x => x.ChromaticIndexSpan).Distinct();
+            var distinctChromaticIndexSpans = result.Cluster.Select(x => x.ChromaticIndexSpan).Distinct().ToList();
 
             distinctChromaticIndexSpans.Should().HaveCount(1);
             distinctChromaticIndexSpans.First().Should().Be(expectedChromaticIndexSpan);

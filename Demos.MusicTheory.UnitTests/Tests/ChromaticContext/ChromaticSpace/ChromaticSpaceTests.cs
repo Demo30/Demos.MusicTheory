@@ -1,12 +1,12 @@
 ﻿using Demos.MusicTheory.Abstractions.ChromaticContext;
 using Demos.MusicTheory.Commons;
-using Demos.MusicTheory.Contexts.ChromaticContext;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Demos.MusicTheory.ChromaticContext;
 
 namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
 {
@@ -17,7 +17,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void ValidatorsRunOnEntityAdd()
         {
             // Given
-            var chromaticNote = new Contexts.ChromaticContext.ChromaticEntity(1);
+            var chromaticNote = new ChromaticEntity(1);
 
             Mock<IChromaticSpaceIndexValidator> indexValidator = new Mock<IChromaticSpaceIndexValidator>();
             indexValidator
@@ -26,7 +26,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
                     It.IsAny<IChromaticEntity[]>()))
                 .Returns(true);
 
-            Contexts.ChromaticContext.ChromaticSpace chromaticSpace = new Contexts.ChromaticContext.ChromaticSpace(indexValidator.Object);
+            MusicTheory.ChromaticContext.ChromaticSpace chromaticSpace = new MusicTheory.ChromaticContext.ChromaticSpace(indexValidator.Object);
 
             // When
             chromaticSpace.AddMusicalEntity(chromaticNote);
@@ -43,7 +43,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void EvaluatesValidatorOnAdd()
         {
             // Given
-            var chromaticNote = new Contexts.ChromaticContext.ChromaticEntity(1);
+            var chromaticNote = new ChromaticEntity(1);
 
             Mock<IChromaticSpaceIndexValidator> indexValidator = new Mock<IChromaticSpaceIndexValidator>();
             indexValidator
@@ -52,7 +52,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
                     It.IsAny<IChromaticEntity[]>()))
                 .Returns(false);
 
-            Contexts.ChromaticContext.ChromaticSpace chromaticSpace = new Contexts.ChromaticContext.ChromaticSpace(indexValidator.Object);
+            MusicTheory.ChromaticContext.ChromaticSpace chromaticSpace = new MusicTheory.ChromaticContext.ChromaticSpace(indexValidator.Object);
 
             // When
             Action act = () => { chromaticSpace.AddMusicalEntity(chromaticNote); };
@@ -72,10 +72,10 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
             // Given
             IEnumerable<IChromaticEntity> notes = new[]
             {
-                new Contexts.ChromaticContext.ChromaticEntity(1),
-                new Contexts.ChromaticContext.ChromaticEntity(2),
-                new Contexts.ChromaticContext.ChromaticEntity(3),
-                new Contexts.ChromaticContext.ChromaticEntity(5)
+                new ChromaticEntity(1),
+                new ChromaticEntity(2),
+                new ChromaticEntity(3),
+                new ChromaticEntity(5)
             };
             int numberOfNotes = notes.Count();
 
@@ -86,7 +86,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
                     It.IsAny<IChromaticEntity[]>()))
                 .Returns(true);
 
-            Contexts.ChromaticContext.ChromaticSpace chromaticSpace = new Contexts.ChromaticContext.ChromaticSpace(indexValidator.Object);
+            MusicTheory.ChromaticContext.ChromaticSpace chromaticSpace = new MusicTheory.ChromaticContext.ChromaticSpace(indexValidator.Object);
 
             // When
             notes.ToList().ForEach(note => chromaticSpace.AddMusicalEntity(note));

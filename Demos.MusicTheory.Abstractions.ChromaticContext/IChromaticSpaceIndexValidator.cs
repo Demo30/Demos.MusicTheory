@@ -1,8 +1,7 @@
 ﻿using Demos.MusicTheory.Abstractions.Commons;
 
-namespace Demos.MusicTheory.Abstractions.ChromaticContext
+namespace Demos.MusicTheory.Abstractions.ChromaticContext;
+
+public interface IChromaticSpaceIndexValidator : IMusicalEntitySpaceValidator
 {
-    public interface IChromaticSpaceIndexValidator : IMusicalEntitySpaceValidator
-    {
-    }
 }

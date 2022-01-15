@@ -11,7 +11,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext
     public class ChromaticNoteIntervalFullyQualifiedFromNoteBySpan
     {
         [Theory]
-        [TestCase(ChromaticNoteQuality.C, 1, NotationSymbols.None, 2, ChromaticNoteQuality.D, 1, NotationSymbols.None)]
+        [TestCase(ChromaticNoteQuality.C, 1, NotationSymbols.None, 2,  OneDimensionDirection.RIGHT, ChromaticNoteQuality.D, 1, NotationSymbols.None)]
         public void ValidResults(
             ChromaticNoteQuality noteQuality, 
             int order, 

@@ -1,9 +1,8 @@
 ﻿using Demos.MusicTheory.Abstractions.Commons;
 using System;
 
-namespace Demos.MusicTheory.Abstractions.ChromaticContext
+namespace Demos.MusicTheory.Abstractions.ChromaticContext;
+
+public interface IChromaticSpace : IMusicalEntitySpace<IChromaticEntity>
 {
-    public interface IChromaticSpace : IMusicalEntitySpace<IChromaticEntity>
-    {
-    }
 }

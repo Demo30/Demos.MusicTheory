@@ -1,12 +1,11 @@
-﻿namespace Demos.MusicTheory
+﻿namespace Demos.MusicTheory.ChromaticContext;
+
+public enum ChromaticNoteIntervalQuality
 {
-    public enum ChromaticNoteIntervalQuality
-    {
-        UNKNOWN = 0,
-        Perfect,
-        Minor,
-        Major,
-        Augmented,
-        Diminished
-    }
+    Unknown = 0,
+    Perfect,
+    Minor,
+    Major,
+    Augmented,
+    Diminished
 }

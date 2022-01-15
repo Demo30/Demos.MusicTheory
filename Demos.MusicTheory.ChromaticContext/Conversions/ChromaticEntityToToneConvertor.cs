@@ -1,6 +1,5 @@
-﻿namespace Demos.MusicTheory.ChromaticContext.Conversions
+﻿namespace Demos.MusicTheory.ChromaticContext.Conversions;
+
+public class ChromaticEntityToToneConvertor
 {
-    public class ChromaticEntityToToneConvertor
-    {
-    }
 }

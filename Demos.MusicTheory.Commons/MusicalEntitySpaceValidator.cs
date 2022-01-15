@@ -5,23 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demos.MusicTheory.Commons
+namespace Demos.MusicTheory.Commons;
+
+public abstract class MusicalEntitySpaceValidator : IMusicalEntitySpaceValidator
 {
-    public abstract class MusicalEntitySpaceValidator : IMusicalEntitySpaceValidator
+    public abstract Type CompatibleType { get; }
+
+    public virtual bool ValidateEntityCompatibility<T>(T entity, IEnumerable<T> compatibleEntities) where T : IMusicalEntity
     {
-        public abstract Type CompatibleType { get; }
+        return CheckCompatibility(typeof(T));
+    }
 
-        public virtual bool ValidateEntityCompatibility<T>(T entity, IEnumerable<T> compatibleEntities) where T : IMusicalEntity
-        {
-            return CheckCompatibility(typeof(T));
-        }
+    private bool CheckCompatibility(Type entityType)
+    {
+        bool compatible =
+            CompatibleType.IsAssignableFrom(entityType);
 
-        protected bool CheckCompatibility(Type entityType)
-        {
-            bool compatible =
-                CompatibleType.IsAssignableFrom(entityType);
-
-            return compatible ? true : throw new ArgumentException("Incompatible musical entity type.");
-        }
+        return compatible ? true : throw new ArgumentException("Incompatible musical entity type.");
     }
 }

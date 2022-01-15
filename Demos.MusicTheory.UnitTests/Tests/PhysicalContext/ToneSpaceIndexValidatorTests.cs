@@ -1,12 +1,12 @@
 ﻿using Demos.MusicTheory.Abstractions.ChromaticContext;
 using Demos.MusicTheory.Abstractions.PhysicalContext;
 using Demos.MusicTheory.Commons;
-using Demos.MusicTheory.Contexts.ChromaticContext;
 using Demos.MusicTheory.Contexts.PhysicalContext;
 using FluentAssertions;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using Demos.MusicTheory.ChromaticContext;
 
 namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
 {
@@ -78,8 +78,8 @@ namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
         public void ThrowOnIncompatibleEntityAdded()
         {
             // Given
-            Contexts.ChromaticContext.ChromaticEntity entity = new Contexts.ChromaticContext.ChromaticEntity(2);
-            IEnumerable<Contexts.ChromaticContext.ChromaticEntity> entitites = Array.Empty<Contexts.ChromaticContext.ChromaticEntity>();
+            ChromaticEntity entity = new ChromaticEntity(2);
+            IEnumerable<ChromaticEntity> entitites = Array.Empty<ChromaticEntity>();
 
             ToneSpaceFrequencyValidator validator = GetValidator();
 

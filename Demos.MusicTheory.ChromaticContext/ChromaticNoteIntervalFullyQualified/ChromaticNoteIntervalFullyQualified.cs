@@ -1,26 +1,25 @@
-﻿namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
+﻿namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
+
+/// <summary>
+/// Ordinary interval between two fully qualified chromatic notes
+/// </summary>
+public class ChromaticNoteIntervalFullyQualified : ChromaticNoteIntervalFullyQualifiedBase
 {
+    public int SemitoneCount => ChromaticIndexSpan;
+
     /// <summary>
-    /// Ordinary interval between two fully qualified chromatic notes
+    /// Starting from 0. One full octave has one suboctave.
     /// </summary>
-    public class ChromaticNoteIntervalFullyQualified : ChromaticNoteIntervalFullyQualifiedBase
+    public int Suboctaves => _chromaticIndexSpanCounter.GetSuboctaves(DiatonicScaleDegree);
+
+    /// <summary>
+    /// Subtracts compound octave intervals from the overall base number.
+    /// </summary>
+    /// <returns></returns>
+    public int SimpleBaseNumber => _chromaticIndexSpanCounter.GetSimpleBaseNumber(DiatonicScaleDegree);
+
+    public ChromaticNoteIntervalFullyQualified(int diatonicScaleDegree, ChromaticNoteIntervalQuality quality) : base(diatonicScaleDegree, quality)
     {
-        public int SemitoneCount => ChromaticIndexSpan;
 
-        /// <summary>
-        /// Starting from 0. One full octave has one suboctave.
-        /// </summary>
-        public int Suboctaves => _chromaticIndexSpanCounter.GetSuboctaves(DiatonicScaleDegree);
-
-        /// <summary>
-        /// Subtracts compound octave intervals from the overal base number.
-        /// </summary>
-        /// <returns></returns>
-        public int SimpleBaseNumber => _chromaticIndexSpanCounter.GetSimpleBaseNumber(DiatonicScaleDegree);
-
-        public ChromaticNoteIntervalFullyQualified(int diatonicScaleDegree, ChromaticNoteIntervalQuality quality) : base(diatonicScaleDegree, quality)
-        {
-
-        }
     }
 }
