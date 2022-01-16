@@ -3,7 +3,7 @@ using ChNFQInterval = Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFu
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers
 {
-    public class ChromaticNoteFullyQualifiedProviderFromNoteByInterval
+    internal class ChromaticNoteFullyQualifiedProviderFromNoteByInterval
     {
         private readonly ChromaticNoteFullyQualifiedProviderFromNoteBySpan _providerBySpan;
 

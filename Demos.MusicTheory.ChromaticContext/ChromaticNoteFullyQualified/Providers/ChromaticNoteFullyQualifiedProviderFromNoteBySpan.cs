@@ -2,24 +2,23 @@
 using Demos.MusicTheory.Commons;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
-namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers
+namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers;
+internal class ChromaticNoteFullyQualifiedProviderFromNoteBySpan
 {
-    public class ChromaticNoteFullyQualifiedProviderFromNoteBySpan
+    internal ChromaticNoteEnharmonicCluster GetEnharmonicNoteCluster(ChromaticNoteFullyQualified note, int chromaticIndexSpan, OneDimensionDirection direction)
     {
-        public ChromaticNoteEnharmonicCluster GetEnharmonicNoteCluster(ChromaticNoteFullyQualified note, int chromaticIndexSpan, OneDimensionDirection direction)
-        {
-            List<ChromaticNoteFullyQualified> enharmonicNotes = new();
+        List<ChromaticNoteFullyQualified> enharmonicNotes = new();
 
-            int noteIndex = note.ChromaticContextIndex;
-            int noteSimpleIndex = noteIndex % ChromaticContextConstants.ChromaticStepsFullOctave;
+        int noteIndex = note.ChromaticContextIndex;
+        int noteSimpleIndex = noteIndex % ChromaticContextConstants.ChromaticStepsFullOctave;
 
 
 
-            enharmonicNotes.Add(new ChromaticNoteFullyQualified(ChromaticNoteQuality.D, 1, NotationSymbols.None));
-            //int firstDiatonicTreshold = (int)ChromaticNoteQuality.E
+        enharmonicNotes.Add(new ChromaticNoteFullyQualified(ChromaticNoteQuality.D, 1, NotationSymbols.None));
+        //int firstDiatonicTreshold = (int)ChromaticNoteQuality.E
 
-            return new ChromaticNoteEnharmonicCluster(enharmonicNotes.ToArray());
-        }
+        return new ChromaticNoteEnharmonicCluster(enharmonicNotes.ToArray());
     }
 }
