@@ -3,6 +3,8 @@ using Demos.MusicTheory.Commons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ITone = Demos.MusicTheory.PhysicalContext.ITone;
+using IToneSpaceFrequencyValidator = Demos.MusicTheory.PhysicalContext.IToneSpaceFrequencyValidator;
 
 namespace Demos.MusicTheory.Contexts.PhysicalContext
 {

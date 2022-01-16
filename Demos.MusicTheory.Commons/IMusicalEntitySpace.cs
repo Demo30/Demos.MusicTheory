@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Demos.MusicTheory.Abstractions.Commons;
+namespace Demos.MusicTheory.Commons;
 
 public interface IMusicalEntitySpace<T> where T : IMusicalEntity
 {

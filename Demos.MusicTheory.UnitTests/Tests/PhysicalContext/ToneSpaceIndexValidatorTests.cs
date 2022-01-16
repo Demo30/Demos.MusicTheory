@@ -1,93 +1,90 @@
-﻿using Demos.MusicTheory.Abstractions.ChromaticContext;
-using Demos.MusicTheory.Abstractions.PhysicalContext;
+﻿using System;
+using Demos.MusicTheory.ChromaticContext;
 using Demos.MusicTheory.Commons;
 using Demos.MusicTheory.Contexts.PhysicalContext;
+using Demos.MusicTheory.PhysicalContext;
 using FluentAssertions;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using Demos.MusicTheory.ChromaticContext;
 
-namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
+namespace Demos.MusicTheory.UnitTests.Tests.PhysicalContext;
+
+[TestFixture]
+public class ToneSpaceIndexValidatorTests
 {
-    [TestFixture]
-    public class ToneSpaceIndexValidatorTests
+    private ToneSpaceFrequencyValidator GetValidator()
     {
-        private ToneSpaceFrequencyValidator GetValidator()
+        return new ToneSpaceFrequencyValidator();
+    }
+
+
+    [Theory]
+    public void ValidationShouldThrowException_OnConflictingFrequencies()
+    {
+        // Given
+        var entity = new Tone(200.2);
+        var entities = new[]
         {
-            return new ToneSpaceFrequencyValidator();
-        }
+            new Tone(200)
+        };
 
+        var validator = GetValidator();
 
-        [Theory]
-        public void ValidationShouldThrowException_OnConflictingFrequencies()
+        // When
+        var act = () => { validator.ValidateEntityCompatibility(entity, entities); };
+
+        // Then
+        act.Should().Throw<MusicalEntityValidatorException>();
+    }
+
+    [Theory]
+    public void ValidationShouldSucceed_WhenNoConflictingNotes()
+    {
+        // Given
+        var entity = new Tone(600);
+        var entities = new[]
         {
-            // Given
-            ITone entity = new Contexts.PhysicalContext.Tone(200.2);
-            IEnumerable<ITone> entitites = new[]
-            {
-                new Contexts.PhysicalContext.Tone(200)
-            };
+            new Tone(200),
+            new Tone(250)
+        };
 
-            ToneSpaceFrequencyValidator validator = GetValidator();
+        var validator = GetValidator();
 
-            // When
-            Action act = () => { validator.ValidateEntityCompatibility(entity, entitites); };
+        // When
+        var act = () => { validator.ValidateEntityCompatibility(entity, entities); };
 
-            // Then
-            act.Should().Throw<MusicalEntityValidatorException>();
-        }
+        // Then
+        act.Should().NotThrow();
+    }
 
-        [Theory]
-        public void ValidationShouldSucceed_WhenNoConflictingNotes()
-        {
-            // Given
-            ITone entity = new Contexts.PhysicalContext.Tone(600);
-            IEnumerable<ITone> entitites = new[]
-            {
-                new Contexts.PhysicalContext.Tone(200),
-                new Contexts.PhysicalContext.Tone(250)
-            };
+    [Theory]
+    public void ValidationShouldSucceed_WhenArrayEmpty()
+    {
+        // Given
+        var entity = new Tone(200);
+        var entities = Array.Empty<ITone>();
 
-            ToneSpaceFrequencyValidator validator = GetValidator();
+        var validator = GetValidator();
 
-            // When
-            Action act = () => { validator.ValidateEntityCompatibility(entity, entitites); };
+        // When
+        var act = () => { validator.ValidateEntityCompatibility(entity, entities); };
 
-            // Then
-            act.Should().NotThrow();
-        }
+        // Then
+        act.Should().NotThrow();
+    }
 
-        [Theory]
-        public void ValidationShouldSucceed_WhenArrayEmpty()
-        {
-            // Given
-            ITone entity = new Contexts.PhysicalContext.Tone(200);
-            IEnumerable<ITone> entitites = Array.Empty<ITone>();
+    [Theory]
+    public void ThrowOnIncompatibleEntityAdded()
+    {
+        // Given
+        var entity = new ChromaticEntity(2);
+        var entities = Array.Empty<ChromaticEntity>();
 
-            ToneSpaceFrequencyValidator validator = GetValidator();
+        var validator = GetValidator();
 
-            // When
-            Action act = () => { validator.ValidateEntityCompatibility(entity, entitites); };
+        // When
+        var act = () => { validator.ValidateEntityCompatibility(entity, entities); };
 
-            // Then
-            act.Should().NotThrow();
-        }
-
-        [Theory]
-        public void ThrowOnIncompatibleEntityAdded()
-        {
-            // Given
-            ChromaticEntity entity = new ChromaticEntity(2);
-            IEnumerable<ChromaticEntity> entitites = Array.Empty<ChromaticEntity>();
-
-            ToneSpaceFrequencyValidator validator = GetValidator();
-
-            // When
-            Action act = () => { validator.ValidateEntityCompatibility(entity, entitites); };
-
-            // Then
-            act.Should().Throw<ArgumentException>();
-        }
+        // Then
+        act.Should().Throw<ArgumentException>();
     }
 }

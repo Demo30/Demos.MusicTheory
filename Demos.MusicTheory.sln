@@ -13,11 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.MusicTheory.PhysicalC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.MusicTheory.ChromaticContext", "Demos.MusicTheory.ChromaticContext\Demos.MusicTheory.ChromaticContext.csproj", "{F7951C38-1CE4-47BE-957F-1A7761863CE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.MusicTheory.Abstractions.ChromaticContext", "Demos.MusicTheory.Abstractions.ChromaticContext\Demos.MusicTheory.Abstractions.ChromaticContext.csproj", "{FB32491A-8B08-4414-AC5F-1ED8B80729E8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.MusicTheory.Abstractions.PhysicalContext", "Demos.MusicTheory.Abstractions.PhysicalContext\Demos.MusicTheory.Abstractions.PhysicalContext.csproj", "{CEDD33DD-9FD9-4B0F-8E06-EF331B9E059E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.MusicTheory.Abstractions.Commons", "Demos.MusicTheory.Abstractions.Commons\Demos.MusicTheory.Abstractions.Commons.csproj", "{238924BA-F075-40D3-8B89-1855B2BF8FC2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.MusicTheory.Services", "Demos.MusicTheory.Services\Demos.MusicTheory.Services.csproj", "{A13AA298-E361-4364-A49E-25CEAFF26749}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,18 +41,10 @@ Global
 		{F7951C38-1CE4-47BE-957F-1A7761863CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7951C38-1CE4-47BE-957F-1A7761863CE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7951C38-1CE4-47BE-957F-1A7761863CE3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB32491A-8B08-4414-AC5F-1ED8B80729E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB32491A-8B08-4414-AC5F-1ED8B80729E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB32491A-8B08-4414-AC5F-1ED8B80729E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB32491A-8B08-4414-AC5F-1ED8B80729E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CEDD33DD-9FD9-4B0F-8E06-EF331B9E059E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CEDD33DD-9FD9-4B0F-8E06-EF331B9E059E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CEDD33DD-9FD9-4B0F-8E06-EF331B9E059E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CEDD33DD-9FD9-4B0F-8E06-EF331B9E059E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{238924BA-F075-40D3-8B89-1855B2BF8FC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{238924BA-F075-40D3-8B89-1855B2BF8FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{238924BA-F075-40D3-8B89-1855B2BF8FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{238924BA-F075-40D3-8B89-1855B2BF8FC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A13AA298-E361-4364-A49E-25CEAFF26749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A13AA298-E361-4364-A49E-25CEAFF26749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A13AA298-E361-4364-A49E-25CEAFF26749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A13AA298-E361-4364-A49E-25CEAFF26749}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

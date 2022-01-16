@@ -1,12 +1,11 @@
-﻿using Demos.MusicTheory.Abstractions.PhysicalContext;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Demos.MusicTheory.PhysicalContext;
+using ITone = Demos.MusicTheory.PhysicalContext.ITone;
+using IToneSpaceFrequencyValidator = Demos.MusicTheory.PhysicalContext.IToneSpaceFrequencyValidator;
 
 namespace Demos.MusicTheory.UnitTests.Tests.PhysicalContext
 {
@@ -33,7 +32,7 @@ namespace Demos.MusicTheory.UnitTests.Tests.PhysicalContext
                     It.IsAny<ITone[]>()))
                 .Returns(true);
 
-            Contexts.PhysicalContext.ToneSpace toneSpace = new Contexts.PhysicalContext.ToneSpace(frequencyValidator.Object);
+            ToneSpace toneSpace = new ToneSpace(frequencyValidator.Object);
 
             // When
             notes.ToList().ForEach(tone => toneSpace.AddMusicalEntity(tone));

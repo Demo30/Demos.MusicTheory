@@ -1,6 +1,4 @@
-﻿using Demos.MusicTheory.Abstractions.ChromaticContext;
-using Demos.MusicTheory.Abstractions.Commons;
-using Demos.MusicTheory.Commons;
+﻿using Demos.MusicTheory.Commons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +6,17 @@ using static Demos.MusicTheory.ChromaticContext.Constants.ChromaticContextConsta
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 
-public abstract class ChromaticNoteFullyQualifiedBase : 
-    IContentEqual<ChromaticNoteFullyQualified>,
+public abstract class ChromaticNoteFullyQualifiedBase : IContentEqual<ChromaticNoteFullyQualified>,
     IChromaticEntity
 {
-    protected ChromaticNoteQuality QualityBase => baseChromaticCharacteristic.Quality;
-    protected NotationSymbols ModifierBase => baseChromaticCharacteristic.Modifier;
+    protected ChromaticNoteQuality QualityBase => _baseChromaticCharacteristic.Quality;
+    protected NotationSymbols ModifierBase => _baseChromaticCharacteristic.Modifier;
     protected int OrderBase { get; }
     public abstract int ChromaticContextIndex { get; }
 
     private int QualityChromaticOffset => (int)QualityBase;
-    private readonly ChromaticNoteElementary baseChromaticCharacteristic;
-    private static readonly Dictionary<NotationSymbols, int> _modifierChromaticCorrection = new()
+    private readonly ChromaticNoteElementary _baseChromaticCharacteristic;
+    private static readonly Dictionary<NotationSymbols, int> ModifierChromaticCorrection = new()
     {
         { NotationSymbols.None, 0 },
         { NotationSymbols.Sharp, 1 },
@@ -31,7 +28,7 @@ public abstract class ChromaticNoteFullyQualifiedBase :
     public ChromaticNoteFullyQualifiedBase(ChromaticNoteQuality qualifier, int order, NotationSymbols modifier)
     {
         CheckConstructionArgumentValidity(qualifier, order, modifier);
-        baseChromaticCharacteristic = new ChromaticNoteElementary(qualifier, modifier);
+        _baseChromaticCharacteristic = new ChromaticNoteElementary(qualifier, modifier);
         OrderBase = order;
     }
 
@@ -45,7 +42,7 @@ public abstract class ChromaticNoteFullyQualifiedBase :
     protected int GetChromaticIndex()
     {
         Func<NotationSymbols, int> getChromaticOffsetModification = (modifier)
-            => _modifierChromaticCorrection.ContainsKey(modifier) ? _modifierChromaticCorrection[modifier] : 0;
+            => ModifierChromaticCorrection.ContainsKey(modifier) ? ModifierChromaticCorrection[modifier] : 0;
 
         int chromaticOffset =
             (OrderBase * ChromaticStepsFullOctave) +

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Demos.MusicTheory.Abstractions.ChromaticContext;
 using Demos.MusicTheory.Commons;
 
 namespace Demos.MusicTheory.ChromaticContext;

@@ -1,9 +1,8 @@
-﻿using Demos.MusicTheory.Abstractions.PhysicalContext;
-using Demos.MusicTheory.Commons;
-using System;
+﻿using System;
 using System.Linq;
+using Demos.MusicTheory.Commons;
 
-namespace Demos.MusicTheory.Contexts.PhysicalContext
+namespace Demos.MusicTheory.PhysicalContext
 {
     public class ToneSpace : MusicalEntitySpace<ITone>, IToneSpace
     {

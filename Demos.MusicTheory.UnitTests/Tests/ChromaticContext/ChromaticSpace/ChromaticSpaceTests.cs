@@ -1,5 +1,4 @@
-﻿using Demos.MusicTheory.Abstractions.ChromaticContext;
-using Demos.MusicTheory.Commons;
+﻿using Demos.MusicTheory.Commons;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;

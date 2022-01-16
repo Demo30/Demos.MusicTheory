@@ -1,4 +1,4 @@
-﻿namespace Demos.MusicTheory.Abstractions.Commons;
+﻿namespace Demos.MusicTheory.Commons;
 
 public interface IContentEqual<in T>
 {
