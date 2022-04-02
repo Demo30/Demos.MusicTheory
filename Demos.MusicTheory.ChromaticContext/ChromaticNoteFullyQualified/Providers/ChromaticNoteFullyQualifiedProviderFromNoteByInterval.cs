@@ -1,6 +1,6 @@
 ﻿using Demos.MusicTheory.Commons;
-using Demos.MusicTheory.Services;
-using ChNFQInterval = Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
+using ChromaticNote = Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
+using static Demos.MusicTheory.Services.ServicesManager;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers;
 
@@ -8,8 +8,8 @@ internal class ChromaticNoteFullyQualifiedProviderFromNoteByInterval
 {
     private readonly ChromaticNoteFullyQualifiedProviderFromNoteBySpan _providerBySpan;
 
-    public ChromaticNoteFullyQualifiedProviderFromNoteByInterval() : this(
-        ServicesManager.GetService<ChromaticNoteFullyQualifiedProviderFromNoteBySpan>())
+    public ChromaticNoteFullyQualifiedProviderFromNoteByInterval() :
+        this(GetService<ChromaticNoteFullyQualifiedProviderFromNoteBySpan>())
     {
         
     }
@@ -18,6 +18,6 @@ internal class ChromaticNoteFullyQualifiedProviderFromNoteByInterval
         _providerBySpan = providerBySpan;
     }
 
-    public ChromaticNoteEnharmonicCluster GetEnharmonicNoteCluster(ChromaticNoteFullyQualified note, ChNFQInterval.ChromaticNoteIntervalFullyQualified interval, OneDimensionDirection direction) =>
+    public ChromaticNoteEnharmonicCluster GetEnharmonicNoteCluster(ChromaticNoteFullyQualified note, ChromaticNote.ChromaticNoteIntervalFullyQualified interval, OneDimensionDirection direction) =>
         _providerBySpan.GetEnharmonicNoteCluster(note, interval.ChromaticIndexSpan, direction);
 }

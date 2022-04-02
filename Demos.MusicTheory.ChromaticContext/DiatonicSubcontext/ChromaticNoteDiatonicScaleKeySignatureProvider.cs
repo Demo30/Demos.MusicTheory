@@ -12,8 +12,8 @@ public class ChromaticNoteDiatonicScaleKeySignatureProvider
         List<ChromaticNote.ChromaticNoteFullyQualified> notes = new();
 
         var order = -1;
-        ChromaticNoteElementary[] characteristics = GetBaseCharacteristics(key).ToArray();
-        for (int i = 0; i < count; i++)
+        var characteristics = GetBaseCharacteristics(key).ToArray();
+        for (var i = 0; i < count; i++)
         {
             var repeatingCharacteristicIndex = i % characteristics.Length;
             order += repeatingCharacteristicIndex == 0 ? 1 : 0;
@@ -26,7 +26,7 @@ public class ChromaticNoteDiatonicScaleKeySignatureProvider
 
     private IEnumerable<ChromaticNoteElementary> GetBaseCharacteristics(KeySignatures key)
     {
-        DiatonicScaleKeySignatureBaseCharacteristicsProvider baseCharacteristicsProvider = new();
+        var baseCharacteristicsProvider = new DiatonicScaleKeySignatureBaseCharacteristicsProvider();
         return baseCharacteristicsProvider.GetBaseChromaticCharacteristic(key);
     }
 }

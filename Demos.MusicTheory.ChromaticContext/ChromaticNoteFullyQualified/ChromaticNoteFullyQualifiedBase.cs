@@ -6,7 +6,8 @@ using static Demos.MusicTheory.ChromaticContext.Constants.ChromaticContextConsta
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 
-public abstract class ChromaticNoteFullyQualifiedBase : IContentEqual<ChromaticNoteFullyQualified>,
+public abstract class ChromaticNoteFullyQualifiedBase :
+    IContentEqual<ChromaticNoteFullyQualified>,
     IChromaticEntity
 {
     protected ChromaticNoteQuality QualityBase => _baseChromaticCharacteristic.Quality;
@@ -34,29 +35,23 @@ public abstract class ChromaticNoteFullyQualifiedBase : IContentEqual<ChromaticN
 
     public abstract bool IsEqualByContent(ChromaticNoteFullyQualified comparedNote);
 
-    protected string GetModifierString(NotationSymbols modifier)
-    {
-        return modifier == NotationSymbols.None ? "" : modifier.ToString();
-    }
+    protected static string GetModifierString(NotationSymbols modifier) =>
+        modifier == NotationSymbols.None ? "" : modifier.ToString();
 
     protected int GetChromaticIndex()
     {
-        Func<NotationSymbols, int> getChromaticOffsetModification = (modifier)
-            => ModifierChromaticCorrection.ContainsKey(modifier) ? ModifierChromaticCorrection[modifier] : 0;
-
-        int chromaticOffset =
+        int GetChromaticOffsetModification(NotationSymbols modifier) => ModifierChromaticCorrection.ContainsKey(modifier) ? ModifierChromaticCorrection[modifier] : 0;
+        return
             (OrderBase * ChromaticStepsFullOctave) +
             GetBaseChromaticOffset() +
-            getChromaticOffsetModification(ModifierBase);
-
-        return chromaticOffset;
+            GetChromaticOffsetModification(ModifierBase);
     }
 
     private int GetBaseChromaticOffset() =>
         ((2 * ChromaticStepsElementaryStep) * QualityChromaticOffset) -
         ((QualityChromaticOffset > (int)ChromaticNoteQuality.E) ? ChromaticStepsElementaryStep : 0);
 
-    private void CheckConstructionArgumentValidity(ChromaticNoteQuality quality, int octaveOrder, NotationSymbols modifier)
+    private static void CheckConstructionArgumentValidity(ChromaticNoteQuality quality, int octaveOrder, NotationSymbols modifier)
     {
         if (octaveOrder < 0)
             throw new ArgumentException("Octave order cannot be negative.");

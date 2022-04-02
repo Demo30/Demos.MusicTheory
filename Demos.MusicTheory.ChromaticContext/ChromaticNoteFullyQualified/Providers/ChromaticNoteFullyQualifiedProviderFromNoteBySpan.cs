@@ -9,13 +9,11 @@ internal class ChromaticNoteFullyQualifiedProviderFromNoteBySpan
     {
         List<ChromaticNoteFullyQualified> enharmonicNotes = new();
 
-        int noteIndex = note.ChromaticContextIndex;
-        int noteSimpleIndex = noteIndex % ChromaticContextConstants.ChromaticStepsFullOctave;
-
-
+        var noteIndex = note.ChromaticContextIndex;
+        var noteSimpleIndex = noteIndex % ChromaticContextConstants.ChromaticStepsFullOctave;
 
         enharmonicNotes.Add(new ChromaticNoteFullyQualified(ChromaticNoteQuality.D, 1, NotationSymbols.None));
-        //int firstDiatonicTreshold = (int)ChromaticNoteQuality.E
+        
 
         return new ChromaticNoteEnharmonicCluster(enharmonicNotes.ToArray());
     }
