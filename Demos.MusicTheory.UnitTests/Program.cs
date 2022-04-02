@@ -1,11 +1,11 @@
-﻿using System;
+﻿using JetBrains.Annotations;
 
-namespace Demos.MusicTheory.Tests
+namespace Demos.MusicTheory.UnitTests;
+
+[UsedImplicitly]
+public class Program
 {
-    class Program
+    public static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }

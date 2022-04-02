@@ -7,43 +7,42 @@ using Demos.MusicTheory.PhysicalContext;
 using ITone = Demos.MusicTheory.PhysicalContext.ITone;
 using IToneSpaceFrequencyValidator = Demos.MusicTheory.PhysicalContext.IToneSpaceFrequencyValidator;
 
-namespace Demos.MusicTheory.UnitTests.Tests.PhysicalContext
+namespace Demos.MusicTheory.UnitTests.Tests.PhysicalContext;
+
+[TestFixture]
+public class ToneSpaceTests
 {
-    [TestFixture]
-    public class ToneSpaceTests
+    [Theory]
+    public void TonesAdded()
     {
-        [Theory]
-        public void TonesAdded()
+        // Given
+        IEnumerable<ITone> notes = new[]
         {
-            // Given
-            IEnumerable<ITone> notes = new[]
-            {
-                new Contexts.PhysicalContext.Tone(200),
-                new Contexts.PhysicalContext.Tone(400),
-                new Contexts.PhysicalContext.Tone(450),
-                new Contexts.PhysicalContext.Tone(470),
-            };
-            int numberOfNotes = notes.Count();
+            new Contexts.PhysicalContext.Tone(200),
+            new Contexts.PhysicalContext.Tone(400),
+            new Contexts.PhysicalContext.Tone(450),
+            new Contexts.PhysicalContext.Tone(470),
+        };
+        var numberOfNotes = notes.Count();
 
-            Mock<IToneSpaceFrequencyValidator> frequencyValidator = new Mock<IToneSpaceFrequencyValidator>();
-            frequencyValidator
-                .Setup(mock => mock.ValidateEntityCompatibility(
-                    It.IsAny<ITone>(),
-                    It.IsAny<ITone[]>()))
-                .Returns(true);
+        var frequencyValidator = new Mock<IToneSpaceFrequencyValidator>();
+        frequencyValidator
+            .Setup(mock => mock.ValidateEntityCompatibility(
+                It.IsAny<ITone>(),
+                It.IsAny<ITone[]>()))
+            .Returns(true);
 
-            ToneSpace toneSpace = new ToneSpace(frequencyValidator.Object);
+        var toneSpace = new ToneSpace(frequencyValidator.Object);
 
-            // When
-            notes.ToList().ForEach(tone => toneSpace.AddMusicalEntity(tone));
+        // When
+        notes.ToList().ForEach(tone => toneSpace.AddMusicalEntity(tone));
 
-            // Then
-            frequencyValidator.Verify(mock =>
+        // Then
+        frequencyValidator.Verify(mock =>
                 mock.ValidateEntityCompatibility(
                     It.IsAny<ITone>(),
                     It.IsAny<ITone[]>()),
-                Times.Exactly(numberOfNotes));
-            toneSpace.MusicalEntities.Should().HaveCount(numberOfNotes);
-        }
+            Times.Exactly(numberOfNotes));
+        toneSpace.MusicalEntities.Should().HaveCount(numberOfNotes);
     }
 }

@@ -1,8 +1,6 @@
 ﻿using Demos.MusicTheory.Commons;
-using FluentAssertions;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using Demos.MusicTheory.ChromaticContext;
 
 namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace;
@@ -14,42 +12,42 @@ public class ChromaticSpaceIndexValidatorTests
     public void ValidationShouldThrowException_OnConflictingIndexes()
     {
         // Given
-        IChromaticEntity entity = new ChromaticEntity(2);
-        IEnumerable<IChromaticEntity> entitites = new[]
+        var entity = new ChromaticEntity(2);
+        var entities = new[]
         {
             new ChromaticEntity(1),
             new ChromaticEntity(2),
             new ChromaticEntity(3)
         };
 
-        ChromaticSpaceIndexValidator indexValidator = new ChromaticSpaceIndexValidator();
+        var indexValidator = new ChromaticSpaceIndexValidator();
 
         // When
-        Action act = () => { indexValidator.ValidateEntityCompatibility(entity, entitites); };
+        void Call() => indexValidator.ValidateEntityCompatibility(entity, entities);
 
         // Then
-        act.Should().Throw<MusicalEntityValidatorException>();
+        Assert.Throws<MusicalEntityValidatorException>(Call);
     }
 
     [Theory]
     public void ValidationShouldSucceed_WhenNoConflictingNotes()
     {
         // Given
-        IChromaticEntity entity = new ChromaticEntity(2);
-        IEnumerable<IChromaticEntity> entitites = new[]
+        var entity = new ChromaticEntity(2);
+        var entities = new[]
         {
             new ChromaticEntity(1),
             new ChromaticEntity(3),
             new ChromaticEntity(4)
         };
 
-        ChromaticSpaceIndexValidator indexValidator = new ChromaticSpaceIndexValidator();
+        var indexValidator = new ChromaticSpaceIndexValidator();
 
         // When
-        Action act = () => { indexValidator.ValidateEntityCompatibility(entity, entitites); };
+        void Call() => indexValidator.ValidateEntityCompatibility(entity, entities);
 
         // Then
-        act.Should().NotThrow();
+        Assert.DoesNotThrow(Call);
     }
 
     [Theory]
@@ -57,31 +55,31 @@ public class ChromaticSpaceIndexValidatorTests
     public void ValidationShouldSucceed_WhenArrayEmpty()
     {
         // Given
-        IChromaticEntity entity = new ChromaticEntity(2);
-        IEnumerable<IChromaticEntity> entities = Array.Empty<IChromaticEntity>();
+        var entity = new ChromaticEntity(2);
+        var entities = Array.Empty<IChromaticEntity>();
 
         var indexValidator = new ChromaticSpaceIndexValidator();
 
         // When
-        var act = () => { indexValidator.ValidateEntityCompatibility(entity, entities); };
+        void Call() => indexValidator.ValidateEntityCompatibility(entity, entities);
 
         // Then
-        act.Should().NotThrow();
+        Assert.DoesNotThrow(Call);
     }
 
     [Theory]
     public void ThrowOnIncompatibleEntityAdded()
     {
         // Given
-        Contexts.PhysicalContext.Tone entity = new Contexts.PhysicalContext.Tone(440);
-        IEnumerable<Contexts.PhysicalContext.Tone> entitites = Array.Empty<Contexts.PhysicalContext.Tone>();
+        var entity = new Contexts.PhysicalContext.Tone(440);
+        var entities = Array.Empty<Contexts.PhysicalContext.Tone>();
 
-        ChromaticSpaceIndexValidator indexValidator = new ChromaticSpaceIndexValidator();
+        var indexValidator = new ChromaticSpaceIndexValidator();
 
         // When
-        Action act = () => { indexValidator.ValidateEntityCompatibility(entity, entitites); };
+        void Call() => indexValidator.ValidateEntityCompatibility(entity, entities);
 
         // Then
-        act.Should().Throw<ArgumentException>();
+        Assert.Throws<ArgumentException>(Call);
     }
 }

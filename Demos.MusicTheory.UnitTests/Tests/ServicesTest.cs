@@ -1,5 +1,4 @@
-﻿using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
-using Demos.MusicTheory.Services;
+﻿using Demos.MusicTheory.Services;
 using Demos.MusicTheory.Setup;
 using FluentAssertions;
 using NUnit.Framework;
@@ -13,7 +12,7 @@ public class ServicesTest
     public void TestServices()
     {
         // Given
-        MusicTheoryServices.Setup();
+        MusicTheorySetup.Setup();
         
         // When
         var keys = ServicesManager.ServicesProvider.Services.Keys;
@@ -26,7 +25,7 @@ public class ServicesTest
     public void TestServices2()
     {
         // Given
-        MusicTheoryServices.Setup();
+        MusicTheorySetup.Setup();
         
         // When + Then
         foreach (var serviceType in ServicesManager.ServicesProvider.Services.Keys)

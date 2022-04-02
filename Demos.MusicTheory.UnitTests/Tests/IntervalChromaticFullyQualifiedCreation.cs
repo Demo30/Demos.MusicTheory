@@ -38,8 +38,8 @@ namespace Demos.MusicTheory.UnitTests.Tests
         [TestCase(8, ChromaticNoteIntervalQuality.Diminished)]
         public void ValidCreationArgumentsOneOctave(int intervalBaseNumber, ChromaticNoteIntervalQuality intervalChromaticQuality)
         {
-            TestDelegate validCreation = () => new ChromaticNoteIntervalFullyQualified(intervalBaseNumber, intervalChromaticQuality);
-            Assert.DoesNotThrow(validCreation);
+            void ValidCreation() => new ChromaticNoteIntervalFullyQualified(intervalBaseNumber, intervalChromaticQuality);
+            Assert.DoesNotThrow(ValidCreation);
         }
 
         [Theory]
@@ -63,8 +63,8 @@ namespace Demos.MusicTheory.UnitTests.Tests
         [TestCase(16, ChromaticNoteIntervalQuality.Diminished)]
         public void ValidCreationArgumentsCompoundOctave(int intervalBaseNumber, ChromaticNoteIntervalQuality intervalChromaticQuality)
         {
-            TestDelegate validCreation = () => new ChromaticNoteIntervalFullyQualified(intervalBaseNumber, intervalChromaticQuality);
-            Assert.DoesNotThrow(validCreation);
+            void ValidCreation() => new ChromaticNoteIntervalFullyQualified(intervalBaseNumber, intervalChromaticQuality);
+            Assert.DoesNotThrow(ValidCreation);
         }
 
         [Theory]
@@ -82,8 +82,8 @@ namespace Demos.MusicTheory.UnitTests.Tests
         [TestCase(4, ChromaticNoteIntervalQuality.Minor)]
         public void InvalidCreationArgumentsOneOctave(int intervalBaseNumber, ChromaticNoteIntervalQuality intervalChromaticQuality)
         {
-            TestDelegate invalidCreation = () => new ChromaticNoteIntervalFullyQualified(intervalBaseNumber, intervalChromaticQuality);
-            Assert.Throws(Is.InstanceOf<Exception>(), invalidCreation);
+            void InvalidCreation() => new ChromaticNoteIntervalFullyQualified(intervalBaseNumber, intervalChromaticQuality);
+            Assert.Throws(Is.InstanceOf<Exception>(), InvalidCreation);
         }
 
     }

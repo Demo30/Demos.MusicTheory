@@ -2,101 +2,99 @@
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Demos.MusicTheory.ChromaticContext;
 
-namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace
+namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace;
+
+[TestFixture]
+public class ChromaticSpaceTests
 {
-    [TestFixture]
-    public class ChromaticSpaceTests
+    [Theory]
+    public void ValidatorsRunOnEntityAdd()
     {
-        [Theory]
-        public void ValidatorsRunOnEntityAdd()
-        {
-            // Given
-            var chromaticNote = new ChromaticEntity(1);
+        // Given
+        var chromaticNote = new ChromaticEntity(1);
 
-            Mock<IChromaticSpaceIndexValidator> indexValidator = new Mock<IChromaticSpaceIndexValidator>();
-            indexValidator
-                .Setup(mock => mock.ValidateEntityCompatibility(
-                    It.IsAny<IChromaticEntity>(),
-                    It.IsAny<IChromaticEntity[]>()))
-                .Returns(true);
+        var indexValidator = new Mock<IChromaticSpaceIndexValidator>();
+        indexValidator
+            .Setup(mock => mock.ValidateEntityCompatibility(
+                It.IsAny<IChromaticEntity>(),
+                It.IsAny<IChromaticEntity[]>()))
+            .Returns(true);
 
-            MusicTheory.ChromaticContext.ChromaticSpace chromaticSpace = new MusicTheory.ChromaticContext.ChromaticSpace(indexValidator.Object);
+        var chromaticSpace = new MusicTheory.ChromaticContext.ChromaticSpace(indexValidator.Object);
 
-            // When
-            chromaticSpace.AddMusicalEntity(chromaticNote);
+        // When
+        chromaticSpace.AddMusicalEntity(chromaticNote);
 
-            // Then
-            indexValidator.Verify(mock =>
+        // Then
+        indexValidator.Verify(mock =>
                 mock.ValidateEntityCompatibility(
                     It.IsAny<IChromaticEntity>(),
                     It.IsAny<IChromaticEntity[]>()),
-                Times.Once);
-        }
+            Times.Once);
+    }
 
-        [Theory]
-        public void EvaluatesValidatorOnAdd()
-        {
-            // Given
-            var chromaticNote = new ChromaticEntity(1);
+    [Theory]
+    public void EvaluatesValidatorOnAdd()
+    {
+        // Given
+        var chromaticNote = new ChromaticEntity(1);
 
-            Mock<IChromaticSpaceIndexValidator> indexValidator = new Mock<IChromaticSpaceIndexValidator>();
-            indexValidator
-                .Setup(mock => mock.ValidateEntityCompatibility(
-                    It.IsAny<IChromaticEntity>(),
-                    It.IsAny<IChromaticEntity[]>()))
-                .Returns(false);
+        var indexValidator = new Mock<IChromaticSpaceIndexValidator>();
+        indexValidator
+            .Setup(mock => mock.ValidateEntityCompatibility(
+                It.IsAny<IChromaticEntity>(),
+                It.IsAny<IChromaticEntity[]>()))
+            .Returns(false);
 
-            MusicTheory.ChromaticContext.ChromaticSpace chromaticSpace = new MusicTheory.ChromaticContext.ChromaticSpace(indexValidator.Object);
+        var chromaticSpace = new MusicTheory.ChromaticContext.ChromaticSpace(indexValidator.Object);
 
-            // When
-            Action act = () => { chromaticSpace.AddMusicalEntity(chromaticNote); };
+        // When
+        void Call() => chromaticSpace.AddMusicalEntity(chromaticNote);
 
-            // Then
-            act.Should().Throw<MusicalEntityValidatorException>();
-            indexValidator.Verify(mock =>
+        // Then
+        Assert.Throws<MusicalEntityValidatorException>(Call);
+        
+        indexValidator.Verify(mock =>
                 mock.ValidateEntityCompatibility(
                     It.IsAny<IChromaticEntity>(),
                     It.IsAny<IChromaticEntity[]>()),
-                Times.Once);
-        }
+            Times.Once);
+    }
 
-        [Theory]
-        public void ChromaticNotesAdded()
+    [Theory]
+    public void ChromaticNotesAdded()
+    {
+        // Given
+        var notes = new[]
         {
-            // Given
-            IEnumerable<IChromaticEntity> notes = new[]
-            {
-                new ChromaticEntity(1),
-                new ChromaticEntity(2),
-                new ChromaticEntity(3),
-                new ChromaticEntity(5)
-            };
-            int numberOfNotes = notes.Count();
+            new ChromaticEntity(1),
+            new ChromaticEntity(2),
+            new ChromaticEntity(3),
+            new ChromaticEntity(5)
+        };
+        var numberOfNotes = notes.Length;
 
-            Mock<IChromaticSpaceIndexValidator> indexValidator = new Mock<IChromaticSpaceIndexValidator>();
-            indexValidator
-                .Setup(mock => mock.ValidateEntityCompatibility(
-                    It.IsAny<IChromaticEntity>(),
-                    It.IsAny<IChromaticEntity[]>()))
-                .Returns(true);
+        var indexValidator = new Mock<IChromaticSpaceIndexValidator>();
+        indexValidator
+            .Setup(mock => mock.ValidateEntityCompatibility(
+                It.IsAny<IChromaticEntity>(),
+                It.IsAny<IChromaticEntity[]>()))
+            .Returns(true);
 
-            MusicTheory.ChromaticContext.ChromaticSpace chromaticSpace = new MusicTheory.ChromaticContext.ChromaticSpace(indexValidator.Object);
+        var chromaticSpace = new MusicTheory.ChromaticContext.ChromaticSpace(indexValidator.Object);
 
-            // When
-            notes.ToList().ForEach(note => chromaticSpace.AddMusicalEntity(note));
+        // When
+        notes.ToList().ForEach(note => chromaticSpace.AddMusicalEntity(note));
 
-            // Then
-            indexValidator.Verify(mock =>
+        // Then
+        indexValidator.Verify(mock =>
                 mock.ValidateEntityCompatibility(
                     It.IsAny<IChromaticEntity>(),
                     It.IsAny<IChromaticEntity[]>()),
-                Times.Exactly(numberOfNotes));
-            chromaticSpace.MusicalEntities.Should().HaveCount(numberOfNotes);
-        }
+            Times.Exactly(numberOfNotes));
+        chromaticSpace.MusicalEntities.Should().HaveCount(numberOfNotes);
     }
 }

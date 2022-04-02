@@ -4,7 +4,7 @@ using Demos.MusicTheory.Services;
 
 namespace Demos.MusicTheory.Setup;
 
-public static class MusicTheoryServices
+public static class MusicTheorySetup
 {
     public static void Setup()
     {
