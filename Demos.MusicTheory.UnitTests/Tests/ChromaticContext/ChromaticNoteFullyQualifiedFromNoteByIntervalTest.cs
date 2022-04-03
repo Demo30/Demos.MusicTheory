@@ -5,48 +5,45 @@ using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
 using Demos.MusicTheory.Commons;
 using FluentAssertions;
+using Moq;
 using NUnit.Framework;
 
 namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class ChromaticNoteFullyQualifiedFromNoteByIntervalTest
+public class ChromaticNoteFullyQualifiedFromNoteByIntervalTest : TestBase
 {
-    private ChromaticNoteFullyQualifiedProviderFromNoteByInterval _provider;
-    
-    [SetUp]
-    public void SetUp()
-    {
-        _provider = new ChromaticNoteFullyQualifiedProviderFromNoteByInterval();
-    }
-    
-    [Theory]
-    [TestCaseSource(nameof(GetTestCases))]
-    public void ValidResults(
-        ChromaticNoteQuality noteQuality, 
-        int order, 
-        NotationSymbols modifier, 
-        ChromaticNoteIntervalFullyQualified interval, 
-        OneDimensionDirection direction,
-        ChromaticNoteQuality expectedNoteQuality,
-        int expectedOrder,
-        NotationSymbols expectedModifier)
+    [Test]
+    public void ValidResults()
     {
         // Given
-        ChromaticNoteFullyQualified note = new(noteQuality, order, modifier);
+        const ChromaticNoteQuality calledQuality = ChromaticNoteQuality.D;
+        const int calledOrder = 5;
+        const NotationSymbols calledModifier = NotationSymbols.None;
+        var calledInterval = new ChromaticNoteIntervalFullyQualified(3, ChromaticNoteIntervalQuality.Augmented);
+        const OneDimensionDirection calledDirection = OneDimensionDirection.RIGHT;
+
+        var expectedResult = new ChromaticNoteEnharmonicCluster(new[]
+        {
+            new ChromaticNoteFullyQualified(ChromaticNoteQuality.C, 0, NotationSymbols.Sharp),
+            new ChromaticNoteFullyQualified(ChromaticNoteQuality.D, 0, NotationSymbols.Flat)
+        });
+        
+        ChromaticNoteFullyQualified note = new(calledQuality, calledOrder, calledModifier);
+        var mockProviderFromNoteBySpan = new Mock<IChromaticNoteFullyQualifiedProviderFromNoteBySpan>();
+        mockProviderFromNoteBySpan
+            .Setup(p => p.GetEnharmonicNoteCluster(
+                It.IsAny<ChromaticNoteFullyQualified>(), 
+                It.IsAny<int>(),
+                It.IsAny<OneDimensionDirection>()))
+            .Returns(expectedResult);
 
         // When
-        var cluster = _provider.GetEnharmonicNoteCluster(note, interval, direction);
+        var provider = new ChromaticNoteFullyQualifiedProviderFromNoteByInterval(mockProviderFromNoteBySpan.Object);
+        var cluster = provider.GetEnharmonicNoteCluster(note, calledInterval, calledDirection);
 
         // Then
-        var expectedNote = new ChromaticNoteFullyQualified(expectedNoteQuality, expectedOrder, expectedModifier);
-        cluster.Cluster.Should().ContainSingle(n => n.IsEqualByContent(expectedNote));
-        cluster.ChromaticContextIndex.Should().Be(expectedNote.ChromaticContextIndex);
-    }
-
-    private static IEnumerable<TestCaseData> GetTestCases()
-    {
-        // TODO: add more test cases
-        yield return new TestCaseData(ChromaticNoteQuality.C, 1, NotationSymbols.None, new ChromaticNoteIntervalFullyQualified(1, ChromaticNoteIntervalQuality.Perfect), OneDimensionDirection.RIGHT, ChromaticNoteQuality.C, 1, NotationSymbols.None);
+        mockProviderFromNoteBySpan.Verify(c => c.GetEnharmonicNoteCluster(note, calledInterval.SemitoneCount, calledDirection), Times.Once);
+        cluster.Should().BeSameAs(expectedResult);
     }
 }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class ChromaticNoteEnharmonicClusterCreationTest
+public class ChromaticNoteEnharmonicClusterCreationTest : TestBase
 {
     private static ChromaticNoteFullyQualified[] GetValidTestCases(int testCaseIndex)
     {

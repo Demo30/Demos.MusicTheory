@@ -8,9 +8,9 @@ public class ChromaticNoteIntervalFullyQualified : ChromaticNoteIntervalFullyQua
     public int SemitoneCount => ChromaticIndexSpan;
 
     /// <summary>
-    /// Starting from 0. One full octave has one suboctave.
+    /// Starting from 0. One full octave has one sub-octave.
     /// </summary>
-    public int Suboctaves => _chromaticIndexSpanCounter.GetSuboctaves(DiatonicScaleDegree);
+    public int SubOctaves => _chromaticIndexSpanCounter.GetSuboctaves(DiatonicScaleDegree);
 
     /// <summary>
     /// Subtracts compound octave intervals from the overall base number.

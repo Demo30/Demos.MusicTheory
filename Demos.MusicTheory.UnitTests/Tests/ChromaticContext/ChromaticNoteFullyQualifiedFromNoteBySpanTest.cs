@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class ChromaticNoteFullyQualifiedFromNoteBySpanTest
+public class ChromaticNoteFullyQualifiedFromNoteBySpanTest : TestBase
 {
     private ChromaticNoteFullyQualifiedProviderFromNoteBySpan _provider;
     
@@ -18,10 +18,15 @@ public class ChromaticNoteFullyQualifiedFromNoteBySpanTest
         _provider = new ChromaticNoteFullyQualifiedProviderFromNoteBySpan();
     }
     
+    // TODO: add more test, try edge-cases
     [Theory]
     [TestCase(ChromaticNoteQuality.C, 1, NotationSymbols.None, 1,  OneDimensionDirection.RIGHT, ChromaticNoteQuality.D, 1, NotationSymbols.Flat)]
     [TestCase(ChromaticNoteQuality.C, 1, NotationSymbols.None, 1,  OneDimensionDirection.RIGHT, ChromaticNoteQuality.C, 1, NotationSymbols.Sharp)]
     [TestCase(ChromaticNoteQuality.C, 1, NotationSymbols.None, 2,  OneDimensionDirection.RIGHT, ChromaticNoteQuality.D, 1, NotationSymbols.None)]
+    [TestCase(ChromaticNoteQuality.C, 0, NotationSymbols.None, 1,  OneDimensionDirection.RIGHT, ChromaticNoteQuality.D, 0, NotationSymbols.Flat)]
+    [TestCase(ChromaticNoteQuality.C, 0, NotationSymbols.None, 1,  OneDimensionDirection.RIGHT, ChromaticNoteQuality.C, 0, NotationSymbols.Sharp)]
+    [TestCase(ChromaticNoteQuality.C, 0, NotationSymbols.None, 0,  OneDimensionDirection.RIGHT, ChromaticNoteQuality.C, 0, NotationSymbols.None)]
+    [TestCase(ChromaticNoteQuality.C, 0, NotationSymbols.None, 12,  OneDimensionDirection.RIGHT, ChromaticNoteQuality.C, 1, NotationSymbols.None)]
     public void ValidResults(
         ChromaticNoteQuality noteQuality, 
         int order, 

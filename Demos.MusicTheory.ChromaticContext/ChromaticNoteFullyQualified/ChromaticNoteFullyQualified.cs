@@ -11,8 +11,7 @@ public class ChromaticNoteFullyQualified : ChromaticNoteFullyQualifiedBase
     public NotationSymbols Modifier => ModifierBase;
 
     public override int ChromaticContextIndex => GetChromaticIndex();
-
-
+    
     public ChromaticNoteFullyQualified(ChromaticNoteQuality qualifier, int order, NotationSymbols modifier) : base(qualifier, order, modifier)
     {
 

@@ -6,14 +6,14 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Provide
 
 internal class ChromaticNoteFullyQualifiedProviderFromNoteByInterval
 {
-    private readonly ChromaticNoteFullyQualifiedProviderFromNoteBySpan _providerBySpan;
+    private readonly IChromaticNoteFullyQualifiedProviderFromNoteBySpan _providerBySpan;
 
     public ChromaticNoteFullyQualifiedProviderFromNoteByInterval() :
         this(GetService<ChromaticNoteFullyQualifiedProviderFromNoteBySpan>())
     {
         
     }
-    internal ChromaticNoteFullyQualifiedProviderFromNoteByInterval(ChromaticNoteFullyQualifiedProviderFromNoteBySpan providerBySpan)
+    internal ChromaticNoteFullyQualifiedProviderFromNoteByInterval(IChromaticNoteFullyQualifiedProviderFromNoteBySpan providerBySpan)
     {
         _providerBySpan = providerBySpan;
     }

@@ -1,30 +1,19 @@
 ﻿using Demos.MusicTheory.Commons;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using Demos.MusicTheory.ChromaticContext.Helpers;
 using static Demos.MusicTheory.ChromaticContext.Constants.ChromaticContextConstants;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 
-public abstract class ChromaticNoteFullyQualifiedBase :
-    IContentEqual<ChromaticNoteFullyQualified>,
-    IChromaticEntity
+public abstract class ChromaticNoteFullyQualifiedBase : IContentEqual<ChromaticNoteFullyQualified>, IChromaticEntity
 {
+    public abstract int ChromaticContextIndex { get; }
     protected ChromaticNoteQuality QualityBase => _baseChromaticCharacteristic.Quality;
     protected NotationSymbols ModifierBase => _baseChromaticCharacteristic.Modifier;
     protected int OrderBase { get; }
-    public abstract int ChromaticContextIndex { get; }
 
-    private int QualityChromaticOffset => (int)QualityBase;
     private readonly ChromaticNoteElementary _baseChromaticCharacteristic;
-    private static readonly Dictionary<NotationSymbols, int> ModifierChromaticCorrection = new()
-    {
-        { NotationSymbols.None, 0 },
-        { NotationSymbols.Sharp, 1 },
-        { NotationSymbols.Flat, -1 },
-        { NotationSymbols.DoubleSharp, +2 },
-        { NotationSymbols.DoubleFlat, -2 }
-    };
 
     public ChromaticNoteFullyQualifiedBase(ChromaticNoteQuality qualifier, int order, NotationSymbols modifier)
     {
@@ -35,21 +24,11 @@ public abstract class ChromaticNoteFullyQualifiedBase :
 
     public abstract bool IsEqualByContent(ChromaticNoteFullyQualified comparedNote);
 
-    protected static string GetModifierString(NotationSymbols modifier) =>
-        modifier == NotationSymbols.None ? "" : modifier.ToString();
+    protected static string GetModifierString(NotationSymbols modifier) => modifier == NotationSymbols.None ? "" : modifier.ToString();
 
-    protected int GetChromaticIndex()
-    {
-        int GetChromaticOffsetModification(NotationSymbols modifier) => ModifierChromaticCorrection.ContainsKey(modifier) ? ModifierChromaticCorrection[modifier] : 0;
-        return
-            (OrderBase * ChromaticStepsFullOctave) +
-            GetBaseChromaticOffset() +
-            GetChromaticOffsetModification(ModifierBase);
-    }
-
-    private int GetBaseChromaticOffset() =>
-        ((2 * ChromaticStepsElementaryStep) * QualityChromaticOffset) -
-        ((QualityChromaticOffset > (int)ChromaticNoteQuality.E) ? ChromaticStepsElementaryStep : 0);
+    protected int GetChromaticIndex() =>
+        BaseChromaticIndexMapper.GetBaseChromaticOffset(QualityBase, ModifierBase) +
+        (OrderBase * ChromaticStepsFullOctave);
 
     private static void CheckConstructionArgumentValidity(ChromaticNoteQuality quality, int octaveOrder, NotationSymbols modifier)
     {
