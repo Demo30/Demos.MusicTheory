@@ -2,5 +2,5 @@
 
 internal interface IChromaticNoteFullyQualifiedProviderFromChromaticIndex
 {
-    public ChromaticNoteEnharmonicCluster GetEnharmonicNoteCluster(int chromaticIndex);
+    public ChromaticNoteFullyQualifiedEnharmonicCluster GetEnharmonicNoteCluster(int chromaticIndex);
 }

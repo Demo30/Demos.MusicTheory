@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Demos.MusicTheory.ChromaticContext.Constants;
 using Demos.MusicTheory.Commons;
 using System.Collections.Generic;
@@ -9,22 +10,27 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Provide
 
 internal class ChromaticNoteFullyQualifiedProviderFromChromaticIndex : IChromaticNoteFullyQualifiedProviderFromChromaticIndex
 {
-    public ChromaticNoteEnharmonicCluster GetEnharmonicNoteCluster(int chromaticIndex)
+    public ChromaticNoteFullyQualifiedEnharmonicCluster GetEnharmonicNoteCluster(int chromaticIndex)
     {
         var baseOffset = chromaticIndex % ChromaticContextConstants.ChromaticStepsFullOctave;
         var order = chromaticIndex / ChromaticContextConstants.ChromaticStepsFullOctave;
         
+        var notes = GetQualityModifierCartesianProduct()
+            .Where(t => BaseChromaticIndexMapper.GetBaseChromaticOffset(t.Item1, t.Item2) == baseOffset)
+            .Select(t => new ChromaticNoteFullyQualified(t.Item1, order, t.Item2))
+            .ToArray();
+        
+        return new ChromaticNoteFullyQualifiedEnharmonicCluster(notes);
+    }
+
+    private static IEnumerable<(ChromaticNoteQuality, NotationSymbols)> GetQualityModifierCartesianProduct()
+    {
         var qualities = Enum.GetValues<ChromaticNoteQuality>().Where(quality => quality != ChromaticNoteQuality.Unknown).ToList();
         var modifiers = GetModifiers();
 
-        var matches = qualities
-            .SelectMany(q => modifiers.Select(m => (q, m)))
-            .Where(t => BaseChromaticIndexMapper.GetBaseChromaticOffset(t.q, t.m) == baseOffset);
-        var notes = matches.Select(t => new ChromaticNoteFullyQualified(t.q, order, t.m)).ToArray();
-        
-        return new ChromaticNoteEnharmonicCluster(notes);
+        return qualities.SelectMany(q => modifiers.Select(m => (q, m)));
     }
-
+    
     private static IEnumerable<NotationSymbols> GetModifiers() => new[]
     {
         NotationSymbols.None,

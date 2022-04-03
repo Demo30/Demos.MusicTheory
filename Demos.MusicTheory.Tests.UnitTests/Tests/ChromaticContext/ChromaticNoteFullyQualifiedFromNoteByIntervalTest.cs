@@ -23,7 +23,7 @@ public class ChromaticNoteFullyQualifiedFromNoteByIntervalTest : TestBase
         const NotationSymbols calledModifier = NotationSymbols.None;
         var calledInterval = new ChromaticNoteIntervalFullyQualified(3, ChromaticNoteIntervalQuality.Augmented);
 
-        var expectedResult = new ChromaticNoteEnharmonicCluster(new[]
+        var expectedResult = new ChromaticNoteFullyQualifiedEnharmonicCluster(new[]
         {
             new ChromaticNoteFullyQualified(ChromaticNoteQuality.C, 0, NotationSymbols.Sharp),
             new ChromaticNoteFullyQualified(ChromaticNoteQuality.D, 0, NotationSymbols.Flat)

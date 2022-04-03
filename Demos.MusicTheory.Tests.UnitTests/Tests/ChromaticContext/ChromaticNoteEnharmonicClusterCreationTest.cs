@@ -110,7 +110,7 @@ public class ChromaticNoteEnharmonicClusterCreationTest : TestBase
     [TestCase(10)]
     public void ValidCreation(int validCombinationTestCaseNumber)
     {
-        void ValidCall() => new ChromaticNoteEnharmonicCluster(GetValidTestCases(validCombinationTestCaseNumber));
+        void ValidCall() => new ChromaticNoteFullyQualifiedEnharmonicCluster(GetValidTestCases(validCombinationTestCaseNumber));
         
         Assert.DoesNotThrow(ValidCall);
     }
@@ -121,7 +121,7 @@ public class ChromaticNoteEnharmonicClusterCreationTest : TestBase
     [TestCase(2)]
     public void InvalidCreation(int invalidCombinationTestCaseNumber)
     {
-        void InvalidCall() => new ChromaticNoteEnharmonicCluster(GetInvalidTestCases(invalidCombinationTestCaseNumber));
+        void InvalidCall() => new ChromaticNoteFullyQualifiedEnharmonicCluster(GetInvalidTestCases(invalidCombinationTestCaseNumber));
 
         Assert.Throws<ArgumentException>(InvalidCall);
     }

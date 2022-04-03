@@ -22,7 +22,7 @@ public class ChromaticNoteFullyQualifiedFromNoteBySpanTest : TestBase
         const int calledOrder = 1;
         const NotationSymbols calledModifier = NotationSymbols.None;
 
-        var expectedCluster = new ChromaticNoteEnharmonicCluster(new[]
+        var expectedCluster = new ChromaticNoteFullyQualifiedEnharmonicCluster(new[]
         {
             new ChromaticNoteFullyQualified(ChromaticNoteQuality.D, 1, NotationSymbols.Sharp),
             new ChromaticNoteFullyQualified(ChromaticNoteQuality.E, 1, NotationSymbols.Flat)

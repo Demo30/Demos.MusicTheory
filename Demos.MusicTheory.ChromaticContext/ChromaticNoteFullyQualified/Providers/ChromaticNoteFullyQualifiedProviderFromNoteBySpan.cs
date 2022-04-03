@@ -2,13 +2,13 @@
 using static Demos.MusicTheory.Services.ServicesManager;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers;
-internal class ChromaticNoteFullyQualifiedProviderFromNoteBySpan : IChromaticNoteFullyQualifiedProviderFromNoteBySpan
+
+internal class ChromaticNoteFullyQualifiedProviderFromNoteBySpan
 {
     private readonly IChromaticNoteFullyQualifiedProviderFromChromaticIndex _providerFromChromaticIndex;
 
     public ChromaticNoteFullyQualifiedProviderFromNoteBySpan() : this(GetService<ChromaticNoteFullyQualifiedProviderFromChromaticIndex>())
     {
-        
     }
 
     internal ChromaticNoteFullyQualifiedProviderFromNoteBySpan(IChromaticNoteFullyQualifiedProviderFromChromaticIndex providerFromChromaticIndex)
@@ -16,10 +16,9 @@ internal class ChromaticNoteFullyQualifiedProviderFromNoteBySpan : IChromaticNot
         _providerFromChromaticIndex = providerFromChromaticIndex;
     }
     
-    public ChromaticNoteEnharmonicCluster GetEnharmonicNoteCluster(ChromaticNoteFullyQualified note, int chromaticIndexSpan, OneDimensionDirection direction)
-    {
-        var diff = direction == OneDimensionDirection.RIGHT ? chromaticIndexSpan : (-1 * chromaticIndexSpan);
-        var spannedIndex = note.ChromaticContextIndex + diff;
-        return _providerFromChromaticIndex.GetEnharmonicNoteCluster(spannedIndex);
-    }
+    public ChromaticNoteFullyQualifiedEnharmonicCluster GetEnharmonicNoteCluster(ChromaticNoteFullyQualified note, int chromaticIndexSpan, OneDimensionDirection direction) =>
+        _providerFromChromaticIndex.GetEnharmonicNoteCluster(GetSpannedChromaticIndex(note, chromaticIndexSpan, direction));
+
+    private static int GetSpannedChromaticIndex(IChromaticEntity note, int chromaticIndexSpan, OneDimensionDirection direction) =>
+        note.ChromaticContextIndex + (direction == OneDimensionDirection.RIGHT ? chromaticIndexSpan : -chromaticIndexSpan);
 }

@@ -16,6 +16,6 @@ public class ChromaticIntervalFullyQualifiedProviderFromRange
         _chromaticIndexLengthProvider = chromaticIndexLengthProvider;
     }
 
-    public ChromaticNoteIntervalFullyQualifiedCluster GetIntervals(ChromaticNoteFullyQualifiedRange range) =>
+    public ChromaticNoteIntervalFullyQualifiedEnharmonicCluster GetIntervals(ChromaticNoteFullyQualifiedRange range) =>
         _chromaticIndexLengthProvider.GetIntervals(range.ChromaticIndexSpan);
 }

@@ -9,6 +9,8 @@ public class ChromaticNoteDiatonicScaleKeySignatureProvider
 {
     public ChromaticNote.ChromaticNoteFullyQualified[] GetNotes(KeySignatures key, int count)
     {
+        // This can possibly be implemented using the chromatic index provider and precomputed map instead
+        
         List<ChromaticNote.ChromaticNoteFullyQualified> notes = new();
 
         var order = -1;
@@ -24,7 +26,7 @@ public class ChromaticNoteDiatonicScaleKeySignatureProvider
         return notes.ToArray();
     }
 
-    private IEnumerable<ChromaticNoteElementary> GetBaseCharacteristics(KeySignatures key)
+    private static IEnumerable<ChromaticNoteElementary> GetBaseCharacteristics(KeySignatures key)
     {
         var baseCharacteristicsProvider = new DiatonicScaleKeySignatureBaseCharacteristicsProvider();
         return baseCharacteristicsProvider.GetBaseChromaticCharacteristic(key);

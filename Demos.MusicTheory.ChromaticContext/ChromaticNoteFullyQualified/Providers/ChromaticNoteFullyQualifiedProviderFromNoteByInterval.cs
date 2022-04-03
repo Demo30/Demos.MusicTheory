@@ -8,23 +8,19 @@ internal class ChromaticNoteFullyQualifiedProviderFromNoteByInterval
 {
     private readonly IChromaticNoteFullyQualifiedProviderFromChromaticIndex _providerByChromaticIndex;
 
-    public ChromaticNoteFullyQualifiedProviderFromNoteByInterval() :
-        this(GetService<ChromaticNoteFullyQualifiedProviderFromChromaticIndex>())
+    public ChromaticNoteFullyQualifiedProviderFromNoteByInterval() : this(GetService<ChromaticNoteFullyQualifiedProviderFromChromaticIndex>())
     {
-        
     }
+    
     internal ChromaticNoteFullyQualifiedProviderFromNoteByInterval(IChromaticNoteFullyQualifiedProviderFromChromaticIndex providerByChromaticIndex)
     {
         _providerByChromaticIndex = providerByChromaticIndex;
     }
 
-    public ChromaticNoteEnharmonicCluster GetEnharmonicNoteCluster(ChromaticNoteFullyQualified note, ChromaticNote.ChromaticNoteIntervalFullyQualified interval, OneDimensionDirection direction)
-    {
-        var chromaticIndex = 
-            note.ChromaticContextIndex +
-            (direction == OneDimensionDirection.RIGHT ? interval.SemitoneCount : -interval.SemitoneCount);
-        
-        return _providerByChromaticIndex.GetEnharmonicNoteCluster(chromaticIndex);
-    }
-        
+    public ChromaticNoteFullyQualifiedEnharmonicCluster GetEnharmonicNoteCluster(ChromaticNoteFullyQualified note, ChromaticNote.ChromaticNoteIntervalFullyQualified interval, OneDimensionDirection direction) =>
+        _providerByChromaticIndex.GetEnharmonicNoteCluster(GetSpannedIndex(note, interval, direction));
+
+    private static int GetSpannedIndex(IChromaticEntity note, ChromaticNote.ChromaticNoteIntervalFullyQualified interval, OneDimensionDirection direction) =>
+        note.ChromaticContextIndex +
+        (direction == OneDimensionDirection.RIGHT ? interval.SemitoneCount : -interval.SemitoneCount);
 }

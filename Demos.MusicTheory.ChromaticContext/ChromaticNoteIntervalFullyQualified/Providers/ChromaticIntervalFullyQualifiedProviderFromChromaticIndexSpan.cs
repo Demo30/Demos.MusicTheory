@@ -18,7 +18,7 @@ public class ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan
         public bool IsPerfectType { get; set; }
     }
 
-    public ChromaticNoteIntervalFullyQualifiedCluster GetIntervals(int chromaticIndexSpan)
+    public ChromaticNoteIntervalFullyQualifiedEnharmonicCluster GetIntervals(int chromaticIndexSpan)
     {
         // I'm sure there can be a nicer cleaner implementeation... all these ifs ain't no good :)
 
@@ -54,7 +54,7 @@ public class ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan
             }
         }
 
-        return new ChromaticNoteIntervalFullyQualifiedCluster(enharmonicIntervalCluster.ToArray());
+        return new ChromaticNoteIntervalFullyQualifiedEnharmonicCluster(enharmonicIntervalCluster.ToArray());
     }
 
     private SpanAnalysisReport Analyse(int chromaticIndexSpan)

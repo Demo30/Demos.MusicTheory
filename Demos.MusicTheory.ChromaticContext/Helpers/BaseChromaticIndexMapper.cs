@@ -25,21 +25,24 @@ internal static class BaseChromaticIndexMapper
     
     private static Dictionary<(ChromaticNoteQuality, NotationSymbols), int> GetBaseChromaticIndexMap()
     {
+        var map = new Dictionary<(ChromaticNoteQuality, NotationSymbols), int>();
+        
         var qualities = Enum.GetValues<ChromaticNoteQuality>().Where(quality => quality != ChromaticNoteQuality.Unknown).ToList();
         var modifiers = ModifierChromaticCorrection.Keys.ToList();
-
-        var map = new Dictionary<(ChromaticNoteQuality, NotationSymbols), int>();
+        
         qualities
             .SelectMany(q => modifiers.Select(m => (q, m)))
             .ToList()
             .ForEach(t => map.Add((t.q, t.m), GetBaseOffset(t.q, t.m)));
+        
         return map;
     }
 
     private static int GetBaseOffset(ChromaticNoteQuality quality, NotationSymbols modifier) =>
         GetBasicOffset(quality) - GetQualityOffsetCorrection(quality) + GetModifierCorrection(modifier);
     
-    private static int GetModifierCorrection(NotationSymbols modifier) => ModifierChromaticCorrection.ContainsKey(modifier) ? ModifierChromaticCorrection[modifier]
+    private static int GetModifierCorrection(NotationSymbols modifier) => ModifierChromaticCorrection.ContainsKey(modifier)
+        ? ModifierChromaticCorrection[modifier]
         : throw new InvalidOperationException("Invalid modifier supplied.");
     
     private static int GetQualityOffsetCorrection(ChromaticNoteQuality quality) => (int)quality > (int)ChromaticNoteQuality.E ? ChromaticStepsElementaryStep : 0;
