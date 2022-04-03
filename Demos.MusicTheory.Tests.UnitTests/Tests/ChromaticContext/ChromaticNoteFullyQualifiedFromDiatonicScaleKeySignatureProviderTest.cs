@@ -1,4 +1,4 @@
-﻿using Demos.MusicTheory.ChromaticContext.DiatonicSubcontext;
+﻿using Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 using Demos.MusicTheory.Commons;
 using FluentAssertions;
 using NUnit.Framework;
@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class ChromaticNoteFullyQualifiedProviderByKeySignatureTest
+public class ChromaticNoteFullyQualifiedFromDiatonicScaleKeySignatureProviderTest
 {
     [Theory]
     [TestCase(KeySignatures.Simple, 14, new[] { "C0", "D0", "E0", "F0", "G0", "A0", "B0", "C1", "D1", "E1", "F1", "G1", "A1", "B1" })]
@@ -14,7 +14,7 @@ public class ChromaticNoteFullyQualifiedProviderByKeySignatureTest
     public void GetNotes(KeySignatures key, int count, string[] outputs)
     {
         // Given
-        ChromaticNoteDiatonicScaleKeySignatureProvider provider = new();
+        ChromaticNoteFullyQualifiedFromDiatonicScaleKeySignatureProvider provider = new();
 
         // When
         var notes = provider.GetNotes(key, count);
