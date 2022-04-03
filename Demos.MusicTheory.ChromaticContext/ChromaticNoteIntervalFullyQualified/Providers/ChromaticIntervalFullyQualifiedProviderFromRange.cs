@@ -5,17 +5,17 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
 
 public class ChromaticIntervalFullyQualifiedProviderFromRange
 {
-    private readonly ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan _chromaticIndexLengthProvider;
+    private readonly ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan _chromaticIndexSpanProvider;
 
-    public ChromaticIntervalFullyQualifiedProviderFromRange() : this(
-        ServicesManager.GetService<ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan>()) {}
-    
-    internal ChromaticIntervalFullyQualifiedProviderFromRange(
-        ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan chromaticIndexLengthProvider)
+    public ChromaticIntervalFullyQualifiedProviderFromRange() : this(ServicesManager.GetService<ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan>())
     {
-        _chromaticIndexLengthProvider = chromaticIndexLengthProvider;
+    }
+    
+    internal ChromaticIntervalFullyQualifiedProviderFromRange(ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan chromaticIndexSpanProvider)
+    {
+        _chromaticIndexSpanProvider = chromaticIndexSpanProvider;
     }
 
     public ChromaticNoteIntervalFullyQualifiedEnharmonicCluster GetIntervals(ChromaticNoteFullyQualifiedRange range) =>
-        _chromaticIndexLengthProvider.GetIntervals(range.ChromaticIndexSpan);
+        _chromaticIndexSpanProvider.GetIntervals(range.ChromaticIndexSpan);
 }

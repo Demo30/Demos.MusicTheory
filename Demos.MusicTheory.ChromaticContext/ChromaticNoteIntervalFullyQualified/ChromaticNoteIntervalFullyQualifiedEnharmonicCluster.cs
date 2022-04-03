@@ -7,29 +7,37 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
 public class ChromaticNoteIntervalFullyQualifiedEnharmonicCluster : IChromaticIndexSpan
 {
     public int ChromaticIndexSpan => Cluster.First().ChromaticIndexSpan;
+    
+    public int SemitoneCount => Cluster.First().SemitoneCount;
 
-    public ChromaticNoteIntervalFullyQualified[] Cluster { get; }
-
-    public ChromaticNoteIntervalFullyQualifiedEnharmonicCluster(IEnumerable<ChromaticNoteIntervalFullyQualified> cluster)
+    public ChromaticNoteIntervalFullyQualified[] Cluster
     {
-        Validate(cluster);
-        Cluster = cluster.ToArray();
+        get => _cluster;
+        private init
+        {
+            Validate(value);
+            _cluster = value;
+        }
     }
 
-    private void Validate(IEnumerable<ChromaticNoteIntervalFullyQualified> cluster)
+    private readonly ChromaticNoteIntervalFullyQualified[] _cluster;
+
+    public ChromaticNoteIntervalFullyQualifiedEnharmonicCluster(ChromaticNoteIntervalFullyQualified[] cluster)
+    {
+        Cluster = cluster;
+    }
+
+    private static void Validate(ChromaticNoteIntervalFullyQualified[] cluster)
     {
         if (cluster == null || !cluster.Any())
-        {
-            throw new ArgumentNullException("Cluster cannot be empty.");
-        }
+            throw new ArgumentNullException(nameof(cluster));
 
         var sharedIndexSpan = cluster
             .Select(interval => interval.ChromaticIndexSpan)
             .Distinct()
             .Count() == 1;
+        
         if (!sharedIndexSpan)
-        {
             throw new ArgumentException("All intervals within a cluster need to share the same chromatic index span.");
-        }
     }
 }

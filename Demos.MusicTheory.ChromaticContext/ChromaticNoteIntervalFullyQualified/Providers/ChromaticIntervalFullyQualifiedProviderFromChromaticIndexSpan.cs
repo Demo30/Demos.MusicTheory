@@ -7,30 +7,16 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
 
 public class ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan
 {
-    private struct SpanAnalysisReport
-    {
-        public int ChromaticIndexSpan { get; set; }
-        public bool IsBlackKey { get; set; }
-        public int DiatonicCorrection { get; set; }
-        public int MainDiatonicScaleDegree { get; set; }
-        public int BaseDiatonicScaleDegree { get; set; }
-        public int Suboctaves { get; set; }
-        public bool IsPerfectType { get; set; }
-    }
-
     public ChromaticNoteIntervalFullyQualifiedEnharmonicCluster GetIntervals(int chromaticIndexSpan)
     {
-        // I'm sure there can be a nicer cleaner implementeation... all these ifs ain't no good :)
+        var enharmonicIntervalCluster = new List<ChromaticNoteIntervalFullyQualified>();
+        var analysis = Analyse(chromaticIndexSpan);
 
-        List<ChromaticNoteIntervalFullyQualified> enharmonicIntervalCluster = new();
-
-        SpanAnalysisReport report = Analyse(chromaticIndexSpan);
-
-        if (report.IsBlackKey)
+        if (analysis.IsBlackKey)
         {
-            enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainDiatonicScaleDegree, ChromaticNoteIntervalQuality.Augmented));
+            enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(analysis.MainDiatonicScaleDegree, ChromaticNoteIntervalQuality.Augmented));
 
-            int nextDiatonicScaleDegree = report.MainDiatonicScaleDegree + 1;
+            var nextDiatonicScaleDegree = analysis.MainDiatonicScaleDegree + 1;
             var quality = IsPerfectType(nextDiatonicScaleDegree) ?
                 ChromaticNoteIntervalQuality.Diminished :
                 ChromaticNoteIntervalQuality.Minor;
@@ -39,52 +25,62 @@ public class ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan
         }
         else
         {
-            ChromaticNoteIntervalQuality quality =  report.IsPerfectType?
-                ChromaticNoteIntervalQuality.Perfect :
-                ChromaticNoteIntervalQuality.Major;
-            enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainDiatonicScaleDegree, quality));
+            var quality =  analysis.IsPerfectType
+                ? ChromaticNoteIntervalQuality.Perfect
+                : ChromaticNoteIntervalQuality.Major;
+            
+            enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(analysis.MainDiatonicScaleDegree, quality));
                 
-            if (report.BaseDiatonicScaleDegree != (int)ChromaticNoteQuality.F)
+            if (analysis.BaseDiatonicScaleDegree != (int)ChromaticNoteQuality.F)
             {
-                enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainDiatonicScaleDegree + 1, ChromaticNoteIntervalQuality.Diminished));
+                enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(analysis.MainDiatonicScaleDegree + 1, ChromaticNoteIntervalQuality.Diminished));
             }
-            if ((new int[] { (int)ChromaticNoteQuality.C, (int)ChromaticNoteQuality.F }).Contains(report.BaseDiatonicScaleDegree) && report.MainDiatonicScaleDegree > 1)
+            
+            if ((new[] { (int)ChromaticNoteQuality.C, (int)ChromaticNoteQuality.F }).Contains(analysis.BaseDiatonicScaleDegree) && analysis.MainDiatonicScaleDegree > 1)
             {
-                enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(report.MainDiatonicScaleDegree - 1, ChromaticNoteIntervalQuality.Augmented));
+                enharmonicIntervalCluster.Add(new ChromaticNoteIntervalFullyQualified(analysis.MainDiatonicScaleDegree - 1, ChromaticNoteIntervalQuality.Augmented));
             }
         }
 
         return new ChromaticNoteIntervalFullyQualifiedEnharmonicCluster(enharmonicIntervalCluster.ToArray());
     }
 
-    private SpanAnalysisReport Analyse(int chromaticIndexSpan)
+    private static SpanAnalysisReport Analyse(int chromaticIndexSpan)
     {
-        int suboctaves = (chromaticIndexSpan / ChromaticContextConstants.ChromaticStepsFullOctave);
-        int baseChromaticIndexSpan = chromaticIndexSpan - (suboctaves * ChromaticContextConstants.ChromaticStepsFullOctave);
-        int diatonicCorrection = (baseChromaticIndexSpan > 4 ? 1 : 0);
-        int baseIntervalBaseNumber =
-            (((baseChromaticIndexSpan + diatonicCorrection) / 2) + 1);
-        int intervalBaseNumber =
-            baseIntervalBaseNumber +
-            (suboctaves * ChromaticContextConstants.DiatonicStepsInOctave);
-        bool isBlackKey =
+        var subOctaves = chromaticIndexSpan / ChromaticContextConstants.ChromaticStepsFullOctave;
+        var baseChromaticIndexSpan = chromaticIndexSpan - (subOctaves * ChromaticContextConstants.ChromaticStepsFullOctave);
+        var diatonicCorrection = baseChromaticIndexSpan > 4 ? 1 : 0;
+        var baseIntervalBaseNumber = ((baseChromaticIndexSpan + diatonicCorrection) / 2) + 1;
+        var intervalBaseNumber = baseIntervalBaseNumber + (subOctaves * ChromaticContextConstants.DiatonicStepsInOctave);
+        var isBlackKey =
             baseChromaticIndexSpan > 0 &&
             (
                 (baseIntervalBaseNumber <= (int)ChromaticNoteQuality.E && !IsOddNumber(baseChromaticIndexSpan)) ||
                 (baseIntervalBaseNumber > (int)ChromaticNoteQuality.E && IsOddNumber(baseChromaticIndexSpan))
             );
 
-        return new SpanAnalysisReport()
+        return new SpanAnalysisReport
         {
             ChromaticIndexSpan = chromaticIndexSpan,
             DiatonicCorrection = diatonicCorrection,
             MainDiatonicScaleDegree = intervalBaseNumber,
             BaseDiatonicScaleDegree = baseIntervalBaseNumber,
             IsBlackKey = isBlackKey,
-            Suboctaves = suboctaves,
+            SubOctaves = subOctaves,
             IsPerfectType = IsPerfectType(intervalBaseNumber)
         };
     }
 
-    private bool IsOddNumber(int number) => number % 2 == 0;
+    private static bool IsOddNumber(int number) => number % 2 == 0;
+    
+    private struct SpanAnalysisReport
+    {
+        public int ChromaticIndexSpan { get; set; }
+        public bool IsBlackKey { get; set; }
+        public int DiatonicCorrection { get; set; }
+        public int MainDiatonicScaleDegree { get; set; }
+        public int BaseDiatonicScaleDegree { get; set; }
+        public int SubOctaves { get; set; }
+        public bool IsPerfectType { get; set; }
+    }
 }
