@@ -4,7 +4,7 @@ namespace Demos.MusicTheory.Tests.IntegrationTests;
 
 public class TestBase
 {
-    public TestBase()
+    protected TestBase()
     {
         InitializeStaticCaches();
     }
@@ -12,7 +12,7 @@ public class TestBase
     /// <summary>
     /// These are to be considered as implementations inherent to the tested class.
     /// </summary>
-    private void InitializeStaticCaches()
+    private static void InitializeStaticCaches()
     {
         BaseChromaticIndexMapper.InitializeMapper();
     }

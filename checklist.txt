@@ -5,8 +5,10 @@
 [x] Mít notu a dostat kolekci všech enharmonických ekvivalentů (C# => C#, Db; D => Ebb, C##)
 [x] Mít notu a vzdálenost od noty v půltónech a dostat kolekci všech enharmonických ekvivalentů (C, 1 => C#, Db; C, 3 => D#, Eb)
 [x] Mít rozmezí dvou not (C1-F1) a určit, jaký mezi sebou mají rozestup v půltónech.
-[?] Mít rozmezí dvou not (C1-F1) a určit, jaký mezi sebou mají intervalový rozestup (P5).
+[x] Mít rozmezí dvou not (C1-F1) a určit, jaký mezi sebou mají intervalový rozestup (P5) (nikoliv cluster!)
+
 [?] Mít interval a dostat kolekci všech jeho enharmonických ekvivalentů.
+
 
 [?] Mít tóninu (C major) a vypsat všechny její základní noty (C, D, E, F, G, A, B).
 [?] Mít tóninu (C major) a vypsat všechny její noty (C2, D2, E2, F2, G2, A2, B2) v daném řádu (2).

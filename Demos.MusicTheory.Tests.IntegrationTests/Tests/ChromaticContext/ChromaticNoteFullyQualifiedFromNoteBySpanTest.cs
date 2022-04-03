@@ -11,23 +11,18 @@ namespace Demos.MusicTheory.Tests.IntegrationTests.Tests.ChromaticContext;
 public class ChromaticNoteFullyQualifiedFromNoteBySpanTest : TestBase
 {
     private ChromaticNoteFullyQualifiedProviderFromNoteBySpan? _provider;
-
-    [OneTimeSetUp]
-    public void SetUpOnce()
-    {
-        Services.ServicesManager.ServicesProvider.RegisterService(() => new ChromaticNoteFullyQualifiedProviderFromChromaticIndex());
-    }
-
-    [OneTimeTearDown]
-    public void TearDownOnce()
-    {
-        Services.ServicesManager.ResetServiceProvider();
-    }
     
     [SetUp]
     public void SetUp()
     {
+        Services.ServicesManager.ServicesProvider.RegisterService(() => new ChromaticNoteFullyQualifiedProviderFromChromaticIndex());
         _provider = new ChromaticNoteFullyQualifiedProviderFromNoteBySpan();
+    }
+    
+    [TearDown]
+    public void TearDown()
+    {
+        Services.ServicesManager.ResetServiceProvider();
     }
     
     [Theory]

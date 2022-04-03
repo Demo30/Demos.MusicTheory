@@ -13,22 +13,17 @@ public class ChromaticNoteFullyQualifiedFromNoteByIntervalTest : TestBase
 {
     private ChromaticNoteFullyQualifiedProviderFromNoteByInterval? _provider;
 
-    [OneTimeSetUp]
-    public void SetUpOnce()
-    {
-        Services.ServicesManager.ServicesProvider.RegisterService(() => new ChromaticNoteFullyQualifiedProviderFromChromaticIndex());
-    }
-
-    [OneTimeTearDown]
-    public void TearDownOnce()
-    {
-        Services.ServicesManager.ResetServiceProvider();
-    }
-    
     [SetUp]
     public void SetUp()
     {
+        Services.ServicesManager.ServicesProvider.RegisterService(() => new ChromaticNoteFullyQualifiedProviderFromChromaticIndex());
         _provider = new ChromaticNoteFullyQualifiedProviderFromNoteByInterval();
+    }
+    
+    [TearDown]
+    public void TearDown()
+    {
+        Services.ServicesManager.ResetServiceProvider();
     }
     
     [Theory]
