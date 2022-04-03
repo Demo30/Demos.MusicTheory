@@ -6,18 +6,25 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Provide
 
 internal class ChromaticNoteFullyQualifiedProviderFromNoteByInterval
 {
-    private readonly IChromaticNoteFullyQualifiedProviderFromNoteBySpan _providerBySpan;
+    private readonly IChromaticNoteFullyQualifiedProviderFromChromaticIndex _providerByChromaticIndex;
 
     public ChromaticNoteFullyQualifiedProviderFromNoteByInterval() :
-        this(GetService<ChromaticNoteFullyQualifiedProviderFromNoteBySpan>())
+        this(GetService<ChromaticNoteFullyQualifiedProviderFromChromaticIndex>())
     {
         
     }
-    internal ChromaticNoteFullyQualifiedProviderFromNoteByInterval(IChromaticNoteFullyQualifiedProviderFromNoteBySpan providerBySpan)
+    internal ChromaticNoteFullyQualifiedProviderFromNoteByInterval(IChromaticNoteFullyQualifiedProviderFromChromaticIndex providerByChromaticIndex)
     {
-        _providerBySpan = providerBySpan;
+        _providerByChromaticIndex = providerByChromaticIndex;
     }
 
-    public ChromaticNoteEnharmonicCluster GetEnharmonicNoteCluster(ChromaticNoteFullyQualified note, ChromaticNote.ChromaticNoteIntervalFullyQualified interval, OneDimensionDirection direction) =>
-        _providerBySpan.GetEnharmonicNoteCluster(note, interval.ChromaticIndexSpan, direction);
+    public ChromaticNoteEnharmonicCluster GetEnharmonicNoteCluster(ChromaticNoteFullyQualified note, ChromaticNote.ChromaticNoteIntervalFullyQualified interval, OneDimensionDirection direction)
+    {
+        var chromaticIndex = 
+            note.ChromaticContextIndex +
+            (direction == OneDimensionDirection.RIGHT ? interval.SemitoneCount : -interval.SemitoneCount);
+        
+        return _providerByChromaticIndex.GetEnharmonicNoteCluster(chromaticIndex);
+    }
+        
 }

@@ -1,12 +1,12 @@
-﻿using Demos.MusicTheory.ChromaticContext;
+﻿using System.Linq;
+using Demos.MusicTheory.ChromaticContext;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
 using Demos.MusicTheory.Commons;
 using FluentAssertions;
 using NUnit.Framework;
-using System.Linq;
 
-namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext;
+namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext;
 
 [TestFixture]
 public class ChromaticNoteIntervalFullyQualifiedFromIntervalRangeTest

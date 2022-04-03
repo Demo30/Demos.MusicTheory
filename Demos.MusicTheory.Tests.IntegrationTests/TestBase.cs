@@ -1,6 +1,6 @@
 ﻿using Demos.MusicTheory.ChromaticContext.Helpers;
 
-namespace Demos.MusicTheory.UnitTests;
+namespace Demos.MusicTheory.Tests.IntegrationTests;
 
 public class TestBase
 {

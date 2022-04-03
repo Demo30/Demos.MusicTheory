@@ -1,11 +1,11 @@
-﻿using Demos.MusicTheory.Commons;
+﻿using System.Linq;
+using Demos.MusicTheory.ChromaticContext;
+using Demos.MusicTheory.Commons;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using System.Linq;
-using Demos.MusicTheory.ChromaticContext;
 
-namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace;
+namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext.ChromaticSpace;
 
 [TestFixture]
 public class ChromaticSpaceTest

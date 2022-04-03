@@ -1,9 +1,9 @@
-﻿using Demos.MusicTheory.Commons;
-using NUnit.Framework;
-using System;
+﻿using System;
 using Demos.MusicTheory.ChromaticContext;
+using Demos.MusicTheory.Commons;
+using NUnit.Framework;
 
-namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext.ChromaticSpace;
+namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext.ChromaticSpace;
 
 [TestFixture]
 public class ChromaticSpaceIndexValidatorTest

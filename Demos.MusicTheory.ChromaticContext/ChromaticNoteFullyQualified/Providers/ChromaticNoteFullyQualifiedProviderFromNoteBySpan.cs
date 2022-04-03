@@ -1,36 +1,25 @@
-﻿using System;
-using Demos.MusicTheory.ChromaticContext.Constants;
-using Demos.MusicTheory.Commons;
-using System.Collections.Generic;
-using System.Linq;
-using Demos.MusicTheory.ChromaticContext.Helpers;
+﻿using Demos.MusicTheory.Commons;
+using static Demos.MusicTheory.Services.ServicesManager;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers;
 internal class ChromaticNoteFullyQualifiedProviderFromNoteBySpan : IChromaticNoteFullyQualifiedProviderFromNoteBySpan
 {
-    public ChromaticNoteEnharmonicCluster GetEnharmonicNoteCluster(ChromaticNoteFullyQualified note, int chromaticIndexSpan, OneDimensionDirection direction)
-    {
-        var spannedIndex = (note.ChromaticContextIndex + chromaticIndexSpan);
-        var baseOffset = spannedIndex % ChromaticContextConstants.ChromaticStepsFullOctave;
-        var order = spannedIndex / ChromaticContextConstants.ChromaticStepsFullOctave;
-        
-        var qualities = Enum.GetValues<ChromaticNoteQuality>().Where(quality => quality != ChromaticNoteQuality.Unknown).ToList();
-        var modifiers = GetModifiers();
+    private readonly IChromaticNoteFullyQualifiedProviderFromChromaticIndex _providerFromChromaticIndex;
 
-        var matches = qualities
-            .SelectMany(q => modifiers.Select(m => (q, m)))
-            .Where(t => BaseChromaticIndexMapper.GetBaseChromaticOffset(t.q, t.m) == baseOffset);
-        var notes = matches.Select(t => new ChromaticNoteFullyQualified(t.q, order, t.m)).ToArray();
+    public ChromaticNoteFullyQualifiedProviderFromNoteBySpan() : this(GetService<ChromaticNoteFullyQualifiedProviderFromChromaticIndex>())
+    {
         
-        return new ChromaticNoteEnharmonicCluster(notes);
     }
 
-    private static IEnumerable<NotationSymbols> GetModifiers() => new[]
+    internal ChromaticNoteFullyQualifiedProviderFromNoteBySpan(IChromaticNoteFullyQualifiedProviderFromChromaticIndex providerFromChromaticIndex)
     {
-        NotationSymbols.None,
-        NotationSymbols.Sharp,
-        NotationSymbols.Flat,
-        NotationSymbols.DoubleSharp,
-        NotationSymbols.DoubleFlat
-    };
+        _providerFromChromaticIndex = providerFromChromaticIndex;
+    }
+    
+    public ChromaticNoteEnharmonicCluster GetEnharmonicNoteCluster(ChromaticNoteFullyQualified note, int chromaticIndexSpan, OneDimensionDirection direction)
+    {
+        var diff = direction == OneDimensionDirection.RIGHT ? chromaticIndexSpan : (-1 * chromaticIndexSpan);
+        var spannedIndex = note.ChromaticContextIndex + diff;
+        return _providerFromChromaticIndex.GetEnharmonicNoteCluster(spannedIndex);
+    }
 }

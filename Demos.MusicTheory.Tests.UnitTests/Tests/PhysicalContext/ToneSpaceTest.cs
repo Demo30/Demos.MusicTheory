@@ -1,13 +1,13 @@
-﻿using FluentAssertions;
-using Moq;
-using NUnit.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Demos.MusicTheory.PhysicalContext;
+using FluentAssertions;
+using Moq;
+using NUnit.Framework;
 using ITone = Demos.MusicTheory.PhysicalContext.ITone;
 using IToneSpaceFrequencyValidator = Demos.MusicTheory.PhysicalContext.IToneSpaceFrequencyValidator;
 
-namespace Demos.MusicTheory.UnitTests.Tests.PhysicalContext;
+namespace Demos.MusicTheory.Tests.UnitTests.Tests.PhysicalContext;
 
 [TestFixture]
 public class ToneSpaceTest

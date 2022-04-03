@@ -3,7 +3,7 @@ using Demos.MusicTheory.ChromaticContext;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
 using NUnit.Framework;
 
-namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext;
+namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext;
 
 [TestFixture]
 public class ChromaticNoteInternalFullyQualifiedCreationTest

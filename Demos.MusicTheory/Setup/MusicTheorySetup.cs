@@ -10,9 +10,7 @@ public static class MusicTheorySetup
     public static void Setup()
     {
         if (ServicesManager.ServicesProvider.Services.Count > 0)
-        {
-            return;
-        }
+            throw new ServiceInitializationException();
 
         var provider = ServicesManager.ServicesProvider;
         
@@ -20,6 +18,9 @@ public static class MusicTheorySetup
         RegisterServices(provider);
     }
 
+    /// <summary>
+    /// Anything that should be computed once on the startup
+    /// </summary>
     private static void PrecomputeCaches()
     {
         BaseChromaticIndexMapper.InitializeMapper();
@@ -27,8 +28,9 @@ public static class MusicTheorySetup
 
     private static void RegisterServices(ServicesProvider provider)
     {
-        provider.Services.Add(typeof(ChromaticNoteFullyQualifiedProviderFromNoteBySpan), () => new ChromaticNoteFullyQualifiedProviderFromNoteBySpan());
-        provider.Services.Add(typeof(ChromaticNoteFullyQualifiedProviderFromNoteByInterval), () => new ChromaticNoteFullyQualifiedProviderFromNoteByInterval());
-        provider.Services.Add(typeof(ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan), () => new ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan());
+        provider.RegisterService(() => new ChromaticNoteFullyQualifiedProviderFromNoteBySpan());
+        provider.RegisterService(() => new ChromaticNoteFullyQualifiedProviderFromNoteByInterval());
+        provider.RegisterService(() => new ChromaticNoteFullyQualifiedProviderFromChromaticIndex());
+        provider.RegisterService(() => new ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan());
     }
 }

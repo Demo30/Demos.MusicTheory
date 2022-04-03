@@ -6,7 +6,7 @@ using Demos.MusicTheory.PhysicalContext;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Demos.MusicTheory.UnitTests.Tests.PhysicalContext;
+namespace Demos.MusicTheory.Tests.UnitTests.Tests.PhysicalContext;
 
 [TestFixture]
 public class ToneSpaceIndexValidatorTest

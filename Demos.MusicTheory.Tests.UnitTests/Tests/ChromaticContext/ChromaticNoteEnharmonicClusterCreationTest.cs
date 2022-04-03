@@ -1,10 +1,10 @@
-﻿using Demos.MusicTheory.ChromaticContext;
+﻿using System;
+using System.Collections.Generic;
+using Demos.MusicTheory.ChromaticContext;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 
-namespace Demos.MusicTheory.UnitTests.Tests.ChromaticContext;
+namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext;
 
 [TestFixture]
 public class ChromaticNoteEnharmonicClusterCreationTest : TestBase
