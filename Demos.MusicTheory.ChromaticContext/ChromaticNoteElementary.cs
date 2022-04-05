@@ -32,4 +32,21 @@ public class ChromaticNoteElementary
         Quality = quality;
         Modifier = modifier;
     }
+
+    public override string ToString() => $"{Quality}{ModifierToString(Modifier)}";
+
+    private static string ModifierToString(NotationSymbols modifier)
+    {
+        if (!RelevantNotationSymbols.Contains(modifier))
+            throw new InvalidOperationException();
+
+        return modifier switch
+        {
+            NotationSymbols.Sharp => "Sharp",
+            NotationSymbols.Flat => "Flat",
+            NotationSymbols.DoubleFlat => "Double flat",
+            NotationSymbols.DoubleSharp => "Double sharp",
+            _ => ""
+        };
+    }
 }

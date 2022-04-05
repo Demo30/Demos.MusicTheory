@@ -1,19 +1,20 @@
-﻿namespace Demos.MusicTheory.Commons
+﻿namespace Demos.MusicTheory.Commons;
+
+public enum KeySignatures
 {
-    public enum KeySignatures
-    {
-        Simple,
-        Sharps_1,
-        Sharps_2,
-        Sharps_3,
-        Sharps_4,
-        Sharps_5,
-        Sharps_6,
-        Flats_1,
-        Flats_2,
-        Flats_3,
-        Flats_4,
-        Flats_5,
-        Flats_6
-    }
+    Simple,
+    Sharps1,
+    Sharps2,
+    Sharps3,
+    Sharps4,
+    Sharps5,
+    Sharps6,
+    Sharps7,
+    Flats1,
+    Flats2,
+    Flats3,
+    Flats4,
+    Flats5,
+    Flats6,
+    Flats7
 }
