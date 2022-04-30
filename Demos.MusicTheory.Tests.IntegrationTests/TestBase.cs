@@ -1,9 +1,15 @@
 ﻿using Demos.MusicTheory.ChromaticContext.Helpers;
+using NUnit.Framework;
 
 namespace Demos.MusicTheory.Tests.IntegrationTests;
 
 public class TestBase
 {
+    [TearDown]
+    protected virtual void TearDown()
+    {
+        Services.ServicesManager.ResetServiceProvider();
+    }
     protected TestBase()
     {
         InitializeStaticCaches();

@@ -37,6 +37,6 @@ public class ElementaryNoteProviderFromDiatonicScaleKeySignatureTest
 
         // Then
         notes.Should().HaveCount(7);
-        foreach (var note in notes) outputs.Should().Contain(note.ToString());
+        foreach (var note in notes) outputs.Should().Contain(note.ToString()); // not checking order here
     }
 }

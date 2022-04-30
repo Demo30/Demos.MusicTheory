@@ -39,6 +39,8 @@ public static class DiatonicScaleToSignatureMapper
         {new DiatonicScale(NoteQuality.F, NotationSymbols.None, DiatonicScaleType.Minor), KeySignatures.Flats4},
         {new DiatonicScale(NoteQuality.C, NotationSymbols.None, DiatonicScaleType.Minor), KeySignatures.Flats3},
         {new DiatonicScale(NoteQuality.G, NotationSymbols.None, DiatonicScaleType.Minor), KeySignatures.Flats2},
-        {new DiatonicScale(NoteQuality.D, NotationSymbols.None, DiatonicScaleType.Minor), KeySignatures.Flats1}
+        {new DiatonicScale(NoteQuality.D, NotationSymbols.None, DiatonicScaleType.Minor), KeySignatures.Flats1},
+        {new DiatonicScale(NoteQuality.A, NotationSymbols.Flat, DiatonicScaleType.Minor), KeySignatures.Flats7},
+        {new DiatonicScale(NoteQuality.A, NotationSymbols.Sharp, DiatonicScaleType.Minor), KeySignatures.Sharps7}
     };
 }

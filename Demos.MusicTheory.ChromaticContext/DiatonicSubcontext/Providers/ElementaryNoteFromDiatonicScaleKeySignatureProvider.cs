@@ -8,7 +8,8 @@ namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 /// <summary>
 /// Given a diatonic scale key signature, a collection of base characteristics is returned.
 /// </summary>
-public sealed class ElementaryNoteFromDiatonicScaleKeySignatureProvider
+public sealed class
+    ElementaryNoteFromDiatonicScaleKeySignatureProvider : IElementaryNoteFromDiatonicScaleKeySignatureProvider
 {
     public IEnumerable<ElementaryNote> GetChromaticElementaryNotes(KeySignatures key)
     {

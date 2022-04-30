@@ -20,12 +20,6 @@ public class NoteProviderFromNoteBySpanTest : TestBase
         _provider = new NoteProviderFromNoteBySpan();
     }
 
-    [TearDown]
-    public void TearDown()
-    {
-        Services.ServicesManager.ResetServiceProvider();
-    }
-
     [Theory]
     [TestCase(NoteQuality.C, 1, NotationSymbols.None, 1, OneDimensionalDirection.RIGHT, NoteQuality.D,
         1, NotationSymbols.Flat)]

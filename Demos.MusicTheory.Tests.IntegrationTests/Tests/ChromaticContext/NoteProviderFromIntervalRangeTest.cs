@@ -21,12 +21,6 @@ public class NoteProviderFromIntervalRangeTest : TestBase
         _provider = new IntervalProviderFromNoteRange();
     }
 
-    [TearDown]
-    public void TearDown()
-    {
-        Services.ServicesManager.ResetServiceProvider();
-    }
-
     [Theory]
     [TestCaseSource(nameof(GetTestCases))]
     public void ValidResults(

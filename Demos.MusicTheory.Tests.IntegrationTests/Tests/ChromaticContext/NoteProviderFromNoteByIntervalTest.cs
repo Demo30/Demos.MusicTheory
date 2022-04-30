@@ -21,12 +21,6 @@ public class NoteProviderFromNoteByIntervalTest : TestBase
         _provider = new NoteProviderFromNoteByInterval();
     }
 
-    [TearDown]
-    public void TearDown()
-    {
-        Services.ServicesManager.ResetServiceProvider();
-    }
-
     [Theory]
     [TestCaseSource(nameof(GetTestCases))]
     public void ValidResults(
