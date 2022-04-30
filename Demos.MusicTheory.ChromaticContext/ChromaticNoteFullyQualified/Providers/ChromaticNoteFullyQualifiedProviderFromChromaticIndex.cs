@@ -12,9 +12,8 @@ internal class ChromaticNoteFullyQualifiedProviderFromChromaticIndex : IChromati
 {
     public ChromaticNoteFullyQualifiedEnharmonicCluster GetEnharmonicNoteCluster(int chromaticIndex)
     {
-        var baseOffset = chromaticIndex % ChromaticContextConstants.ChromaticStepsFullOctave;
-        var order = chromaticIndex / ChromaticContextConstants.ChromaticStepsFullOctave;
-        
+        var (order, baseOffset) = Math.DivRem(chromaticIndex, ChromaticContextConstants.ChromaticStepsFullOctave);
+
         var notes = GetQualityModifierCartesianProduct()
             .Where(t => BaseChromaticIndexMapper.GetBaseChromaticOffset(t.Item1, t.Item2) == baseOffset)
             .Select(t => new ChromaticNoteFullyQualified(t.Item1, order, t.Item2))

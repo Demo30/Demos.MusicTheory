@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Demos.MusicTheory\Demos.MusicTheory.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tests\PhysicalContext" />
+  </ItemGroup>
+
 </Project>

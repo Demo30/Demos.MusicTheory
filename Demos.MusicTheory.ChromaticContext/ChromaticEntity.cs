@@ -1,5 +1,4 @@
-﻿using Demos.MusicTheory.Abstractions.ChromaticContext;
-using Demos.MusicTheory.Abstractions.Commons;
+﻿using Demos.MusicTheory.Abstractions.Commons;
 
 namespace Demos.MusicTheory.ChromaticContext;
 
@@ -12,6 +11,8 @@ public class ChromaticEntity : IContentEqual<ChromaticEntity>, IChromaticEntity
         ChromaticContextIndex = chromaticContextIndex;
     }
 
-    public virtual bool IsEqualByContent(ChromaticEntity comparedObject) => 
-        ChromaticContextIndex.Equals(comparedObject?.ChromaticContextIndex);
+    public virtual bool IsEqualByContent(ChromaticEntity comparedObject)
+    {
+        return ChromaticContextIndex.Equals(comparedObject?.ChromaticContextIndex);
+    }
 }

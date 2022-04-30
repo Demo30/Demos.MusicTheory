@@ -30,10 +30,10 @@ public class ChromaticNoteElementaryFromDiatonicScaleKeySignatureProviderTest
     public void ShouldReturnElementaryNotesForGivenDiatonicScaleSignature(KeySignatures key, string[] outputs)
     {
         // Given
-        ChromaticNoteElementaryFromDiatonicScaleKeySignatureProvider provider = new();
+        var provider = new ChromaticNoteElementaryFromDiatonicScaleKeySignatureProvider();
 
         // When
-        List<ChromaticNoteElementary> notes = provider.GetChromaticElementaryNotes(key).ToList();
+        var notes = provider.GetChromaticElementaryNotes(key).ToList();
 
         // Then
         notes.Should().HaveCount(7);

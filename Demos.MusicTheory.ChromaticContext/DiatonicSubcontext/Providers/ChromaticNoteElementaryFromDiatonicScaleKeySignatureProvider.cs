@@ -14,7 +14,7 @@ public sealed class ChromaticNoteElementaryFromDiatonicScaleKeySignatureProvider
     {
         var characteristics = GetFlatsAndSharps(key).ToList();
         
-        var qualitiesWithoutModification = ((ChromaticNoteQuality[]) Enum.GetValues(typeof(ChromaticNoteQuality)))
+        var qualitiesWithoutModification = Enum.GetValues<ChromaticNoteQuality>()
             .Where(quality => !characteristics.Any(ch => ch.Quality.Equals(quality)))
             .Where(quality => quality != ChromaticNoteQuality.Unknown)
             .Select(quality => new ChromaticNoteElementary(quality, NotationSymbols.None));
