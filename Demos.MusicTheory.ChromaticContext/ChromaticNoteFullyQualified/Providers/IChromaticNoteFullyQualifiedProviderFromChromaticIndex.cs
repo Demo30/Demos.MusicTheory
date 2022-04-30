@@ -1,6 +1,0 @@
-﻿namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers;
-
-internal interface IChromaticNoteFullyQualifiedProviderFromChromaticIndex
-{
-    public ChromaticNoteFullyQualifiedEnharmonicCluster GetEnharmonicNoteCluster(int chromaticIndex);
-}

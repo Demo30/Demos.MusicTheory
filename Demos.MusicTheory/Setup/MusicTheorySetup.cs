@@ -13,7 +13,7 @@ public static class MusicTheorySetup
             throw new ServiceInitializationException();
 
         var provider = ServicesManager.ServicesProvider;
-        
+
         PrecomputeCaches();
         RegisterServices(provider);
     }
@@ -28,9 +28,9 @@ public static class MusicTheorySetup
 
     private static void RegisterServices(ServicesProvider provider)
     {
-        provider.RegisterService(() => new ChromaticNoteFullyQualifiedProviderFromNoteBySpan());
-        provider.RegisterService(() => new ChromaticNoteFullyQualifiedProviderFromNoteByInterval());
-        provider.RegisterService(() => new ChromaticNoteFullyQualifiedProviderFromChromaticIndex());
-        provider.RegisterService(() => new ChromaticIntervalFullyQualifiedProviderFromChromaticIndexSpan());
+        provider.RegisterService(() => new NoteProviderFromNoteBySpan());
+        provider.RegisterService(() => new NoteProviderFromNoteByInterval());
+        provider.RegisterService(() => new NoteProviderFromIndex());
+        provider.RegisterService(() => new IntervalProviderFromIndexSpan());
     }
 }

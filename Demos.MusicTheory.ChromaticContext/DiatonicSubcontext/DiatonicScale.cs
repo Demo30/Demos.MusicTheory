@@ -3,6 +3,6 @@
 namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext;
 
 public record DiatonicScale(
-    ChromaticNoteQuality Quality,
+    NoteQuality Quality,
     NotationSymbols Modifier,
     DiatonicScaleType DiatonicScaleType);
