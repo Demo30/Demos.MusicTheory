@@ -16,8 +16,7 @@ public class NoteProviderFromIntervalRangeTest : TestBase
     [SetUp]
     public void SetUp()
     {
-        Services.ServicesManager.ServicesProvider.RegisterService(() =>
-            new IntervalProviderFromIndexSpan());
+        RegisterService<IntervalProviderFromIndexSpan>();
         _provider = new IntervalProviderFromNoteRange();
     }
 

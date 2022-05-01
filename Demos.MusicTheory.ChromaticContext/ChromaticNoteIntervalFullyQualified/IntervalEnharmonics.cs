@@ -6,25 +6,25 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
 
 public class IntervalEnharmonics : IChromaticIndexSpan
 {
-    public int ChromaticIndexSpan => Cluster.First().ChromaticIndexSpan;
+    public int ChromaticIndexSpan => Intervals.First().ChromaticIndexSpan;
 
-    public int SemitoneCount => Cluster.First().SemitoneCount;
+    public int SemitoneCount => Intervals.First().SemitoneCount;
 
-    public Interval[] Cluster
+    public Interval[] Intervals
     {
-        get => _cluster;
+        get => _intervals;
         private init
         {
             Validate(value);
-            _cluster = value;
+            _intervals = value;
         }
     }
 
-    private readonly Interval[] _cluster;
+    private readonly Interval[] _intervals;
 
-    public IntervalEnharmonics(Interval[] cluster)
+    public IntervalEnharmonics(Interval[] intervals)
     {
-        Cluster = cluster;
+        Intervals = intervals;
     }
 
     private static void Validate(Interval[] cluster)

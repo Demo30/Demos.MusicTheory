@@ -5,7 +5,7 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 
 public class NoteEnharmonics : ChromaticEntity
 {
-    public Note[] Cluster { get; }
+    public Note[] Notes { get; }
 
     public NoteEnharmonics(Note[] enharmonicNotes) : base(GetChromaticContextIndex(enharmonicNotes))
     {
@@ -13,7 +13,7 @@ public class NoteEnharmonics : ChromaticEntity
             throw new ArgumentNullException(nameof(enharmonicNotes));
 
         CheckEnharmonicNoteCompatibility(enharmonicNotes);
-        Cluster = enharmonicNotes;
+        Notes = enharmonicNotes;
     }
 
     private static int GetChromaticContextIndex(Note[] enharmonicNotes)

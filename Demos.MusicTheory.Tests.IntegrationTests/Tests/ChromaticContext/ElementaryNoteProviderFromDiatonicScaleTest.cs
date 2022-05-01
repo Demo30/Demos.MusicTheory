@@ -15,7 +15,7 @@ public class ElementaryNoteProviderFromDiatonicScale : TestBase
     [SetUp]
     public void SetUp()
     {
-        Services.ServicesManager.ServicesProvider.RegisterService(() => new ElementaryNoteFromDiatonicScaleKeySignatureProvider());
+        RegisterService<ElementaryNoteFromDiatonicScaleKeySignatureProvider>();
         _provider = new ElementaryNotesProviderFromDiatonicScale();
     }
     
@@ -72,7 +72,7 @@ public class ElementaryNoteProviderFromDiatonicScale : TestBase
         
         yield return new TestCaseData(new DiatonicScale(NoteQuality.C, NotationSymbols.Sharp, DiatonicScaleType.Major),
             new[] {"CSharp", "DSharp", "ESharp", "FSharp", "GSharp", "ASharp", "BSharp"});
-        yield return new TestCaseData(new DiatonicScale(NoteQuality.A, NotationSymbols.Sharp, DiatonicScaleType.Minor), // TODO: A#?
+        yield return new TestCaseData(new DiatonicScale(NoteQuality.A, NotationSymbols.Sharp, DiatonicScaleType.Minor),
             new[] {"ASharp", "BSharp", "CSharp", "DSharp", "ESharp", "FSharp", "GSharp"});
         
         yield return new TestCaseData(new DiatonicScale(NoteQuality.F, NotationSymbols.None, DiatonicScaleType.Major),
@@ -107,7 +107,7 @@ public class ElementaryNoteProviderFromDiatonicScale : TestBase
         
         yield return new TestCaseData(new DiatonicScale(NoteQuality.C, NotationSymbols.Flat, DiatonicScaleType.Major),
             new[] {"CFlat", "DFlat", "EFlat", "FFlat", "GFlat", "AFlat", "BFlat"});
-        yield return new TestCaseData(new DiatonicScale(NoteQuality.A, NotationSymbols.Flat, DiatonicScaleType.Minor), // TODO: Ab??
+        yield return new TestCaseData(new DiatonicScale(NoteQuality.A, NotationSymbols.Flat, DiatonicScaleType.Minor),
             new[] {"AFlat", "BFlat", "CFlat", "DFlat", "EFlat", "FFlat", "GFlat"});
         
 

@@ -19,7 +19,7 @@ internal class NoteProviderFromNoteByInterval
         _providerByIndex = providerByIndex;
     }
 
-    public NoteEnharmonics GetEnharmonicNoteCluster(Note note,
+    public NoteEnharmonics GetEnharmonics(Note note,
         ChromaticNoteIntervalFullyQualified.Interval interval,
         OneDimensionalDirection direction)
     {

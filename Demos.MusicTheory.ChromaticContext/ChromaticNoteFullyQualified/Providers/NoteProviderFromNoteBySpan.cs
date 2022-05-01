@@ -18,7 +18,7 @@ internal class NoteProviderFromNoteBySpan
         _providerFromIndex = providerFromIndex;
     }
 
-    public NoteEnharmonics GetEnharmonicNoteCluster(Note note, int chromaticIndexSpan,
+    public NoteEnharmonics GetEnharmonics(Note note, int chromaticIndexSpan,
         OneDimensionalDirection direction)
     {
         return _providerFromIndex.GetEnharmonics(GetSpannedChromaticIndex(note, chromaticIndexSpan,

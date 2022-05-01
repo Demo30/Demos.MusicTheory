@@ -40,7 +40,7 @@ public class NoteProviderFromNoteBySpanTest : TestBase
             note.ChromaticContextIndex + (direction == OneDimensionalDirection.RIGHT ? span : -1 * span);
 
         // When
-        var cluster = provider.GetEnharmonicNoteCluster(note, span, direction);
+        var cluster = provider.GetEnharmonics(note, span, direction);
 
         // Then
         mockProviderByChromaticIndex.Verify(p => p.GetEnharmonics(expectedChromaticIndexCallArgument),

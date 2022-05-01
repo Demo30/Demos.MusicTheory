@@ -15,8 +15,7 @@ public class NoteProviderFromNoteBySpanTest : TestBase
     [SetUp]
     public void SetUp()
     {
-        Services.ServicesManager.ServicesProvider.RegisterService(() =>
-            new NoteProviderFromIndex());
+        RegisterService<NoteProviderFromIndex>();
         _provider = new NoteProviderFromNoteBySpan();
     }
 
@@ -107,11 +106,11 @@ public class NoteProviderFromNoteBySpanTest : TestBase
         Note note = new(noteQuality, order, modifier);
 
         // When
-        var cluster = _provider!.GetEnharmonicNoteCluster(note, span, direction);
+        var cluster = _provider!.GetEnharmonics(note, span, direction);
 
         // Then
         var expectedNote = new Note(expectedNoteQuality, expectedOrder, expectedModifier);
-        cluster.Cluster.Should().ContainSingle(n => n.IsEqualByContent(expectedNote));
+        cluster.Notes.Should().ContainSingle(n => n.IsEqualByContent(expectedNote));
         cluster.ChromaticContextIndex.Should().Be(expectedNote.ChromaticContextIndex);
     }
 }

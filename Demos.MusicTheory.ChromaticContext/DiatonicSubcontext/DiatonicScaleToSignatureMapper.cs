@@ -5,12 +5,18 @@ namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext;
 
 public static class DiatonicScaleToSignatureMapper
 {
+    private static Dictionary<DiatonicScale, KeySignatures> _map;
+    
+    public static Dictionary<DiatonicScale, KeySignatures> Map
+    {
+        get { return _map ??= GetMap; }
+    }
     public static KeySignatures GetSignature(DiatonicScale scale)
     {
         return Map[scale];
     }
 
-    private static Dictionary<DiatonicScale, KeySignatures> Map => new()
+    private static Dictionary<DiatonicScale, KeySignatures> GetMap => new()
     {
         {new DiatonicScale(NoteQuality.C, NotationSymbols.None, DiatonicScaleType.Major), KeySignatures.Simple},
         {new DiatonicScale(NoteQuality.G, NotationSymbols.None, DiatonicScaleType.Major), KeySignatures.Sharps1},

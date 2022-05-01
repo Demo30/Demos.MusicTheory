@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Demos.MusicTheory.ChromaticContext;
 
-public class ElementaryNote
+public class ElementaryNote : IContentEqual<ElementaryNote>
 {
     public NoteQuality Quality { get; }
 
@@ -33,6 +33,11 @@ public class ElementaryNote
     {
         Quality = quality;
         Modifier = modifier;
+    }
+
+    public bool IsEqualByContent(ElementaryNote comparedObject)
+    {
+        return Quality == comparedObject.Quality && Modifier == comparedObject.Modifier;
     }
 
     public override string ToString()

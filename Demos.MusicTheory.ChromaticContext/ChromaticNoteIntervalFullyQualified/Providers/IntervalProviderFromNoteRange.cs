@@ -25,7 +25,7 @@ public class IntervalProviderFromNoteRange
     {
         return _indexSpanProvider
             .GetIntervals(range.ChromaticIndexSpan)
-            .Cluster
+            .Intervals
             .Single(i => i.DiatonicScaleDegree == GetDiatonicDegreeSpan(range));
     }
 

@@ -16,8 +16,8 @@ public class NoteProviderFromNoteByDiatonicOffsetTest : TestBase
     [SetUp]
     public void SetUp()
     {
-        Services.ServicesManager.ServicesProvider.RegisterService(() => new ElementaryNoteFromDiatonicScaleKeySignatureProvider());
-        Services.ServicesManager.ServicesProvider.RegisterService(() => new ElementaryNotesProviderFromDiatonicScale());
+        RegisterService<ElementaryNoteFromDiatonicScaleKeySignatureProvider>();
+        RegisterService<ElementaryNotesProviderFromDiatonicScale>();
         _provider = new NoteProviderFromNoteByDiatonicOffset();
     }
 

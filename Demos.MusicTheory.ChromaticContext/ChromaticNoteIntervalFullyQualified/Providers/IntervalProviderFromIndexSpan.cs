@@ -10,17 +10,17 @@ public class IntervalProviderFromIndexSpan
 {
     public IntervalEnharmonics GetIntervals(int chromaticIndexSpan)
     {
-        var enharmonicIntervalCluster = new List<Interval>();
+        var intervalEnharmonics = new List<Interval>();
         var analysis = Analyse(chromaticIndexSpan);
 
         if (analysis.IsBlackKey)
         {
-            enharmonicIntervalCluster.Add(new Interval(analysis.MainDiatonicScaleDegree, IntervalQuality.Augmented));
+            intervalEnharmonics.Add(new Interval(analysis.MainDiatonicScaleDegree, IntervalQuality.Augmented));
 
             var nextDiatonicScaleDegree = analysis.MainDiatonicScaleDegree + 1;
             var quality = IsPerfectType(nextDiatonicScaleDegree) ? IntervalQuality.Diminished : IntervalQuality.Minor;
 
-            enharmonicIntervalCluster.Add(new Interval(nextDiatonicScaleDegree, quality));
+            intervalEnharmonics.Add(new Interval(nextDiatonicScaleDegree, quality));
         }
         else
         {
@@ -28,19 +28,19 @@ public class IntervalProviderFromIndexSpan
                 ? IntervalQuality.Perfect
                 : IntervalQuality.Major;
 
-            enharmonicIntervalCluster.Add(new Interval(analysis.MainDiatonicScaleDegree, quality));
+            intervalEnharmonics.Add(new Interval(analysis.MainDiatonicScaleDegree, quality));
 
             if (analysis.BaseDiatonicScaleDegree != (int) NoteQuality.F)
-                enharmonicIntervalCluster.Add(new Interval(analysis.MainDiatonicScaleDegree + 1,
+                intervalEnharmonics.Add(new Interval(analysis.MainDiatonicScaleDegree + 1,
                     IntervalQuality.Diminished));
 
             if (new[] {(int) NoteQuality.C, (int) NoteQuality.F}.Contains(analysis
                     .BaseDiatonicScaleDegree) && analysis.MainDiatonicScaleDegree > 1)
-                enharmonicIntervalCluster.Add(new Interval(analysis.MainDiatonicScaleDegree - 1,
+                intervalEnharmonics.Add(new Interval(analysis.MainDiatonicScaleDegree - 1,
                     IntervalQuality.Augmented));
         }
 
-        return new IntervalEnharmonics(enharmonicIntervalCluster.ToArray());
+        return new IntervalEnharmonics(intervalEnharmonics.ToArray());
     }
 
     private static SpanAnalysisReport Analyse(int chromaticIndexSpan)

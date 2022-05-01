@@ -47,7 +47,7 @@ public class IntervalProviderFromChromaticSpanCreationTest
         var result = provider.GetIntervals(chromaticIndexSpan);
 
         // Then
-        result.Cluster.Should().Contain(x =>
+        result.Intervals.Should().Contain(x =>
             x.DiatonicScaleDegree.Equals(expectedDiatonicScaleDegree) &&
             x.Quality.Equals(expectedQuality));
     }

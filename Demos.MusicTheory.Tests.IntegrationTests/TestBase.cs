@@ -1,4 +1,5 @@
 ﻿using Demos.MusicTheory.ChromaticContext.Helpers;
+using Demos.MusicTheory.Services;
 using NUnit.Framework;
 
 namespace Demos.MusicTheory.Tests.IntegrationTests;
@@ -13,6 +14,11 @@ public class TestBase
     protected TestBase()
     {
         InitializeStaticCaches();
+    }
+
+    protected void RegisterService<TService>()
+    {
+        ServicesManager.ServicesProvider.RegisterService<TService>(() => (TService)Activator.CreateInstance(typeof(TService))!);
     }
 
     /// <summary>

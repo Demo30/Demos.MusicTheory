@@ -41,7 +41,7 @@ public class NoteProviderFromNoteByIntervalTest : TestBase
 
         // When
         var provider = new NoteProviderFromNoteByInterval(mockProviderFromNoteBySpan.Object);
-        var cluster = provider.GetEnharmonicNoteCluster(note, calledInterval, direction);
+        var cluster = provider.GetEnharmonics(note, calledInterval, direction);
 
         // Then
         mockProviderFromNoteBySpan.Verify(c => c.GetEnharmonics(expectedChromaticIndexArgument), Times.Once);

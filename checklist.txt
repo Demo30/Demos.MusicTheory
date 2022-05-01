@@ -8,12 +8,14 @@
 [x] Mít rozmezí dvou not (C1-F1) a určit, jaký mezi sebou mají intervalový rozestup (P5) (nikoliv cluster!)
 [x] Mít vzdálenost v chromatických krocích a dostat kolekci všech odpovídajících enharmonicky ekvivalentních intervalů.
 
-[|] Mít tóninu (C major) a vypsat všechny její základní noty (C, D, E, F, G, A, B). << [| lze jednoduše získat z kvalifikovaných]
-[|] Mít tóninu (G major) a vypsat všechny její noty (C2, D2, E2, F♯2, G2, A2, B2) v daném řádu (2). << [| vlastně podivný požadavek + lze jednoduše získat z kvalifikovaných]
+[|] Mít tóninu (C major) a vypsat všechny její základní noty (C, D, E, F, G, A, B).
+	<< [| lze jednoduše získat z kvalifikovaných]
+[|] Mít tóninu (G major) a vypsat všechny její noty (C2, D2, E2, F♯2, G2, A2, B2) v daném řádu (2).
+	<< [| vlastně podivný požadavek + lze jednoduše získat z kvalifikovaných]
 [x] Mít tóninu (G major) a vypsat všechny její základní kvalifikované noty v pořadí od toniky (G, A, B, C, D, E, F♯).
 [x] Mít tóninu (C major) a vypsat notu vzdálenou určitý počet diatonických kroků od zvolené noty či dostat error, pokud zvolená nota nepatří do tóniny. (E2 + 6 => D3).
-[ ] Mít kolekci základních not (E, G, C) a získat kolekci všech tónin, do kterých spadají (minimálně C a možná další hehe...)
-[ ] Mít kolekci plně identifikovaných not (E2, G2, C2) a získat kolekci všech tónin, do kterých spadají
+[x] Mít kolekci základních not (E, G, C) a získat kolekci všech tónin, do kterých spadají (minimálně C a možná další hehe...)
+[x] Mít kolekci plně identifikovaných not (E2, G2, C2) a získat kolekci všech tónin, do kterých spadají
 
 [ ] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat jejich skladbu v notách (C, E, G)
 [ ] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat cluster jejích inverzí.
