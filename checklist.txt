@@ -17,8 +17,13 @@
 [x] Mít kolekci základních not (E, G, C) a získat kolekci všech tónin, do kterých spadají (minimálně C a možná další hehe...)
 [x] Mít kolekci plně identifikovaných not (E2, G2, C2) a získat kolekci všech tónin, do kterých spadají
 
-[ ] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat jejich skladbu v notách (C, E, G)
+[?] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat jejich skladbu v notách (C, E, G)
+	<< [| toto nakonec asi nechci ]
+[?] Mít cluster plně identifikovaných not a dostat kolekci jim vyhovujících akordů (právě jeden?)
+	<< [| bude vyžadovat další zamylení, protože pojmeme-li akory dostečně obecně, pak je nejasné, z jakého supersetu vybíráme]
 [ ] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat cluster jejích inverzí.
-[ ] Mít cluster plně identifikovaných not a dostat kolekci jim vyhovujících akordů (pouze jeden?)
 [ ] Mít akord a dostat kolekci tónin, do kterých spadají (<= funkce pouze obaluje funkcionalitu získání tónin z kolekce not)
 
+
+
+# further development would probably need to adhere to music set theory (https://en.wikipedia.org/wiki/Set_theory_(music)) terms, concepts and findings in general.

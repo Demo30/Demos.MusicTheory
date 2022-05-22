@@ -1,8 +1,7 @@
 ﻿using Demos.MusicTheory.ChromaticContext.Constants;
 using System.Collections.Generic;
 using System.Linq;
-using static Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.
-    NoteIntervalBase;
+using static Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Interval;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
 

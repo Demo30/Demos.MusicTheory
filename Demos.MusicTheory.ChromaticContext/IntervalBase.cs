@@ -2,17 +2,17 @@
 
 namespace Demos.MusicTheory.ChromaticContext;
 
-public abstract class NoteInterval : IChromaticIndexSpan
+public abstract class IntervalBase : IChromaticIndexSpan
 {
     public int ChromaticIndexSpan
     {
         get => _chromaticIndexSpan;
-        private init => _chromaticIndexSpan = value >= 0 ? value : throw new ArgumentOutOfRangeException();
+        private init => _chromaticIndexSpan = value >= 0 ? value : throw new ArgumentOutOfRangeException(nameof(ChromaticIndexSpan));
     }
 
     private readonly int _chromaticIndexSpan;
 
-    protected NoteInterval(int chromaticIndexSpan)
+    protected IntervalBase(int chromaticIndexSpan)
     {
         ChromaticIndexSpan = chromaticIndexSpan;
     }
