@@ -2,7 +2,7 @@
 
 namespace Demos.MusicTheory.ChromaticContext;
 
-public abstract class IntervalBase : IChromaticIndexSpan
+public abstract class ElementaryInterval : IChromaticIndexSpan
 {
     public int ChromaticIndexSpan
     {
@@ -12,7 +12,7 @@ public abstract class IntervalBase : IChromaticIndexSpan
 
     private readonly int _chromaticIndexSpan;
 
-    protected IntervalBase(int chromaticIndexSpan)
+    protected ElementaryInterval(int chromaticIndexSpan)
     {
         ChromaticIndexSpan = chromaticIndexSpan;
     }

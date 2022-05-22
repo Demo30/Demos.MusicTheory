@@ -1,23 +1,22 @@
-﻿namespace Demos.MusicTheory.Commons
+﻿namespace Demos.MusicTheory.Commons;
+
+public enum NotationSymbols
 {
-    public enum NotationSymbols
-    {
-        None,
-        WholeNote,
-        HalfNote,
-        QuatreNote,
-        EighthNote,
-        SixteenthNote,
-        WholeNoteRest,
-        HalfNoteRest,
-        QuatreNoteRest,
-        EighthNoteRest,
-        SixteenthNoteRest,
-        Sharp,
-        Flat,
-        DoubleFlat,
-        DoubleSharp,
-        Natural,
-        DottedNote,
-    }
+    None,
+    WholeNote,
+    HalfNote,
+    QuarterNote,
+    EighthNote,
+    SixteenthNote,
+    WholeNoteRest,
+    HalfNoteRest,
+    QuarterNoteRest,
+    EighthNoteRest,
+    SixteenthNoteRest,
+    Sharp,
+    Flat,
+    DoubleFlat,
+    DoubleSharp,
+    Natural,
+    DottedNote,
 }

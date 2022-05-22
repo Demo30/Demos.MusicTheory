@@ -1,5 +1,6 @@
 ﻿using Demos.MusicTheory.Commons;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Demos.MusicTheory.ChromaticContext;
@@ -14,13 +15,12 @@ public class ElementaryNote : IContentEqual<ElementaryNote>
         private init =>
             _modifier = RelevantNotationSymbols.Contains(value)
                 ? value
-                : throw new ArgumentException(
-                    $"Provided notation symbol: \"{value}\" is not a valid symbol for a chromatic note.");
+                : throw new ArgumentException($"Provided notation symbol: \"{value}\" is not a valid symbol for a chromatic note.");
     }
 
     private readonly NotationSymbols _modifier = NotationSymbols.None;
 
-    public static NotationSymbols[] RelevantNotationSymbols { get; } =
+    public static IEnumerable<NotationSymbols> RelevantNotationSymbols { get; } = new[]
     {
         NotationSymbols.None,
         NotationSymbols.Sharp,
