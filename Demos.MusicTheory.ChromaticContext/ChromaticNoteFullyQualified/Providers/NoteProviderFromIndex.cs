@@ -8,8 +8,7 @@ using Demos.MusicTheory.ChromaticContext.Helpers;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers;
 
-internal class
-    NoteProviderFromIndex : INoteProviderFromIndex
+internal class NoteProviderFromIndex : INoteProviderFromIndex
 {
     public NoteEnharmonics GetEnharmonics(int chromaticIndex)
     {

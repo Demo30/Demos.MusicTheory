@@ -7,20 +7,20 @@ namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 
 public class NoteProviderFromNoteByDiatonicOffset
 {
-    private readonly IElementaryNotesProviderFromDiatonicScale _provider;
+    private readonly Lazy<IElementaryNotesProviderFromDiatonicScale> _provider;
 
-    public NoteProviderFromNoteByDiatonicOffset() : this(ServicesManager.GetService<ElementaryNotesProviderFromDiatonicScale>())
+    public NoteProviderFromNoteByDiatonicOffset() : this(new Lazy<IElementaryNotesProviderFromDiatonicScale>(ServicesManager.GetService<ElementaryNotesProviderFromDiatonicScale>))
     {
         
     }
     
-    internal NoteProviderFromNoteByDiatonicOffset(IElementaryNotesProviderFromDiatonicScale provider)
+    internal NoteProviderFromNoteByDiatonicOffset(Lazy<IElementaryNotesProviderFromDiatonicScale> provider)
     {
         _provider = provider;
     }
     public Note GetNote(DiatonicScale scale, Note referenceNote, int diatonicSteps)
     {
-        var scaleElementaryNotes = _provider.GetChromaticElementaryNotes(scale).ToArray();
+        var scaleElementaryNotes = _provider.Value.GetChromaticElementaryNotes(scale).ToArray();
 
         var matchingNote = scaleElementaryNotes.SingleOrDefault(x =>
             x.Quality == referenceNote.Quality && x.Modifier == referenceNote.Modifier);

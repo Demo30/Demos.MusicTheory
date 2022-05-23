@@ -8,29 +8,23 @@ internal class NoteProviderFromNoteByInterval
 {
     private readonly INoteProviderFromIndex _providerByIndex;
 
-    public NoteProviderFromNoteByInterval() : this(
-        GetService<NoteProviderFromIndex>())
+    public NoteProviderFromNoteByInterval() : this(GetService<NoteProviderFromIndex>())
     {
     }
 
-    internal NoteProviderFromNoteByInterval(
-        INoteProviderFromIndex providerByIndex)
+    internal NoteProviderFromNoteByInterval(INoteProviderFromIndex providerByIndex)
     {
         _providerByIndex = providerByIndex;
     }
 
-    public NoteEnharmonics GetEnharmonics(Note note,
-        ChromaticNoteIntervalFullyQualified.Interval interval,
-        OneDimensionalDirection direction)
+    public NoteEnharmonics GetEnharmonics(Note note, IChromaticIndexSpan interval, OneDimensionalDirection direction)
     {
         return _providerByIndex.GetEnharmonics(GetSpannedIndex(note, interval, direction));
     }
 
-    private static int GetSpannedIndex(IChromaticEntity note,
-        ChromaticNoteIntervalFullyQualified.Interval interval,
-        OneDimensionalDirection direction)
+    private static int GetSpannedIndex(IChromaticEntity note, IChromaticIndexSpan interval, OneDimensionalDirection direction)
     {
         return note.ChromaticContextIndex +
-               (direction == OneDimensionalDirection.RIGHT ? interval.SemitoneCount : -interval.SemitoneCount);
+               (direction == OneDimensionalDirection.RIGHT ? interval.ChromaticIndexSpan : -interval.ChromaticIndexSpan);
     }
 }

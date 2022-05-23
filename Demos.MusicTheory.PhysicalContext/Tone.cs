@@ -1,8 +1,6 @@
 ﻿using Demos.MusicTheory.Abstractions.Commons;
-using Demos.MusicTheory.Abstractions.PhysicalContext;
-using ITone = Demos.MusicTheory.PhysicalContext.ITone;
 
-namespace Demos.MusicTheory.Contexts.PhysicalContext
+namespace Demos.MusicTheory.PhysicalContext
 {
     public class Tone : IContentEqual<Tone>, ITone
     {

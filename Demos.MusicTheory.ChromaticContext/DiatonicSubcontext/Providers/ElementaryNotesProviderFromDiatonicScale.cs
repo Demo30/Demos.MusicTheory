@@ -7,21 +7,21 @@ namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 
 public sealed class ElementaryNotesProviderFromDiatonicScale : IElementaryNotesProviderFromDiatonicScale
 {
-    private readonly IElementaryNoteFromDiatonicScaleKeySignatureProvider _provider;
+    private readonly Lazy<IElementaryNoteFromDiatonicScaleKeySignatureProvider> _provider;
 
-    public ElementaryNotesProviderFromDiatonicScale() : this(ServicesManager.GetService<ElementaryNoteFromDiatonicScaleKeySignatureProvider>())
+    public ElementaryNotesProviderFromDiatonicScale() : this(new Lazy<IElementaryNoteFromDiatonicScaleKeySignatureProvider>(ServicesManager.GetService<ElementaryNoteFromDiatonicScaleKeySignatureProvider>))
     {
         
     }
 
-    internal ElementaryNotesProviderFromDiatonicScale(IElementaryNoteFromDiatonicScaleKeySignatureProvider provider)
+    internal ElementaryNotesProviderFromDiatonicScale(Lazy<IElementaryNoteFromDiatonicScaleKeySignatureProvider> provider)
     {
         _provider = provider;
     }
     
     public IEnumerable<ElementaryNote> GetChromaticElementaryNotes(DiatonicScale scale)
     {
-        var notes = _provider.GetChromaticElementaryNotes(DiatonicScaleToSignatureMapper.GetSignature(scale))
+        var notes = _provider.Value.GetChromaticElementaryNotes(DiatonicScaleToSignatureMapper.GetSignature(scale))
             .OrderBy(x => (int)x.Quality)
             .ToArray();
 

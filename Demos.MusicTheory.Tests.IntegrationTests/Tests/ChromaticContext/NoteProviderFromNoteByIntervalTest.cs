@@ -230,5 +230,45 @@ public class NoteProviderFromNoteByIntervalTest : TestBase
             OneDimensionalDirection.LEFT,
             NoteQuality.C, 0, NotationSymbols.None
         );
+        
+        yield return new TestCaseData
+        (
+            NoteQuality.G, 1, NotationSymbols.None,
+            new Interval(3, IntervalQuality.Minor),
+            OneDimensionalDirection.RIGHT,
+            NoteQuality.C, 2, NotationSymbols.DoubleFlat
+        );
+        
+        yield return new TestCaseData
+        (
+            NoteQuality.G, 1, NotationSymbols.None,
+            new Interval(3, IntervalQuality.Minor),
+            OneDimensionalDirection.RIGHT,
+            NoteQuality.B, 1, NotationSymbols.Flat
+        );
+        
+        yield return new TestCaseData
+        (
+            NoteQuality.G, 1, NotationSymbols.None,
+            new Interval(3, IntervalQuality.Minor),
+            OneDimensionalDirection.RIGHT,
+            NoteQuality.A, 1, NotationSymbols.Sharp
+        );
+        
+        yield return new TestCaseData
+        (
+            NoteQuality.F, 1, NotationSymbols.DoubleSharp,
+            new Interval(3, IntervalQuality.Minor),
+            OneDimensionalDirection.RIGHT,
+            NoteQuality.C, 2, NotationSymbols.DoubleFlat
+        );
+        
+        yield return new TestCaseData
+        (
+            NoteQuality.F, 1, NotationSymbols.DoubleSharp,
+            new Interval(3, IntervalQuality.Minor),
+            OneDimensionalDirection.RIGHT,
+            NoteQuality.A, 1, NotationSymbols.Sharp
+        );
     }
 }

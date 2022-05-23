@@ -8,14 +8,14 @@ namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 
 public class DiatonicScalesProviderFromNoteCluster
 {
-    private readonly IElementaryNoteFromDiatonicScaleKeySignatureProvider _provider;
+    private readonly Lazy<IElementaryNoteFromDiatonicScaleKeySignatureProvider> _provider;
 
-    public DiatonicScalesProviderFromNoteCluster() : this(ServicesManager.GetService<ElementaryNoteFromDiatonicScaleKeySignatureProvider>())
+    public DiatonicScalesProviderFromNoteCluster() : this(new Lazy<IElementaryNoteFromDiatonicScaleKeySignatureProvider>(ServicesManager.GetService<ElementaryNoteFromDiatonicScaleKeySignatureProvider>))
     {
         
     }
 
-    internal DiatonicScalesProviderFromNoteCluster(IElementaryNoteFromDiatonicScaleKeySignatureProvider provider)
+    internal DiatonicScalesProviderFromNoteCluster(Lazy<IElementaryNoteFromDiatonicScaleKeySignatureProvider> provider)
     {
         _provider = provider;
     }
@@ -35,7 +35,7 @@ public class DiatonicScalesProviderFromNoteCluster
         }
         
         return DiatonicScaleToSignatureMapper.Map.Keys
-            .Select(scale => (scale, notes: _provider.GetChromaticElementaryNotes(DiatonicScaleToSignatureMapper.GetSignature(scale))))
+            .Select(scale => (scale, notes: _provider.Value.GetChromaticElementaryNotes(DiatonicScaleToSignatureMapper.GetSignature(scale))))
             .Where(x => suppliedNotes.All(suppliedNote => x.notes.Any(suppliedNote.IsEqualByContent)))
             .Select(x => x.scale);
     }
