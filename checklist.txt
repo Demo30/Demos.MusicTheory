@@ -1,29 +1,43 @@
-[x] Mít možnost pracovat s notami identifikovanými ve smyslu: C♯2
-[x] Mít možnost pracovat s intervaly identifikovanými ve smyslu: M3, m3, P5, dim5
-[x] Mít možnost získat notu (C♯2) pomocí pokročení v intervalu (M3, m3, dim5) směrem výš či níž.
-[x] Mít možnost získat notu (C♯2) pomocí pokročení o daný počet půtónů směrem výš či níž
-[x] Mít notu a dostat kolekci všech enharmonických ekvivalentů (C♯ => C#, Db; D => Ebb, C♯♯)
-[x] Mít notu a vzdálenost od noty v půltónech a dostat kolekci všech enharmonických ekvivalentů (C, 1 => C♯, Db; C, 3 => D♯, Eb)
-[x] Mít rozmezí dvou not (C1-F1) a určit, jaký mezi sebou mají rozestup v půltónech.
-[x] Mít rozmezí dvou not (C1-F1) a určit, jaký mezi sebou mají intervalový rozestup (P5) (nikoliv cluster!)
-[x] Mít vzdálenost v chromatických krocích a dostat kolekci všech odpovídajících enharmonicky ekvivalentních intervalů.
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+⬛ Práce s notami
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+[☑] Mít možnost pracovat s notami identifikovanými ve smyslu: C♯2
+[☑] Mít možnost pracovat s intervaly identifikovanými ve smyslu: M3, m3, P5, dim5
+[☑] Mít možnost získat notu (C♯2) pomocí pokročení v intervalu (M3, m3, dim5) směrem výš či níž.
+[☑] Mít možnost získat notu (C♯2) pomocí pokročení o daný počet půtónů směrem výš či níž
+[☑] Mít notu a dostat kolekci všech enharmonických ekvivalentů (C♯ => C#, Db; D => Ebb, C♯♯)
+[☑] Mít notu a vzdálenost od noty v půltónech a dostat kolekci všech enharmonických ekvivalentů (C, 1 => C♯, Db; C, 3 => D♯, Eb)
+[☑] Mít rozmezí dvou not (C1-F1) a určit, jaký mezi sebou mají rozestup v půltónech.
+[☑] Mít rozmezí dvou not (C1-F1) a určit, jaký mezi sebou mají intervalový rozestup (P5) (nikoliv cluster!)
+[☑] Mít vzdálenost v chromatických krocích a dostat kolekci všech odpovídajících enharmonicky ekvivalentních intervalů.
 
-[|] Mít tóninu (C major) a vypsat všechny její základní noty (C, D, E, F, G, A, B).
-	<< [| lze jednoduše získat z kvalifikovaných]
-[|] Mít tóninu (G major) a vypsat všechny její noty (C2, D2, E2, F♯2, G2, A2, B2) v daném řádu (2).
-	<< [| vlastně podivný požadavek + lze jednoduše získat z kvalifikovaných]
-[x] Mít tóninu (G major) a vypsat všechny její základní kvalifikované noty v pořadí od toniky (G, A, B, C, D, E, F♯).
-[x] Mít tóninu (C major) a vypsat notu vzdálenou určitý počet diatonických kroků od zvolené noty či dostat error, pokud zvolená nota nepatří do tóniny. (E2 + 6 => D3).
-[x] Mít kolekci základních not (E, G, C) a získat kolekci všech tónin, do kterých spadají (minimálně C a možná další hehe...)
-[x] Mít kolekci plně identifikovaných not (E2, G2, C2) a získat kolekci všech tónin, do kterých spadají
 
-[?] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat jejich skladbu v notách (C, E, G)
-	<< [| toto nakonec asi nechci ]
-[?] Mít cluster plně identifikovaných not a dostat kolekci jim vyhovujících akordů (právě jeden?)
-	<< [| bude vyžadovat další zamylení, protože pojmeme-li akory dostečně obecně, pak je nejasné, z jakého supersetu vybíráme]
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+⬛ Práce s tóninami
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+[✅] Mít tóninu (C major) a vypsat všechny její základní noty (C, D, E, F, G, A, B).
+	[✅ lze jednoduše získat z kvalifikovaných]
+[✅] Mít tóninu (G major) a vypsat všechny její noty (C2, D2, E2, F♯2, G2, A2, B2) v daném řádu (2).
+	[✅ vlastně podivný požadavek + lze jednoduše získat z kvalifikovaných]
+[☑] Mít tóninu (G major) a vypsat všechny její základní kvalifikované noty v pořadí od toniky (G, A, B, C, D, E, F♯).
+[☑] Mít tóninu (C major) a vypsat notu vzdálenou určitý počet diatonických kroků od zvolené noty či dostat error, pokud zvolená nota nepatří do tóniny. (E2 + 6 => D3).
+[☑] Mít kolekci základních not (E, G, C) a získat kolekci všech tónin, do kterých spadají (minimálně C a možná další hehe...)
+[☑] Mít kolekci plně identifikovaných not (E2, G2, C2) a získat kolekci všech tónin, do kterých spadají
+
+
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+⬛ Práce s akordy
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+[❓] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat jejich skladbu v notách (C, E, G)
+	[| toto nakonec asi nechci << wait why?]
+[❓] Mít akord a dostat kolekci tónin, do kterých spadají
+	[✅ funkce pouze obaluje funkcionalitu získání tónin z kolekce not <= zde jde tedy pouze o získání not z akordu]
+[❓] Mít cluster plně identifikovaných not a dostat kolekci jim vyhovujících akordů
+	[| bude vyžadovat další zamyšlení, protože pojmeme-li akordy dostečně obecně, pak je nejasné, z jakého supersetu vybíráme]
 [ ] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat cluster jejích inverzí.
-[ ] Mít akord a dostat kolekci tónin, do kterých spadají (<= funkce pouze obaluje funkcionalitu získání tónin z kolekce not)
 
 
-
-# further development would probably need to adhere to music set theory (https://en.wikipedia.org/wiki/Set_theory_(music)) terms, concepts and findings in general.
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+⬛ Další práce
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+[ ] further development would probably need to adhere to music set theory (https://en.wikipedia.org/wiki/Set_theory_(music)) terms, concepts and findings in general.

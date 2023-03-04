@@ -31,23 +31,25 @@ public class NoteProviderFromIndexTest : TestBase
 
     private static IEnumerable<TestCaseData> GetTestCases()
     {
-        yield return new TestCaseData(2, new Note(NoteQuality.C, 0, NotationSymbols.None));
-        yield return new TestCaseData(2, new Note(NoteQuality.D, 0, NotationSymbols.DoubleFlat));
-        yield return new TestCaseData(3, new Note(NoteQuality.C, 0, NotationSymbols.Sharp));
-        yield return new TestCaseData(3, new Note(NoteQuality.D, 0, NotationSymbols.Flat));
-        yield return new TestCaseData(9, new Note(NoteQuality.G, 0, NotationSymbols.None));
-        yield return new TestCaseData(9, new Note(NoteQuality.F, 0, NotationSymbols.DoubleSharp));
-        yield return new TestCaseData(11, new Note(NoteQuality.A, 0, NotationSymbols.None));
-        yield return new TestCaseData(11, new Note(NoteQuality.B, 0, NotationSymbols.DoubleFlat));
-        yield return new TestCaseData(11, new Note(NoteQuality.G, 0, NotationSymbols.DoubleSharp));
-        yield return new TestCaseData(13, new Note(NoteQuality.B, 0, NotationSymbols.None));
-        yield return new TestCaseData(13, new Note(NoteQuality.C, 1, NotationSymbols.Flat));
-        yield return new TestCaseData(13, new Note(NoteQuality.A, 0, NotationSymbols.DoubleSharp));
-        yield return new TestCaseData(14, new Note(NoteQuality.C, 1, NotationSymbols.None));
-        yield return new TestCaseData(23, new Note(NoteQuality.A, 1, NotationSymbols.None));
-        yield return new TestCaseData(24, new Note(NoteQuality.B, 1, NotationSymbols.Flat));
-        yield return new TestCaseData(24, new Note(NoteQuality.A, 1, NotationSymbols.Sharp));
-        yield return new TestCaseData(24, new Note(NoteQuality.C, 2, NotationSymbols.DoubleFlat));
-        yield return new TestCaseData(35, new Note(NoteQuality.A, 2, NotationSymbols.None));
+        const int baseOffset = 0;
+        
+        yield return new TestCaseData(baseOffset + 0, new Note(NoteQuality.C, 0, NotationSymbols.None));
+        yield return new TestCaseData(baseOffset + 0, new Note(NoteQuality.D, 0, NotationSymbols.DoubleFlat));
+        yield return new TestCaseData(baseOffset + 1, new Note(NoteQuality.C, 0, NotationSymbols.Sharp));
+        yield return new TestCaseData(baseOffset + 1, new Note(NoteQuality.D, 0, NotationSymbols.Flat));
+        yield return new TestCaseData(baseOffset + 7, new Note(NoteQuality.G, 0, NotationSymbols.None));
+        yield return new TestCaseData(baseOffset + 7, new Note(NoteQuality.F, 0, NotationSymbols.DoubleSharp));
+        yield return new TestCaseData(baseOffset + 9, new Note(NoteQuality.A, 0, NotationSymbols.None));
+        yield return new TestCaseData(baseOffset + 9, new Note(NoteQuality.B, 0, NotationSymbols.DoubleFlat));
+        yield return new TestCaseData(baseOffset + 9, new Note(NoteQuality.G, 0, NotationSymbols.DoubleSharp));
+        yield return new TestCaseData(baseOffset + 11, new Note(NoteQuality.B, 0, NotationSymbols.None));
+        yield return new TestCaseData(baseOffset + 11, new Note(NoteQuality.C, 1, NotationSymbols.Flat));
+        yield return new TestCaseData(baseOffset + 11, new Note(NoteQuality.A, 0, NotationSymbols.DoubleSharp));
+        yield return new TestCaseData(baseOffset + 12, new Note(NoteQuality.C, 1, NotationSymbols.None));
+        yield return new TestCaseData(baseOffset + 21, new Note(NoteQuality.A, 1, NotationSymbols.None));
+        yield return new TestCaseData(baseOffset + 22, new Note(NoteQuality.B, 1, NotationSymbols.Flat));
+        yield return new TestCaseData(baseOffset + 22, new Note(NoteQuality.A, 1, NotationSymbols.Sharp));
+        yield return new TestCaseData(baseOffset + 22, new Note(NoteQuality.C, 2, NotationSymbols.DoubleFlat));
+        yield return new TestCaseData(baseOffset + 33, new Note(NoteQuality.A, 2, NotationSymbols.None));
     }
 }

@@ -12,23 +12,29 @@ internal class NoteProviderFromIndex : INoteProviderFromIndex
 {
     public NoteEnharmonics GetEnharmonics(int chromaticIndex)
     {
-        var (order, baseOffset) = Math.DivRem(chromaticIndex, ChromaticContextConstants.ChromaticStepsFullOctave);
+        var (order, baseOffset) = Math.DivRem(chromaticIndex, BaseChromaticIndexMapper.BaseIndex + ChromaticContextConstants.ChromaticStepsFullOctave);
 
         var notes = GetQualityModifierCartesianProduct()
-            .Where(t => BaseChromaticIndexMapper.GetBaseChromaticOffset(t.Item1, t.Item2) == baseOffset)
-            .Select(t => new Note(t.Item1, order, t.Item2))
+            .Select(noteInfo =>
+            {
+                var baseOffsetInfo = BaseChromaticIndexMapper.GetBaseChromaticOffset(noteInfo.NoteQuality, noteInfo.NotationSymbol);
+                return (noteInfo.NoteQuality, Modifier: noteInfo.NotationSymbol, BaseOffset: baseOffsetInfo.baseOffset, Order: order + baseOffsetInfo.orderCorrection);
+            })
+            .Where(t => t.BaseOffset == baseOffset)
+            .Where(t => t.Order >= 0)
+            .Select(t => new Note(t.NoteQuality, t.Order, t.Modifier))
             .ToArray();
 
         return new NoteEnharmonics(notes);
     }
 
-    private static IEnumerable<(NoteQuality, NotationSymbols)> GetQualityModifierCartesianProduct()
+    private static IEnumerable<(NoteQuality NoteQuality, NotationSymbols NotationSymbol)> GetQualityModifierCartesianProduct()
     {
         var qualities = Enum.GetValues<NoteQuality>().Where(quality => quality != NoteQuality.Unknown)
             .ToList();
         var modifiers = GetModifiers();
 
-        return qualities.SelectMany(q => modifiers.Select(m => (q, m)));
+        return qualities.SelectMany(q => modifiers.Select(m => (NoteQuality: q, NotationSymbol: m)));
     }
 
     private static IEnumerable<NotationSymbols> GetModifiers()

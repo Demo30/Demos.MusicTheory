@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using Demos.MusicTheory.Commons;
 using Demos.MusicTheory.Services;
 using static Demos.MusicTheory.ChromaticContext.Constants.ChromaticContextConstants;
@@ -12,38 +13,61 @@ internal static class BaseChromaticIndexMapper
 {
     private static bool IsInitialized => _map is not null;
 
-    private static Dictionary<(NoteQuality, NotationSymbols), int> _map;
+    private static Dictionary<(NoteQuality, NotationSymbols), (int baseOffset, int orderCorrection)> _map;
 
     public static void InitializeMapper()
     {
         _map = GetBaseChromaticIndexMap();
     }
 
-    public static int GetBaseChromaticOffset(NoteQuality quality, NotationSymbols modifier)
+    public static (int baseOffset, int orderCorrection) GetBaseChromaticOffset(NoteQuality quality, NotationSymbols modifier, bool wrapAround = true)
     {
         return IsInitialized
             ? _map[(quality, modifier)]
             : throw new ServiceInitializationException();
     }
 
-    private static Dictionary<(NoteQuality, NotationSymbols), int> GetBaseChromaticIndexMap()
+    private static Dictionary<(NoteQuality, NotationSymbols), (int baseOffset, int orderCorrection)> GetBaseChromaticIndexMap()
     {
-        var map = new Dictionary<(NoteQuality, NotationSymbols), int>();
+        var map = new Dictionary<(NoteQuality, NotationSymbols), (int baseOffset, int orderCorrection)>();
 
         var qualities = Enum.GetValues<NoteQuality>().Where(quality => quality != NoteQuality.Unknown).ToList();
         var modifiers = ModifierChromaticCorrection.Keys.ToList();
 
         qualities
-            .SelectMany(q => modifiers.Select(m => (q, m)))
+            .SelectMany(q => modifiers.Select(m => (Quality: q, Modifier: m)))
             .ToList()
-            .ForEach(t => map.Add((t.q, t.m), GetBaseOffset(t.q, t.m)));
+            .ForEach(t =>
+            {
+                var key = (t.Quality, t.Modifier);
+                var value = GetBaseOffset(t.Quality, t.Modifier);
+                map.Add(key, value);
+            });
 
         return map;
     }
 
-    private static int GetBaseOffset(NoteQuality quality, NotationSymbols modifier)
+    private static (int baseOffset, int orderCorrection) GetBaseOffset(NoteQuality quality, NotationSymbols modifier)
     {
-        return GetBasicOffset(quality) - GetQualityOffsetCorrection(quality) + GetModifierCorrection(modifier);
+        var baseOffset = GetBasicOffset(quality) - GetQualityOffsetCorrection(quality) + GetModifierCorrection(modifier);
+
+        var baseOffsetWithinOneScaleRange =
+            baseOffset >= BaseIndex && baseOffset < ChromaticStepsFullOctave;
+        
+        if (baseOffsetWithinOneScaleRange)
+        {
+            return (baseOffset, 0);
+        }
+        
+        // wrapping around
+        if (baseOffset < BaseIndex)
+        {
+            baseOffset += ChromaticStepsFullOctave; // max single order correction assumed
+            return (baseOffset, +1);
+        }
+        
+        baseOffset -= ChromaticStepsFullOctave; // max single order correction assumed
+        return (baseOffset, -1);
     }
 
     private static int GetModifierCorrection(NotationSymbols modifier)
@@ -60,8 +84,10 @@ internal static class BaseChromaticIndexMapper
 
     private static int GetBasicOffset(NoteQuality quality)
     {
-        return 2 * ChromaticStepsElementaryStep * (int) quality;
+        return (2 * ChromaticStepsElementaryStep) * ((int) quality - 1);
     }
+
+    public static int BaseIndex => 0;
 
     private static readonly Dictionary<NotationSymbols, int> ModifierChromaticCorrection = new()
     {

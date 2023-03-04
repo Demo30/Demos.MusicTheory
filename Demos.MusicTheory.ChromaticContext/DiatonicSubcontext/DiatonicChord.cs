@@ -64,8 +64,8 @@ public class DiatonicChord : ElementaryChord
     {
         var mappings = new Dictionary<DiatonicChordQuality, ChordStructure>
         {
-            { DiatonicChordQuality.MajorTriad,new ChordStructure(new [] { new Interval(3, IntervalQuality.Major), new Interval(3, IntervalQuality.Minor) }) },
-            { DiatonicChordQuality.MinorTriad,new ChordStructure(new [] { new Interval(3, IntervalQuality.Minor), new Interval(3, IntervalQuality.Major) }) },
+            { DiatonicChordQuality.MajorTriad, new ChordStructure(new [] { new Interval(3, IntervalQuality.Major), new Interval(3, IntervalQuality.Minor) }) },
+            { DiatonicChordQuality.MinorTriad, new ChordStructure(new [] { new Interval(3, IntervalQuality.Minor), new Interval(3, IntervalQuality.Major) }) },
         };
 
         return mappings[quality];

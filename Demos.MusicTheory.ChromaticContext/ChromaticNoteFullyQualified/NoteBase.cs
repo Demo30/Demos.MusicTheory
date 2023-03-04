@@ -31,8 +31,9 @@ public abstract class NoteBase : IContentEqual<Note>, IChromaticEntity
 
     protected int GetChromaticIndex()
     {
-        return BaseChromaticIndexMapper.GetBaseChromaticOffset(QualityBase, ModifierBase) +
-               OrderBase * ChromaticStepsFullOctave;
+        var baseOffsetInfo = BaseChromaticIndexMapper.GetBaseChromaticOffset(QualityBase, ModifierBase);
+        return baseOffsetInfo.baseOffset +
+               (OrderBase - baseOffsetInfo.orderCorrection) * ChromaticStepsFullOctave;
     }
 
     private static void CheckConstructionArgumentValidity(NoteQuality quality, int octaveOrder,
