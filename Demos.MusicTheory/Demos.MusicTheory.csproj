@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>10</LangVersion>
+    <TargetFramework>net7.0</TargetFramework>
+    <LangVersion>11</LangVersion>
     <PackageVersion>1.0.0</PackageVersion>
-    <AssemblyVersion></AssemblyVersion>
-    <FileVersion></FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 

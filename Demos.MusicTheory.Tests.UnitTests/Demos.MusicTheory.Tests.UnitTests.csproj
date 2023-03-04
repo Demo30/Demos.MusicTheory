@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <StartupObject>Demos.MusicTheory.Tests.UnitTests.Program</StartupObject>
-    <LangVersion>10</LangVersion>
+    <LangVersion>11</LangVersion>
     <PackageId>Demos.MusicTheory.Tests.UnitTests</PackageId>
   </PropertyGroup>
 
