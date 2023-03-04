@@ -42,22 +42,31 @@ public class DiatonicChord : ElementaryChord
 
         for(var intervalIndex = 0; intervalIndex < chordStructure.OrderedIntervalStructure.Count; intervalIndex++)
         {
-            var interval = (Interval)chordStructure.OrderedIntervalStructure[intervalIndex];
+            var interval = chordStructure.OrderedIntervalStructure[intervalIndex];
             var referenceNote = result.Last();
             var nextNoteEnharmonics = _noteProviderFromNoteByInterval
                 .Value
                 .GetEnharmonics(referenceNote, interval, OneDimensionalDirection.RIGHT)
                 .Notes;
-            result.Add(GetPreferredNote(nextNoteEnharmonics, intervalIndex));
+            result.Add(GetPreferredNote(nextNoteEnharmonics, intervalIndex, baseNote));
         }
 
         return result;
     }
 
-    private Note GetPreferredNote(IEnumerable<Note> enharmonics, int intervalIndex)
+    private Note GetPreferredNote(IEnumerable<Note> enharmonics, int intervalIndex, Note baseNote)
     {
         var notes = enharmonics.ToArray();
-        return notes.Single(n => (int) n.Quality == ((int)BaseNote.Quality + ((intervalIndex + 1) * 2)) % Constants.ChromaticContextConstants.DiatonicStepsInOctave);
+        return notes.Single(n =>
+        {
+            var enharmonicNoteQualityIndex = (int)n.Quality;
+            
+            // the chord is assumed to be constructed from evenly distant notes in thirds
+            var expectedNoteQualityIndexBase = (int)baseNote.Quality + ((intervalIndex + 1) * 2);
+            var expectedNoteQualityIndex = ((expectedNoteQualityIndexBase - 1) % Constants.ChromaticContextConstants.DiatonicStepsInOctave) + 1;
+            
+            return enharmonicNoteQualityIndex == expectedNoteQualityIndex;
+        });
     }
 
     private static ChordStructure GetChordStructure(DiatonicChordQuality quality)
@@ -66,6 +75,8 @@ public class DiatonicChord : ElementaryChord
         {
             { DiatonicChordQuality.MajorTriad, new ChordStructure(new [] { new Interval(3, IntervalQuality.Major), new Interval(3, IntervalQuality.Minor) }) },
             { DiatonicChordQuality.MinorTriad, new ChordStructure(new [] { new Interval(3, IntervalQuality.Minor), new Interval(3, IntervalQuality.Major) }) },
+            { DiatonicChordQuality.AugmentedTriad, new ChordStructure(new [] { new Interval(3, IntervalQuality.Major), new Interval(3, IntervalQuality.Major) }) },
+            { DiatonicChordQuality.DiminishedTriad, new ChordStructure(new [] { new Interval(3, IntervalQuality.Minor), new Interval(3, IntervalQuality.Minor) }) },
         };
 
         return mappings[quality];

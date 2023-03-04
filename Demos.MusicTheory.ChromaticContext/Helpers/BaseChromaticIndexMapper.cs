@@ -95,6 +95,7 @@ internal static class BaseChromaticIndexMapper
         {NotationSymbols.Sharp, 1},
         {NotationSymbols.Flat, -1},
         {NotationSymbols.DoubleSharp, +2},
-        {NotationSymbols.DoubleFlat, -2}
+        {NotationSymbols.DoubleFlat, -2},
+        {NotationSymbols.TripleSharp, +3},
     };
 }

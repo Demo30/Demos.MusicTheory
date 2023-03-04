@@ -17,6 +17,7 @@ public enum NotationSymbols
     Flat,
     DoubleFlat,
     DoubleSharp,
+    TripleSharp,
     Natural,
     DottedNote,
 }

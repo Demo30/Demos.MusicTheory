@@ -28,13 +28,16 @@
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
 ⬛ Práce s akordy
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
-[❓] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat jejich skladbu v notách (C, E, G)
-	[| toto nakonec asi nechci << wait why?]
-[❓] Mít akord a dostat kolekci tónin, do kterých spadají
+[☑] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat jejich skladbu v notách (C, E, G)
+	[☑] minor, major triad
+	[☑] augmented, diminished triads
+	[🔲] seventh and other
+[✅] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat cluster jejích inverzí.
+	[🔲] To už tam zdá se je, ale potřeba ověřit
+[✅] Mít akord a dostat kolekci tónin, do kterých spadají
 	[✅ funkce pouze obaluje funkcionalitu získání tónin z kolekce not <= zde jde tedy pouze o získání not z akordu]
 [❓] Mít cluster plně identifikovaných not a dostat kolekci jim vyhovujících akordů
-	[| bude vyžadovat další zamyšlení, protože pojmeme-li akordy dostečně obecně, pak je nejasné, z jakého supersetu vybíráme]
-[ ] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat cluster jejích inverzí.
+	[bude vyžadovat další zamyšlení, protože pojmeme-li akordy dostečně obecně, pak je nejasné, z jakého supersetu vybíráme]
 
 
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖

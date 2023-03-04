@@ -26,7 +26,8 @@ public class ElementaryNote : IContentEqual<ElementaryNote>
         NotationSymbols.Sharp,
         NotationSymbols.Flat,
         NotationSymbols.DoubleSharp,
-        NotationSymbols.DoubleFlat
+        NotationSymbols.DoubleFlat,
+        NotationSymbols.TripleSharp
     };
 
     public ElementaryNote(NoteQuality quality, NotationSymbols modifier)
@@ -56,6 +57,7 @@ public class ElementaryNote : IContentEqual<ElementaryNote>
             NotationSymbols.Flat => "Flat",
             NotationSymbols.DoubleFlat => "Double flat",
             NotationSymbols.DoubleSharp => "Double sharp",
+            NotationSymbols.TripleSharp => "Triple sharp",
             _ => ""
         };
     }

@@ -45,7 +45,8 @@ internal class NoteProviderFromIndex : INoteProviderFromIndex
             NotationSymbols.Sharp,
             NotationSymbols.Flat,
             NotationSymbols.DoubleSharp,
-            NotationSymbols.DoubleFlat
+            NotationSymbols.DoubleFlat,
+            NotationSymbols.TripleSharp
         };
     }
 }

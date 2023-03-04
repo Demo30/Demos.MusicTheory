@@ -4,6 +4,6 @@ public enum DiatonicChordQuality
 {
     MajorTriad,
     MinorTriad,
-    // Augmented,
-    // Diminished
+    AugmentedTriad,
+    DiminishedTriad
 }
