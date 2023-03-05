@@ -24,7 +24,7 @@ public class ServicesTest
         var keys = ServicesManager.ServicesProvider.Services.Keys;
         
         // Then
-        keys.Should().HaveCount(4);
+        keys.Should().HaveCount(5); // TODO: this is kinda stupid, annotate with attribute maybe
     }
     
     [Test]
