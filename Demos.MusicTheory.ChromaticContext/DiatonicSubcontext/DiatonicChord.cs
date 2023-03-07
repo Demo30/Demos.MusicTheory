@@ -10,7 +10,7 @@ using Demos.MusicTheory.Services;
 
 namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext;
 
-public class DiatonicChord : ElementaryChord
+internal class DiatonicChord : ElementaryChord
 {
     private readonly Lazy<NoteProviderFromNoteByInterval> _noteProviderFromNoteByInterval;
     public DiatonicChordQuality Quality { get; }

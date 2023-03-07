@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net7.0</TargetFramework>
-    <StartupObject>Demos.MusicTheory.Tests.UnitTests.Program</StartupObject>
     <LangVersion>11</LangVersion>
     <PackageId>Demos.MusicTheory.Tests.UnitTests</PackageId>
   </PropertyGroup>

@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.IntegrationTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class DiatonicScalesProviderFromNoteClusterTest : TestBase
+internal class DiatonicScalesProviderFromNoteClusterTest : TestBase
 {
     private DiatonicScalesProviderFromNoteCluster _provider = null!;
     

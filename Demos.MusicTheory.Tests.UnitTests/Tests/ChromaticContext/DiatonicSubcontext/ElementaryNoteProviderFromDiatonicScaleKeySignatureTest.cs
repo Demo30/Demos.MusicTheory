@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Demos.MusicTheory.ChromaticContext;
+﻿using System.Linq;
 using Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 using Demos.MusicTheory.Commons;
 using FluentAssertions;
@@ -9,7 +7,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext.DiatonicSubcontext;
 
 [TestFixture]
-public class ElementaryNoteProviderFromDiatonicScaleKeySignatureTest
+internal class ElementaryNoteProviderFromDiatonicScaleKeySignatureTest
 {
     [Theory]
     [TestCase(KeySignatures.Simple, new[] {"C", "D", "E", "F", "G", "A", "B"})]

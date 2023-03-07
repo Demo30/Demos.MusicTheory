@@ -2,7 +2,7 @@
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 
-public class Note : NoteBase
+internal class Note : NoteBase
 {
     public int Order => OrderBase;
 

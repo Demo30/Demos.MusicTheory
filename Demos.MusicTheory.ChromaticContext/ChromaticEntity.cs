@@ -5,7 +5,7 @@ namespace Demos.MusicTheory.ChromaticContext;
 /// <summary>
 /// Basic chromatic entity. Instantiable on its own.
 /// </summary>
-public class ChromaticEntity : IContentEqual<ChromaticEntity>, IChromaticEntity
+internal class ChromaticEntity : IContentEqual<ChromaticEntity>, IChromaticEntity
 {
     public int ChromaticContextIndex { get; }
 

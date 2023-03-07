@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class IntervalSemitoneCountTest
+internal class IntervalSemitoneCountTest
 {
     [Theory]
     [TestCase(1, IntervalQuality.Perfect, 0)]

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using Demos.MusicTheory.ChromaticContext.Constants;
 using Demos.MusicTheory.Commons;
 using System.Collections.Generic;

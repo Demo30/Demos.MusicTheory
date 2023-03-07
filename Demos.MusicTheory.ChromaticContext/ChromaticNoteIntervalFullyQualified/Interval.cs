@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
 
-public class Interval : ElementaryInterval
+internal class Interval : ElementaryInterval
 {
     public IntervalQuality Quality { get; }
     

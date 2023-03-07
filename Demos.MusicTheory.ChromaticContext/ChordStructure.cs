@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Demos.MusicTheory.ChromaticContext;
 
-public class ChordStructure
+internal class ChordStructure
 {
     public IReadOnlyList<ElementaryInterval> OrderedIntervalStructure { get; }
 

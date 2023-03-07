@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
 
-public class IntervalEnharmonics : IChromaticIndexSpan
+internal class IntervalEnharmonics : IChromaticIndexSpan
 {
     public int ChromaticIndexSpan => Intervals.First().ChromaticIndexSpan;
 

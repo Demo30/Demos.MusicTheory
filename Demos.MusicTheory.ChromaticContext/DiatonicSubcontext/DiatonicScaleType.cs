@@ -1,6 +1,6 @@
 ﻿namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext;
 
-public enum DiatonicScaleType
+internal enum DiatonicScaleType
 {
     Major,
     Minor

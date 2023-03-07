@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 
-public class NoteEnharmonics : ChromaticEntity
+internal class NoteEnharmonics : ChromaticEntity
 {
     public Note[] Notes { get; }
 

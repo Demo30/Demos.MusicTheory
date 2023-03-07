@@ -2,7 +2,7 @@
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 
-public class NoteRange
+internal class NoteRange
 {
     public Note NoteStart { get; }
     public Note NoteEnd { get; }

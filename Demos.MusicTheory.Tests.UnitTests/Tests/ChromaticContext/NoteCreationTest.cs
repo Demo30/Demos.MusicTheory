@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class NoteCreationTest : TestBase
+internal class NoteCreationTest : TestBase
 {
     [Theory]
     [TestCase(NoteQuality.C, 0, NotationSymbols.None, 0)]

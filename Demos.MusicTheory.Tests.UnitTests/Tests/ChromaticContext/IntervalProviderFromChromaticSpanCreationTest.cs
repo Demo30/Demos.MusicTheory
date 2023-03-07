@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class IntervalProviderFromChromaticSpanCreationTest
+internal class IntervalProviderFromChromaticSpanCreationTest
 {
     [Theory]
     [TestCase(0, 1, IntervalQuality.Perfect)]

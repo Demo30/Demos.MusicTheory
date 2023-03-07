@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Demos.MusicTheory.ChromaticContext;
 
-public class ElementaryChord
+internal class ElementaryChord
 {
     public ChordStructure MainChordStructure { get; }
 

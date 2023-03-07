@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.IntegrationTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class NoteProviderFromIndexTest : TestBase
+internal class NoteProviderFromIndexTest : TestBase
 {
     private NoteProviderFromIndex _provider = null!;
 

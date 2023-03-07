@@ -1,6 +1,6 @@
 ﻿namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext;
 
-public enum DiatonicChordQuality
+internal enum DiatonicChordQuality
 {
     MajorTriad,
     MinorTriad,

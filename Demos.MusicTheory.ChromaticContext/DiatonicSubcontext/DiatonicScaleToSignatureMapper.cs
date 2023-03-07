@@ -3,7 +3,7 @@ using Demos.MusicTheory.Commons;
 
 namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext;
 
-public static class DiatonicScaleToSignatureMapper
+internal static class DiatonicScaleToSignatureMapper
 {
     private static Dictionary<DiatonicScale, KeySignatures> _map;
     

@@ -4,12 +4,12 @@ using NUnit.Framework;
 
 namespace Demos.MusicTheory.Tests.IntegrationTests;
 
-public class TestBase
+internal class TestBase
 {
     [TearDown]
     protected virtual void TearDown()
     {
-        Services.ServicesManager.ResetServiceProvider();
+        ServicesManager.ResetServiceProvider();
     }
     protected TestBase()
     {

@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class NoteProviderFromNoteBySpanTest : TestBase
+internal class NoteProviderFromNoteBySpanTest : TestBase
 {
     [Test]
     [TestCase(OneDimensionalDirection.RIGHT, 2)]

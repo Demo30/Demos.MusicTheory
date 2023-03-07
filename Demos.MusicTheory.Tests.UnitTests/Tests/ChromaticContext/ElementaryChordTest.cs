@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class ElementaryChordTest
+internal class ElementaryChordTest
 {
     [Test]
     public void WhenNullChordStructureIsSupplied_CtorThrowsError()

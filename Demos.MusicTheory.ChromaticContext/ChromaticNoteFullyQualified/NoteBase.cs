@@ -6,7 +6,7 @@ using static Demos.MusicTheory.ChromaticContext.Constants.ChromaticContextConsta
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 
-public abstract class NoteBase : IContentEqual<Note>, IChromaticEntity
+internal abstract class NoteBase : IContentEqual<Note>, IChromaticEntity
 {
     public abstract int ChromaticContextIndex { get; }
     protected NoteQuality QualityBase => _baseElementaryCharacteristic.Quality;

@@ -1,6 +1,6 @@
 ﻿namespace Demos.MusicTheory.ChromaticContext;
 
-public interface IChromaticIndexSpan
+internal interface IChromaticIndexSpan
 {
     public int ChromaticIndexSpan { get; }
 }

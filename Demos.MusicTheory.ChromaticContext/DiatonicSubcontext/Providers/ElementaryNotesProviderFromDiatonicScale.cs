@@ -5,7 +5,7 @@ using Demos.MusicTheory.Services;
 
 namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 
-public sealed class ElementaryNotesProviderFromDiatonicScale : IElementaryNotesProviderFromDiatonicScale
+internal sealed class ElementaryNotesProviderFromDiatonicScale : IElementaryNotesProviderFromDiatonicScale
 {
     private readonly Lazy<IElementaryNoteFromDiatonicScaleKeySignatureProvider> _provider;
 

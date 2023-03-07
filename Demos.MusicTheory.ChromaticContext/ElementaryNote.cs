@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Demos.MusicTheory.ChromaticContext;
 
-public class ElementaryNote : IContentEqual<ElementaryNote>
+internal class ElementaryNote : IContentEqual<ElementaryNote>
 {
     public NoteQuality Quality { get; }
 

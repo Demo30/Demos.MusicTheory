@@ -6,7 +6,7 @@ using Demos.MusicTheory.Services;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
 
-public class IntervalProviderFromNoteRange
+internal class IntervalProviderFromNoteRange
 {
     private readonly IntervalProviderFromIndexSpan _indexSpanProvider;
 

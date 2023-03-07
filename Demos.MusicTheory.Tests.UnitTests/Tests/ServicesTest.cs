@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.UnitTests.Tests;
 
 [TestFixture]
-public class ServicesTest
+internal class ServicesTest
 {
     [TearDown]
     public void TearDown()

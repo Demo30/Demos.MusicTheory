@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.IntegrationTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class NoteProviderFromIntervalRangeTest : TestBase
+internal class NoteProviderFromIntervalRangeTest : TestBase
 {
     private IntervalProviderFromNoteRange? _provider;
 

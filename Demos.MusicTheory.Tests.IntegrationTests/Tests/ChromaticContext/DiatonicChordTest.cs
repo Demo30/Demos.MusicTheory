@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.IntegrationTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class DiatonicChordTest : TestBase
+internal class DiatonicChordTest : TestBase
 {
     [SetUp]
     protected void SetUp()

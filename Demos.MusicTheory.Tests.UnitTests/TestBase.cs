@@ -2,7 +2,7 @@
 
 namespace Demos.MusicTheory.Tests.UnitTests;
 
-public class TestBase
+internal class TestBase
 {
     protected TestBase()
     {

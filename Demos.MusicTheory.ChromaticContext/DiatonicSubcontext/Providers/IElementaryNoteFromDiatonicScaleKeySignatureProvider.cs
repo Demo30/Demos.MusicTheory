@@ -3,7 +3,7 @@ using Demos.MusicTheory.Commons;
 
 namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 
-public interface IElementaryNoteFromDiatonicScaleKeySignatureProvider
+internal interface IElementaryNoteFromDiatonicScaleKeySignatureProvider
 {
     public IEnumerable<ElementaryNote> GetChromaticElementaryNotes(KeySignatures key);
 }

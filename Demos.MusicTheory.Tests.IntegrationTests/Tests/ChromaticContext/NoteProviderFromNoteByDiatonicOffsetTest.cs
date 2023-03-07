@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.IntegrationTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class NoteProviderFromNoteByDiatonicOffsetTest : TestBase
+internal class NoteProviderFromNoteByDiatonicOffsetTest : TestBase
 {
     private NoteProviderFromNoteByDiatonicOffset _provider = null!;
 

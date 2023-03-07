@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Demos.MusicTheory.Tests.IntegrationTests.Tests.ChromaticContext;
 
 [TestFixture]
-public class ElementaryNoteProviderFromDiatonicScale : TestBase
+internal class ElementaryNoteProviderFromDiatonicScale : TestBase
 {
     private ElementaryNotesProviderFromDiatonicScale _provider = null!;
 
