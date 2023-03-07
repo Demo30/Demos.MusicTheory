@@ -18,15 +18,13 @@ internal class NoteProviderFromNoteBySpan
         _providerFromIndex = providerFromIndex;
     }
 
-    public NoteEnharmonics GetEnharmonics(Note note, int chromaticIndexSpan,
-        OneDimensionalDirection direction)
+    public NoteEnharmonicsInternal GetEnharmonics(NoteInternal noteInternal, int chromaticIndexSpan, OneDimensionalDirection direction)
     {
-        return _providerFromIndex.GetEnharmonics(GetSpannedChromaticIndex(note, chromaticIndexSpan,
+        return _providerFromIndex.GetEnharmonics(GetSpannedChromaticIndex(noteInternal, chromaticIndexSpan,
             direction));
     }
 
-    private static int GetSpannedChromaticIndex(IChromaticEntity note, int chromaticIndexSpan,
-        OneDimensionalDirection direction)
+    private static int GetSpannedChromaticIndex(IChromaticEntity note, int chromaticIndexSpan, OneDimensionalDirection direction)
     {
         return note.ChromaticContextIndex +
                (direction == OneDimensionalDirection.RIGHT ? chromaticIndexSpan : -chromaticIndexSpan);

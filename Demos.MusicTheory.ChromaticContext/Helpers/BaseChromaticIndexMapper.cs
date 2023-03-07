@@ -13,25 +13,25 @@ internal static class BaseChromaticIndexMapper
 {
     private static bool IsInitialized => _map is not null;
 
-    private static Dictionary<(NoteQuality, NotationSymbols), (int baseOffset, int orderCorrection)> _map;
+    private static Dictionary<(NoteQualityInternal, NotationSymbols), (int baseOffset, int orderCorrection)> _map;
 
     public static void InitializeMapper()
     {
         _map = GetBaseChromaticIndexMap();
     }
 
-    public static (int baseOffset, int orderCorrection) GetBaseChromaticOffset(NoteQuality quality, NotationSymbols modifier, bool wrapAround = true)
+    public static (int baseOffset, int orderCorrection) GetBaseChromaticOffset(NoteQualityInternal qualityInternal, NotationSymbols modifier, bool wrapAround = true)
     {
         return IsInitialized
-            ? _map[(quality, modifier)]
+            ? _map[(qualityInternal, modifier)]
             : throw new ServiceInitializationException();
     }
 
-    private static Dictionary<(NoteQuality, NotationSymbols), (int baseOffset, int orderCorrection)> GetBaseChromaticIndexMap()
+    private static Dictionary<(NoteQualityInternal, NotationSymbols), (int baseOffset, int orderCorrection)> GetBaseChromaticIndexMap()
     {
-        var map = new Dictionary<(NoteQuality, NotationSymbols), (int baseOffset, int orderCorrection)>();
+        var map = new Dictionary<(NoteQualityInternal, NotationSymbols), (int baseOffset, int orderCorrection)>();
 
-        var qualities = Enum.GetValues<NoteQuality>().Where(quality => quality != NoteQuality.Unknown).ToList();
+        var qualities = Enum.GetValues<NoteQualityInternal>().Where(quality => quality != NoteQualityInternal.Unknown).ToList();
         var modifiers = ModifierChromaticCorrection.Keys.ToList();
 
         qualities
@@ -47,9 +47,9 @@ internal static class BaseChromaticIndexMapper
         return map;
     }
 
-    private static (int baseOffset, int orderCorrection) GetBaseOffset(NoteQuality quality, NotationSymbols modifier)
+    private static (int baseOffset, int orderCorrection) GetBaseOffset(NoteQualityInternal qualityInternal, NotationSymbols modifier)
     {
-        var baseOffset = GetBasicOffset(quality) - GetQualityOffsetCorrection(quality) + GetModifierCorrection(modifier);
+        var baseOffset = GetBasicOffset(qualityInternal) - GetQualityOffsetCorrection(qualityInternal) + GetModifierCorrection(modifier);
 
         var baseOffsetWithinOneScaleRange =
             baseOffset >= BaseIndex && baseOffset < ChromaticStepsFullOctave;
@@ -77,14 +77,14 @@ internal static class BaseChromaticIndexMapper
             : throw new InvalidOperationException("Invalid modifier supplied.");
     }
 
-    private static int GetQualityOffsetCorrection(NoteQuality quality)
+    private static int GetQualityOffsetCorrection(NoteQualityInternal qualityInternal)
     {
-        return (int) quality > (int) NoteQuality.E ? ChromaticStepsElementaryStep : 0;
+        return (int) qualityInternal > (int) NoteQualityInternal.E ? ChromaticStepsElementaryStep : 0;
     }
 
-    private static int GetBasicOffset(NoteQuality quality)
+    private static int GetBasicOffset(NoteQualityInternal qualityInternal)
     {
-        return (2 * ChromaticStepsElementaryStep) * ((int) quality - 1);
+        return (2 * ChromaticStepsElementaryStep) * ((int) qualityInternal - 1);
     }
 
     public static int BaseIndex => 0;

@@ -10,44 +10,44 @@ namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext;
 internal class NoteCreationTest : TestBase
 {
     [Theory]
-    [TestCase(NoteQuality.C, 0, NotationSymbols.None, 0)]
-    [TestCase(NoteQuality.C, 0, NotationSymbols.Sharp, 1)]
-    [TestCase(NoteQuality.C, 0, NotationSymbols.DoubleSharp, 2)]
-    [TestCase(NoteQuality.D, 0, NotationSymbols.Flat, 1)]
-    [TestCase(NoteQuality.D, 0, NotationSymbols.None, 2)]
-    [TestCase(NoteQuality.D, 0, NotationSymbols.Sharp, 3)]
-    [TestCase(NoteQuality.B, 0, NotationSymbols.None, 11)]
-    [TestCase(NoteQuality.C, 1, NotationSymbols.Flat, 11)]
-    [TestCase(NoteQuality.C, 1, NotationSymbols.None, 12)]
-    [TestCase(NoteQuality.E, 1, NotationSymbols.None, 16)]
-    [TestCase(NoteQuality.D, 5, NotationSymbols.Sharp, 63)]
+    [TestCase(NoteQualityInternal.C, 0, NotationSymbols.None, 0)]
+    [TestCase(NoteQualityInternal.C, 0, NotationSymbols.Sharp, 1)]
+    [TestCase(NoteQualityInternal.C, 0, NotationSymbols.DoubleSharp, 2)]
+    [TestCase(NoteQualityInternal.D, 0, NotationSymbols.Flat, 1)]
+    [TestCase(NoteQualityInternal.D, 0, NotationSymbols.None, 2)]
+    [TestCase(NoteQualityInternal.D, 0, NotationSymbols.Sharp, 3)]
+    [TestCase(NoteQualityInternal.B, 0, NotationSymbols.None, 11)]
+    [TestCase(NoteQualityInternal.C, 1, NotationSymbols.Flat, 11)]
+    [TestCase(NoteQualityInternal.C, 1, NotationSymbols.None, 12)]
+    [TestCase(NoteQualityInternal.E, 1, NotationSymbols.None, 16)]
+    [TestCase(NoteQualityInternal.D, 5, NotationSymbols.Sharp, 63)]
     public void TestChromaticNoteNormalNoteCreation(
-        NoteQuality elementaryNote,
+        NoteQualityInternal elementaryNote,
         int octaveOrder,
         NotationSymbols modifier,
         int chromaticIndex)
     {
         // When
-        var chromaticNote = new Note(elementaryNote, octaveOrder, modifier);
+        var chromaticNote = new NoteInternal(elementaryNote, octaveOrder, modifier);
 
         // Then
         Assert.IsNotNull(chromaticNote);
-        Assert.AreEqual(elementaryNote, chromaticNote.Quality);
+        Assert.AreEqual(elementaryNote, chromaticNote.QualityInternal);
         Assert.AreEqual(chromaticIndex, chromaticNote.ChromaticContextIndex);
         Assert.AreEqual(modifier, chromaticNote.Modifier);
     }
 
-    [TestCase(NoteQuality.E, -1, NotationSymbols.None)] // invalid octave order
-    [TestCase(NoteQuality.E, 1, NotationSymbols.WholeNote)] // invalid notation symbol
+    [TestCase(NoteQualityInternal.E, -1, NotationSymbols.None)] // invalid octave order
+    [TestCase(NoteQualityInternal.E, 1, NotationSymbols.WholeNote)] // invalid notation symbol
     public void TestChromaticNoteInvalidNoteCreation(
-        NoteQuality elementaryNote,
+        NoteQualityInternal elementaryNote,
         int octaveOrder,
         NotationSymbols modifier)
     {
         // When
         void InvalidConstruction()
         {
-            new Note(elementaryNote, octaveOrder, modifier);
+            new NoteInternal(elementaryNote, octaveOrder, modifier);
         }
 
         // Then

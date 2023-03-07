@@ -23,58 +23,58 @@ internal class NoteProviderFromIntervalRangeTest : TestBase
     [Theory]
     [TestCaseSource(nameof(GetTestCases))]
     public void ValidResults(
-        NoteQuality quality1, int octaveOrder1, NotationSymbols modifier1,
-        NoteQuality quality2, int octaveOrder2, NotationSymbols modifier2,
-        Interval expectedInterval)
+        NoteQualityInternal quality1, int octaveOrder1, NotationSymbols modifier1,
+        NoteQualityInternal quality2, int octaveOrder2, NotationSymbols modifier2,
+        IntervalInternal expectedIntervalInternal)
     {
         // Given
-        var range = new NoteRange(
-            new Note(quality1, octaveOrder1, modifier1),
-            new Note(quality2, octaveOrder2, modifier2));
+        var range = new NoteRangeInternal(
+            new NoteInternal(quality1, octaveOrder1, modifier1),
+            new NoteInternal(quality2, octaveOrder2, modifier2));
 
         // When
         var result = _provider!.GetIntervals(range);
 
         // Then
         result.Should().NotBeNull();
-        result.Should().BeEquivalentTo(expectedInterval);
+        result.Should().BeEquivalentTo(expectedIntervalInternal);
     }
 
     private static IEnumerable<TestCaseData> GetTestCases()
     {
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.None, NoteQuality.C, 1,
-            NotationSymbols.None, new Interval(1, IntervalQuality.Perfect));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.None, NoteQuality.C, 1,
-            NotationSymbols.Sharp, new Interval(1, IntervalQuality.Augmented));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.Sharp, NoteQuality.C, 1,
-            NotationSymbols.Sharp, new Interval(1, IntervalQuality.Perfect));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.Sharp, NoteQuality.D, 1,
-            NotationSymbols.None, new Interval(2, IntervalQuality.Minor));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.Sharp, NoteQuality.D, 1,
-            NotationSymbols.Sharp, new Interval(2, IntervalQuality.Major));
-        yield return new TestCaseData(NoteQuality.D, 2, NotationSymbols.None, NoteQuality.E, 2,
-            NotationSymbols.None, new Interval(2, IntervalQuality.Major));
-        yield return new TestCaseData(NoteQuality.E, 1, NotationSymbols.None, NoteQuality.F, 1,
-            NotationSymbols.None, new Interval(2, IntervalQuality.Minor));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.None, NoteQuality.C, 2,
-            NotationSymbols.None, new Interval(8, IntervalQuality.Perfect));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.None, NoteQuality.D, 2,
-            NotationSymbols.Flat, new Interval(9, IntervalQuality.Minor));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.None, NoteQuality.D, 2,
-            NotationSymbols.None, new Interval(9, IntervalQuality.Major));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.None, NoteQuality.F, 1,
-            NotationSymbols.None, new Interval(4, IntervalQuality.Perfect));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.None, NoteQuality.F, 2,
-            NotationSymbols.None, new Interval(11, IntervalQuality.Perfect));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.None, NoteQuality.F, 2,
-            NotationSymbols.Sharp, new Interval(11, IntervalQuality.Augmented));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.None, NoteQuality.G, 1,
-            NotationSymbols.None, new Interval(5, IntervalQuality.Perfect));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.None, NoteQuality.G, 2,
-            NotationSymbols.None, new Interval(12, IntervalQuality.Perfect));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.None, NoteQuality.G, 2,
-            NotationSymbols.Sharp, new Interval(12, IntervalQuality.Augmented));
-        yield return new TestCaseData(NoteQuality.C, 1, NotationSymbols.None, NoteQuality.A, 2,
-            NotationSymbols.None, new Interval(13, IntervalQuality.Major));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.None, NoteQualityInternal.C, 1,
+            NotationSymbols.None, new IntervalInternal(1, IntervalQualityInternal.Perfect));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.None, NoteQualityInternal.C, 1,
+            NotationSymbols.Sharp, new IntervalInternal(1, IntervalQualityInternal.Augmented));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.Sharp, NoteQualityInternal.C, 1,
+            NotationSymbols.Sharp, new IntervalInternal(1, IntervalQualityInternal.Perfect));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.Sharp, NoteQualityInternal.D, 1,
+            NotationSymbols.None, new IntervalInternal(2, IntervalQualityInternal.Minor));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.Sharp, NoteQualityInternal.D, 1,
+            NotationSymbols.Sharp, new IntervalInternal(2, IntervalQualityInternal.Major));
+        yield return new TestCaseData(NoteQualityInternal.D, 2, NotationSymbols.None, NoteQualityInternal.E, 2,
+            NotationSymbols.None, new IntervalInternal(2, IntervalQualityInternal.Major));
+        yield return new TestCaseData(NoteQualityInternal.E, 1, NotationSymbols.None, NoteQualityInternal.F, 1,
+            NotationSymbols.None, new IntervalInternal(2, IntervalQualityInternal.Minor));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.None, NoteQualityInternal.C, 2,
+            NotationSymbols.None, new IntervalInternal(8, IntervalQualityInternal.Perfect));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.None, NoteQualityInternal.D, 2,
+            NotationSymbols.Flat, new IntervalInternal(9, IntervalQualityInternal.Minor));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.None, NoteQualityInternal.D, 2,
+            NotationSymbols.None, new IntervalInternal(9, IntervalQualityInternal.Major));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.None, NoteQualityInternal.F, 1,
+            NotationSymbols.None, new IntervalInternal(4, IntervalQualityInternal.Perfect));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.None, NoteQualityInternal.F, 2,
+            NotationSymbols.None, new IntervalInternal(11, IntervalQualityInternal.Perfect));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.None, NoteQualityInternal.F, 2,
+            NotationSymbols.Sharp, new IntervalInternal(11, IntervalQualityInternal.Augmented));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.None, NoteQualityInternal.G, 1,
+            NotationSymbols.None, new IntervalInternal(5, IntervalQualityInternal.Perfect));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.None, NoteQualityInternal.G, 2,
+            NotationSymbols.None, new IntervalInternal(12, IntervalQualityInternal.Perfect));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.None, NoteQualityInternal.G, 2,
+            NotationSymbols.Sharp, new IntervalInternal(12, IntervalQualityInternal.Augmented));
+        yield return new TestCaseData(NoteQualityInternal.C, 1, NotationSymbols.None, NoteQualityInternal.A, 2,
+            NotationSymbols.None, new IntervalInternal(13, IntervalQualityInternal.Major));
     }
 }

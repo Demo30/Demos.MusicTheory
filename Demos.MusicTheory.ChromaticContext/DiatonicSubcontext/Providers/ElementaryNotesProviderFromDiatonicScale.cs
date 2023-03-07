@@ -19,18 +19,18 @@ internal sealed class ElementaryNotesProviderFromDiatonicScale : IElementaryNote
         _provider = provider;
     }
     
-    public IEnumerable<ElementaryNote> GetChromaticElementaryNotes(DiatonicScale scale)
+    public IEnumerable<ElementaryNoteInternal> GetChromaticElementaryNotes(DiatonicScale scale)
     {
         var notes = _provider.Value.GetChromaticElementaryNotes(DiatonicScaleToSignatureMapper.GetSignature(scale))
-            .OrderBy(x => (int)x.Quality)
+            .OrderBy(x => (int)x.QualityInternal)
             .ToArray();
 
         var tonicNoteIndex = Array.IndexOf(notes,
-            notes.Single(x => x.Quality == scale.Quality && x.Modifier == scale.Modifier));
+            notes.Single(x => x.QualityInternal == scale.QualityInternal && x.Modifier == scale.Modifier));
 
         return Enumerable.Range(0, Constants.ChromaticContextConstants.DiatonicStepsInOctave)
             .Aggregate(
-            new List<ElementaryNote>(), (list, index) =>
+            new List<ElementaryNoteInternal>(), (list, index) =>
             {
                 list.Add(notes[(index + tonicNoteIndex) % Constants.ChromaticContextConstants.DiatonicStepsInOctave]);
                 return list;

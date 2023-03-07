@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace Demos.MusicTheory.ChromaticContext;
 
-internal class ElementaryNote : IContentEqual<ElementaryNote>
+internal class ElementaryNoteInternal : IContentEqual<ElementaryNoteInternal>
 {
-    public NoteQuality Quality { get; }
+    public NoteQualityInternal QualityInternal { get; }
 
     public NotationSymbols Modifier
     {
@@ -30,20 +30,20 @@ internal class ElementaryNote : IContentEqual<ElementaryNote>
         NotationSymbols.TripleSharp
     };
 
-    public ElementaryNote(NoteQuality quality, NotationSymbols modifier)
+    public ElementaryNoteInternal(NoteQualityInternal qualityInternal, NotationSymbols modifier)
     {
-        Quality = quality;
+        QualityInternal = qualityInternal;
         Modifier = modifier;
     }
 
-    public bool IsEqualByContent(ElementaryNote comparedObject)
+    public bool IsEqualByContent(ElementaryNoteInternal comparedObject)
     {
-        return Quality == comparedObject.Quality && Modifier == comparedObject.Modifier;
+        return QualityInternal == comparedObject.QualityInternal && Modifier == comparedObject.Modifier;
     }
 
     public override string ToString()
     {
-        return $"{Quality}{ModifierToString(Modifier)}";
+        return $"{QualityInternal}{ModifierToString(Modifier)}";
     }
 
     private static string ModifierToString(NotationSymbols modifier)

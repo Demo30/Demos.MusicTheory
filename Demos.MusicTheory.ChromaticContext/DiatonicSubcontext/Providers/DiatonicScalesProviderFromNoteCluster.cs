@@ -20,14 +20,14 @@ internal class DiatonicScalesProviderFromNoteCluster
         _provider = provider;
     }
 
-    public IEnumerable<DiatonicScale> GetDiatonicScales(IEnumerable<Note> notes)
+    public IEnumerable<DiatonicScale> GetDiatonicScales(IEnumerable<NoteInternal> notes)
     {
-        return GetDiatonicScales(notes.Select(n => new ElementaryNote(n.Quality, n.Modifier)));
+        return GetDiatonicScales(notes.Select(n => new ElementaryNoteInternal(n.QualityInternal, n.Modifier)));
     }
 
-    public IEnumerable<DiatonicScale> GetDiatonicScales(IEnumerable<ElementaryNote> elementaryNotes)
+    public IEnumerable<DiatonicScale> GetDiatonicScales(IEnumerable<ElementaryNoteInternal> elementaryNotes)
     {
-        var suppliedNotes = elementaryNotes?.ToArray() ?? Array.Empty<ElementaryNote>();
+        var suppliedNotes = elementaryNotes?.ToArray() ?? Array.Empty<ElementaryNoteInternal>();
         
         if (!suppliedNotes.Any())
         {

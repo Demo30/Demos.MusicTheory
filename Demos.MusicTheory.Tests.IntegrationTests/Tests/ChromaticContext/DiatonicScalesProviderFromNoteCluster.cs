@@ -23,7 +23,7 @@ internal class DiatonicScalesProviderFromNoteClusterTest : TestBase
 
     [Test]
     [TestCaseSource(nameof(GetTestCases))]
-    public void ShouldReturnExpectedDiatonicScalesBasedOnSuppliedElementaryNotes(IEnumerable<ElementaryNote> elementaryNotes, IEnumerable<DiatonicScale> expectedScales)
+    public void ShouldReturnExpectedDiatonicScalesBasedOnSuppliedElementaryNotes(IEnumerable<ElementaryNoteInternal> elementaryNotes, IEnumerable<DiatonicScale> expectedScales)
     {
         // Given
 
@@ -43,11 +43,11 @@ internal class DiatonicScalesProviderFromNoteClusterTest : TestBase
     
     [Test]
     [TestCaseSource(nameof(GetTestCases))]
-    public void ShouldReturnExpectedDiatonicScalesBasedOnSuppliedFullyQualifiedNotes(IEnumerable<ElementaryNote> elementaryNotes, IEnumerable<DiatonicScale> expectedScales)
+    public void ShouldReturnExpectedDiatonicScalesBasedOnSuppliedFullyQualifiedNotes(IEnumerable<ElementaryNoteInternal> elementaryNotes, IEnumerable<DiatonicScale> expectedScales)
     {
         // Given
         var fullyQualifiedNotes = elementaryNotes
-            .Select(x => new Note(x.Quality, 3, x.Modifier))
+            .Select(x => new NoteInternal(x.QualityInternal, 3, x.Modifier))
             .ToArray();
 
         // When
@@ -66,58 +66,58 @@ internal class DiatonicScalesProviderFromNoteClusterTest : TestBase
 
     private static IEnumerable<TestCaseData> GetTestCases()
     {
-        yield return new TestCaseData(Array.Empty<ElementaryNote>(), Array.Empty<DiatonicScale>())
+        yield return new TestCaseData(Array.Empty<ElementaryNoteInternal>(), Array.Empty<DiatonicScale>())
             .SetName("Empty set of notes should return empty set of fitting diatonic scales.");
 
         yield return new TestCaseData(
             new[]
             {
-                new ElementaryNote(NoteQuality.C, NotationSymbols.None),
-                new ElementaryNote(NoteQuality.D, NotationSymbols.None),
-                new ElementaryNote(NoteQuality.E, NotationSymbols.None),
-                new ElementaryNote(NoteQuality.F, NotationSymbols.None),
-                new ElementaryNote(NoteQuality.G, NotationSymbols.None),
-                new ElementaryNote(NoteQuality.A, NotationSymbols.None),
-                new ElementaryNote(NoteQuality.B, NotationSymbols.None),
+                new ElementaryNoteInternal(NoteQualityInternal.C, NotationSymbols.None),
+                new ElementaryNoteInternal(NoteQualityInternal.D, NotationSymbols.None),
+                new ElementaryNoteInternal(NoteQualityInternal.E, NotationSymbols.None),
+                new ElementaryNoteInternal(NoteQualityInternal.F, NotationSymbols.None),
+                new ElementaryNoteInternal(NoteQualityInternal.G, NotationSymbols.None),
+                new ElementaryNoteInternal(NoteQualityInternal.A, NotationSymbols.None),
+                new ElementaryNoteInternal(NoteQualityInternal.B, NotationSymbols.None),
             },
             new[]
             {
-                new DiatonicScale(NoteQuality.C, NotationSymbols.None, DiatonicScaleType.Major),
-                new DiatonicScale(NoteQuality.A, NotationSymbols.None, DiatonicScaleType.Minor)
+                new DiatonicScale(NoteQualityInternal.C, NotationSymbols.None, DiatonicScaleType.Major),
+                new DiatonicScale(NoteQualityInternal.A, NotationSymbols.None, DiatonicScaleType.Minor)
             }
         ).SetName("All basic notes without accidents should be valid for C-major and A-minor scale");
 
         yield return new TestCaseData(
             new[]
             {
-                new ElementaryNote(NoteQuality.C, NotationSymbols.None),
+                new ElementaryNoteInternal(NoteQualityInternal.C, NotationSymbols.None),
             },
             new[]
             {
-                new DiatonicScale(NoteQuality.C, NotationSymbols.None, DiatonicScaleType.Major),
-                new DiatonicScale(NoteQuality.G, NotationSymbols.None, DiatonicScaleType.Major),
+                new DiatonicScale(NoteQualityInternal.C, NotationSymbols.None, DiatonicScaleType.Major),
+                new DiatonicScale(NoteQualityInternal.G, NotationSymbols.None, DiatonicScaleType.Major),
                 // See C#/Db possible confusion - but this should be correct, Db-Mj has C, but C#-Mj does not
-                new DiatonicScale(NoteQuality.D, NotationSymbols.Flat, DiatonicScaleType.Major),
-                new DiatonicScale(NoteQuality.A, NotationSymbols.Flat, DiatonicScaleType.Major),
-                new DiatonicScale(NoteQuality.E, NotationSymbols.Flat, DiatonicScaleType.Major),
-                new DiatonicScale(NoteQuality.B, NotationSymbols.Flat, DiatonicScaleType.Major),
-                new DiatonicScale(NoteQuality.F, NotationSymbols.None, DiatonicScaleType.Major),
+                new DiatonicScale(NoteQualityInternal.D, NotationSymbols.Flat, DiatonicScaleType.Major),
+                new DiatonicScale(NoteQualityInternal.A, NotationSymbols.Flat, DiatonicScaleType.Major),
+                new DiatonicScale(NoteQualityInternal.E, NotationSymbols.Flat, DiatonicScaleType.Major),
+                new DiatonicScale(NoteQualityInternal.B, NotationSymbols.Flat, DiatonicScaleType.Major),
+                new DiatonicScale(NoteQualityInternal.F, NotationSymbols.None, DiatonicScaleType.Major),
                 
-                new DiatonicScale(NoteQuality.A, NotationSymbols.None, DiatonicScaleType.Minor),
-                new DiatonicScale(NoteQuality.E, NotationSymbols.None, DiatonicScaleType.Minor),
-                new DiatonicScale(NoteQuality.B, NotationSymbols.Flat, DiatonicScaleType.Minor),
-                new DiatonicScale(NoteQuality.F, NotationSymbols.None, DiatonicScaleType.Minor),
-                new DiatonicScale(NoteQuality.C, NotationSymbols.None, DiatonicScaleType.Minor),
-                new DiatonicScale(NoteQuality.G, NotationSymbols.None, DiatonicScaleType.Minor),
-                new DiatonicScale(NoteQuality.D, NotationSymbols.None, DiatonicScaleType.Minor),
+                new DiatonicScale(NoteQualityInternal.A, NotationSymbols.None, DiatonicScaleType.Minor),
+                new DiatonicScale(NoteQualityInternal.E, NotationSymbols.None, DiatonicScaleType.Minor),
+                new DiatonicScale(NoteQualityInternal.B, NotationSymbols.Flat, DiatonicScaleType.Minor),
+                new DiatonicScale(NoteQualityInternal.F, NotationSymbols.None, DiatonicScaleType.Minor),
+                new DiatonicScale(NoteQualityInternal.C, NotationSymbols.None, DiatonicScaleType.Minor),
+                new DiatonicScale(NoteQualityInternal.G, NotationSymbols.None, DiatonicScaleType.Minor),
+                new DiatonicScale(NoteQualityInternal.D, NotationSymbols.None, DiatonicScaleType.Minor),
             }
         ).SetName("Natural C note should match many scales.");
         
         yield return new TestCaseData(
             new[]
             {
-                new ElementaryNote(NoteQuality.C, NotationSymbols.None),
-                new ElementaryNote(NoteQuality.C, NotationSymbols.Sharp),
+                new ElementaryNoteInternal(NoteQualityInternal.C, NotationSymbols.None),
+                new ElementaryNoteInternal(NoteQualityInternal.C, NotationSymbols.Sharp),
             },
             Array.Empty<DiatonicScale>()
         ).SetName("Self-conflicting notes should not match any diatonic scale.");
@@ -125,16 +125,16 @@ internal class DiatonicScalesProviderFromNoteClusterTest : TestBase
         yield return new TestCaseData(
             new[]
             {
-                new ElementaryNote(NoteQuality.C, NotationSymbols.None),
-                new ElementaryNote(NoteQuality.B, NotationSymbols.Flat),
-                new ElementaryNote(NoteQuality.D, NotationSymbols.Flat),
+                new ElementaryNoteInternal(NoteQualityInternal.C, NotationSymbols.None),
+                new ElementaryNoteInternal(NoteQualityInternal.B, NotationSymbols.Flat),
+                new ElementaryNoteInternal(NoteQualityInternal.D, NotationSymbols.Flat),
             },
             new[]
             {
-                new DiatonicScale(NoteQuality.A, NotationSymbols.Flat, DiatonicScaleType.Major),
-                new DiatonicScale(NoteQuality.F, NotationSymbols.None, DiatonicScaleType.Minor),
-                new DiatonicScale(NoteQuality.D, NotationSymbols.Flat, DiatonicScaleType.Major),
-                new DiatonicScale(NoteQuality.B, NotationSymbols.Flat, DiatonicScaleType.Minor),
+                new DiatonicScale(NoteQualityInternal.A, NotationSymbols.Flat, DiatonicScaleType.Major),
+                new DiatonicScale(NoteQualityInternal.F, NotationSymbols.None, DiatonicScaleType.Minor),
+                new DiatonicScale(NoteQualityInternal.D, NotationSymbols.Flat, DiatonicScaleType.Major),
+                new DiatonicScale(NoteQualityInternal.B, NotationSymbols.Flat, DiatonicScaleType.Minor),
             }
         );
     }

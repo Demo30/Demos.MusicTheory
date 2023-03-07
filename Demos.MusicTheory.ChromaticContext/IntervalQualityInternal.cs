@@ -1,6 +1,6 @@
 ﻿namespace Demos.MusicTheory.ChromaticContext;
 
-internal enum IntervalQuality
+internal enum IntervalQualityInternal
 {
     Unknown = 0,
     Perfect,

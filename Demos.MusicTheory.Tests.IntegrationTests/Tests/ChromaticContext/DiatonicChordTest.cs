@@ -15,12 +15,12 @@ internal class DiatonicChordTest : TestBase
     protected void SetUp()
     {
         RegisterService<NoteProviderFromIndex>();
-        RegisterService<NoteProviderFromNoteByInterval>();
+        RegisterService<NoteProviderFromNoteBySpan>();
     }
 
     [Test]
     [TestCaseSource(nameof(GetTestCases))]
-    public void DiatonicChordMainNotesTest(DiatonicChord diatonicChord, List<Note> expectedMainChordNotes)
+    public void DiatonicChordMainNotesTest(DiatonicChord diatonicChord, List<NoteInternal> expectedMainChordNotes)
     {
         // Given
         
@@ -34,165 +34,165 @@ internal class DiatonicChordTest : TestBase
     private static IEnumerable<TestCaseData> GetTestCases()
     {
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.C, 1, NotationSymbols.None), DiatonicChordQuality.MajorTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.C, 1, NotationSymbols.None), DiatonicChordQuality.MajorTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.C, 1, NotationSymbols.None),
-                new (NoteQuality.E, 1, NotationSymbols.None),
-                new (NoteQuality.G, 1, NotationSymbols.None)
+                new (NoteQualityInternal.C, 1, NotationSymbols.None),
+                new (NoteQualityInternal.E, 1, NotationSymbols.None),
+                new (NoteQualityInternal.G, 1, NotationSymbols.None)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.C, 1, NotationSymbols.Sharp), DiatonicChordQuality.MajorTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.C, 1, NotationSymbols.Sharp), DiatonicChordQuality.MajorTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.C, 1, NotationSymbols.Sharp),
-                new (NoteQuality.E, 1, NotationSymbols.Sharp),
-                new (NoteQuality.G, 1, NotationSymbols.Sharp)
+                new (NoteQualityInternal.C, 1, NotationSymbols.Sharp),
+                new (NoteQualityInternal.E, 1, NotationSymbols.Sharp),
+                new (NoteQualityInternal.G, 1, NotationSymbols.Sharp)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.D, 1, NotationSymbols.Flat), DiatonicChordQuality.MajorTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.D, 1, NotationSymbols.Flat), DiatonicChordQuality.MajorTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.D, 1, NotationSymbols.Flat),
-                new (NoteQuality.F, 1, NotationSymbols.None),
-                new (NoteQuality.A, 1, NotationSymbols.Flat)
+                new (NoteQualityInternal.D, 1, NotationSymbols.Flat),
+                new (NoteQualityInternal.F, 1, NotationSymbols.None),
+                new (NoteQualityInternal.A, 1, NotationSymbols.Flat)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.D, 1, NotationSymbols.None), DiatonicChordQuality.MajorTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.D, 1, NotationSymbols.None), DiatonicChordQuality.MajorTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.D, 1, NotationSymbols.None),
-                new (NoteQuality.F, 1, NotationSymbols.Sharp),
-                new (NoteQuality.A, 1, NotationSymbols.None)
+                new (NoteQualityInternal.D, 1, NotationSymbols.None),
+                new (NoteQualityInternal.F, 1, NotationSymbols.Sharp),
+                new (NoteQualityInternal.A, 1, NotationSymbols.None)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.D, 1, NotationSymbols.Sharp), DiatonicChordQuality.MajorTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.D, 1, NotationSymbols.Sharp), DiatonicChordQuality.MajorTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.D, 1, NotationSymbols.Sharp),
-                new (NoteQuality.F, 1, NotationSymbols.DoubleSharp),
-                new (NoteQuality.A, 1, NotationSymbols.Sharp)
+                new (NoteQualityInternal.D, 1, NotationSymbols.Sharp),
+                new (NoteQualityInternal.F, 1, NotationSymbols.DoubleSharp),
+                new (NoteQualityInternal.A, 1, NotationSymbols.Sharp)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.C, 1, NotationSymbols.None), DiatonicChordQuality.MinorTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.C, 1, NotationSymbols.None), DiatonicChordQuality.MinorTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.C, 1, NotationSymbols.None),
-                new (NoteQuality.E, 1, NotationSymbols.Flat),
-                new (NoteQuality.G, 1, NotationSymbols.None)
+                new (NoteQualityInternal.C, 1, NotationSymbols.None),
+                new (NoteQualityInternal.E, 1, NotationSymbols.Flat),
+                new (NoteQualityInternal.G, 1, NotationSymbols.None)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.C, 1, NotationSymbols.None), DiatonicChordQuality.DiminishedTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.C, 1, NotationSymbols.None), DiatonicChordQuality.DiminishedTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.C, 1, NotationSymbols.None),
-                new (NoteQuality.E, 1, NotationSymbols.Flat),
-                new (NoteQuality.G, 1, NotationSymbols.Flat)
+                new (NoteQualityInternal.C, 1, NotationSymbols.None),
+                new (NoteQualityInternal.E, 1, NotationSymbols.Flat),
+                new (NoteQualityInternal.G, 1, NotationSymbols.Flat)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.D, 1, NotationSymbols.None), DiatonicChordQuality.DiminishedTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.D, 1, NotationSymbols.None), DiatonicChordQuality.DiminishedTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.D, 1, NotationSymbols.None),
-                new (NoteQuality.F, 1, NotationSymbols.None),
-                new (NoteQuality.A, 1, NotationSymbols.Flat)
+                new (NoteQualityInternal.D, 1, NotationSymbols.None),
+                new (NoteQualityInternal.F, 1, NotationSymbols.None),
+                new (NoteQualityInternal.A, 1, NotationSymbols.Flat)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.E, 1, NotationSymbols.Sharp), DiatonicChordQuality.DiminishedTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.E, 1, NotationSymbols.Sharp), DiatonicChordQuality.DiminishedTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.E, 1, NotationSymbols.Sharp),
-                new (NoteQuality.G, 1, NotationSymbols.Sharp),
-                new (NoteQuality.B, 1, NotationSymbols.None)
+                new (NoteQualityInternal.E, 1, NotationSymbols.Sharp),
+                new (NoteQualityInternal.G, 1, NotationSymbols.Sharp),
+                new (NoteQualityInternal.B, 1, NotationSymbols.None)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.E, 1, NotationSymbols.Sharp), DiatonicChordQuality.DiminishedTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.E, 1, NotationSymbols.Sharp), DiatonicChordQuality.DiminishedTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.E, 1, NotationSymbols.Sharp),
-                new (NoteQuality.G, 1, NotationSymbols.Sharp),
-                new (NoteQuality.B, 1, NotationSymbols.None)
+                new (NoteQualityInternal.E, 1, NotationSymbols.Sharp),
+                new (NoteQualityInternal.G, 1, NotationSymbols.Sharp),
+                new (NoteQualityInternal.B, 1, NotationSymbols.None)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.G, 1, NotationSymbols.None), DiatonicChordQuality.DiminishedTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.G, 1, NotationSymbols.None), DiatonicChordQuality.DiminishedTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.G, 1, NotationSymbols.None),
-                new (NoteQuality.B, 1, NotationSymbols.Flat),
-                new (NoteQuality.D, 2, NotationSymbols.Flat)
+                new (NoteQualityInternal.G, 1, NotationSymbols.None),
+                new (NoteQualityInternal.B, 1, NotationSymbols.Flat),
+                new (NoteQualityInternal.D, 2, NotationSymbols.Flat)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.A, 1, NotationSymbols.Sharp), DiatonicChordQuality.DiminishedTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.A, 1, NotationSymbols.Sharp), DiatonicChordQuality.DiminishedTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.A, 1, NotationSymbols.Sharp),
-                new (NoteQuality.C, 2, NotationSymbols.Sharp),
-                new (NoteQuality.E, 2, NotationSymbols.None)
+                new (NoteQualityInternal.A, 1, NotationSymbols.Sharp),
+                new (NoteQualityInternal.C, 2, NotationSymbols.Sharp),
+                new (NoteQualityInternal.E, 2, NotationSymbols.None)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.F, 1, NotationSymbols.Sharp), DiatonicChordQuality.DiminishedTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.F, 1, NotationSymbols.Sharp), DiatonicChordQuality.DiminishedTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.F, 1, NotationSymbols.Sharp),
-                new (NoteQuality.A, 1, NotationSymbols.None),
-                new (NoteQuality.C, 2, NotationSymbols.None)
+                new (NoteQualityInternal.F, 1, NotationSymbols.Sharp),
+                new (NoteQualityInternal.A, 1, NotationSymbols.None),
+                new (NoteQualityInternal.C, 2, NotationSymbols.None)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.C, 1, NotationSymbols.None), DiatonicChordQuality.AugmentedTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.C, 1, NotationSymbols.None), DiatonicChordQuality.AugmentedTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.C, 1, NotationSymbols.None),
-                new (NoteQuality.E, 1, NotationSymbols.None),
-                new (NoteQuality.G, 1, NotationSymbols.Sharp)
+                new (NoteQualityInternal.C, 1, NotationSymbols.None),
+                new (NoteQualityInternal.E, 1, NotationSymbols.None),
+                new (NoteQualityInternal.G, 1, NotationSymbols.Sharp)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.D, 1, NotationSymbols.Sharp), DiatonicChordQuality.AugmentedTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.D, 1, NotationSymbols.Sharp), DiatonicChordQuality.AugmentedTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.D, 1, NotationSymbols.Sharp),
-                new (NoteQuality.F, 1, NotationSymbols.DoubleSharp),
-                new (NoteQuality.A, 1, NotationSymbols.DoubleSharp)
+                new (NoteQualityInternal.D, 1, NotationSymbols.Sharp),
+                new (NoteQualityInternal.F, 1, NotationSymbols.DoubleSharp),
+                new (NoteQualityInternal.A, 1, NotationSymbols.DoubleSharp)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.F, 1, NotationSymbols.None), DiatonicChordQuality.AugmentedTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.F, 1, NotationSymbols.None), DiatonicChordQuality.AugmentedTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.F, 1, NotationSymbols.None),
-                new (NoteQuality.A, 1, NotationSymbols.None),
-                new (NoteQuality.C, 2, NotationSymbols.Sharp)
+                new (NoteQualityInternal.F, 1, NotationSymbols.None),
+                new (NoteQualityInternal.A, 1, NotationSymbols.None),
+                new (NoteQualityInternal.C, 2, NotationSymbols.Sharp)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.A, 1, NotationSymbols.None), DiatonicChordQuality.AugmentedTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.A, 1, NotationSymbols.None), DiatonicChordQuality.AugmentedTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.A, 1, NotationSymbols.None),
-                new (NoteQuality.C, 2, NotationSymbols.Sharp),
-                new (NoteQuality.E, 2, NotationSymbols.Sharp)
+                new (NoteQualityInternal.A, 1, NotationSymbols.None),
+                new (NoteQualityInternal.C, 2, NotationSymbols.Sharp),
+                new (NoteQualityInternal.E, 2, NotationSymbols.Sharp)
             });
         
         yield return new TestCaseData(
-            new DiatonicChord(new Note(NoteQuality.B, 1, NotationSymbols.Sharp), DiatonicChordQuality.AugmentedTriad),
-            new List<Note>
+            new DiatonicChord(new NoteInternal(NoteQualityInternal.B, 1, NotationSymbols.Sharp), DiatonicChordQuality.AugmentedTriad),
+            new List<NoteInternal>
             {
-                new (NoteQuality.B, 1, NotationSymbols.Sharp),
-                new (NoteQuality.D, 2, NotationSymbols.DoubleSharp),
-                new (NoteQuality.F, 2, NotationSymbols.TripleSharp)
+                new (NoteQualityInternal.B, 1, NotationSymbols.Sharp),
+                new (NoteQualityInternal.D, 2, NotationSymbols.DoubleSharp),
+                new (NoteQualityInternal.F, 2, NotationSymbols.TripleSharp)
             });
     }
 }

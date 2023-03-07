@@ -9,7 +9,7 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Provide
 
 internal class NoteProviderFromIndex : INoteProviderFromIndex
 {
-    public NoteEnharmonics GetEnharmonics(int chromaticIndex)
+    public NoteEnharmonicsInternal GetEnharmonics(int chromaticIndex)
     {
         var (order, baseOffset) = Math.DivRem(chromaticIndex, BaseChromaticIndexMapper.BaseIndex + ChromaticContextConstants.ChromaticStepsFullOctave);
 
@@ -21,15 +21,15 @@ internal class NoteProviderFromIndex : INoteProviderFromIndex
             })
             .Where(t => t.BaseOffset == baseOffset)
             .Where(t => t.Order >= 0)
-            .Select(t => new Note(t.NoteQuality, t.Order, t.Modifier))
+            .Select(t => new NoteInternal(t.NoteQuality, t.Order, t.Modifier))
             .ToArray();
 
-        return new NoteEnharmonics(notes);
+        return new NoteEnharmonicsInternal(notes);
     }
 
-    private static IEnumerable<(NoteQuality NoteQuality, NotationSymbols NotationSymbol)> GetQualityModifierCartesianProduct()
+    private static IEnumerable<(NoteQualityInternal NoteQuality, NotationSymbols NotationSymbol)> GetQualityModifierCartesianProduct()
     {
-        var qualities = Enum.GetValues<NoteQuality>().Where(quality => quality != NoteQuality.Unknown)
+        var qualities = Enum.GetValues<NoteQualityInternal>().Where(quality => quality != NoteQualityInternal.Unknown)
             .ToList();
         var modifiers = GetModifiers();
 

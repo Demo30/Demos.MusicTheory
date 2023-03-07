@@ -5,5 +5,5 @@ namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 
 internal interface IElementaryNoteFromDiatonicScaleKeySignatureProvider
 {
-    public IEnumerable<ElementaryNote> GetChromaticElementaryNotes(KeySignatures key);
+    public IEnumerable<ElementaryNoteInternal> GetChromaticElementaryNotes(KeySignatures key);
 }

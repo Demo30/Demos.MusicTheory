@@ -9,88 +9,88 @@ namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext;
 [TestFixture]
 internal class NoteEnharmonicsCreationTest : TestBase
 {
-    private static Note[] GetValidTestCases(int testCaseIndex)
+    private static NoteInternal[] GetValidTestCases(int testCaseIndex)
     {
-        List<Note[]> validEnharmonicClusters = new()
+        List<NoteInternal[]> validEnharmonicClusters = new()
         {
             new[]
             {
-                new Note(NoteQuality.D, 1, Commons.NotationSymbols.None),
-                new Note(NoteQuality.C, 1, Commons.NotationSymbols.DoubleSharp),
-                new Note(NoteQuality.E, 1, Commons.NotationSymbols.DoubleFlat)
+                new NoteInternal(NoteQualityInternal.D, 1, Commons.NotationSymbols.None),
+                new NoteInternal(NoteQualityInternal.C, 1, Commons.NotationSymbols.DoubleSharp),
+                new NoteInternal(NoteQualityInternal.E, 1, Commons.NotationSymbols.DoubleFlat)
             },
             new[]
             {
-                new Note(NoteQuality.C, 1, Commons.NotationSymbols.Sharp),
-                new Note(NoteQuality.D, 1, Commons.NotationSymbols.Flat)
+                new NoteInternal(NoteQualityInternal.C, 1, Commons.NotationSymbols.Sharp),
+                new NoteInternal(NoteQualityInternal.D, 1, Commons.NotationSymbols.Flat)
             },
             new[]
             {
-                new Note(NoteQuality.E, 1, Commons.NotationSymbols.None),
-                new Note(NoteQuality.F, 1, Commons.NotationSymbols.Flat)
+                new NoteInternal(NoteQualityInternal.E, 1, Commons.NotationSymbols.None),
+                new NoteInternal(NoteQualityInternal.F, 1, Commons.NotationSymbols.Flat)
             },
             new[]
             {
-                new Note(NoteQuality.E, 1, Commons.NotationSymbols.Sharp),
-                new Note(NoteQuality.F, 1, Commons.NotationSymbols.None)
+                new NoteInternal(NoteQualityInternal.E, 1, Commons.NotationSymbols.Sharp),
+                new NoteInternal(NoteQualityInternal.F, 1, Commons.NotationSymbols.None)
             },
             new[]
             {
-                new Note(NoteQuality.F, 1, Commons.NotationSymbols.None),
-                new Note(NoteQuality.F, 1, Commons.NotationSymbols.None)
+                new NoteInternal(NoteQualityInternal.F, 1, Commons.NotationSymbols.None),
+                new NoteInternal(NoteQualityInternal.F, 1, Commons.NotationSymbols.None)
             },
             new[]
             {
-                new Note(NoteQuality.F, 1, Commons.NotationSymbols.None),
-                new Note(NoteQuality.G, 1, Commons.NotationSymbols.DoubleFlat)
+                new NoteInternal(NoteQualityInternal.F, 1, Commons.NotationSymbols.None),
+                new NoteInternal(NoteQualityInternal.G, 1, Commons.NotationSymbols.DoubleFlat)
             },
             new[]
             {
-                new Note(NoteQuality.F, 1, Commons.NotationSymbols.Sharp),
-                new Note(NoteQuality.G, 1, Commons.NotationSymbols.Flat)
+                new NoteInternal(NoteQualityInternal.F, 1, Commons.NotationSymbols.Sharp),
+                new NoteInternal(NoteQualityInternal.G, 1, Commons.NotationSymbols.Flat)
             },
             new[]
             {
-                new Note(NoteQuality.F, 1, Commons.NotationSymbols.DoubleSharp),
-                new Note(NoteQuality.G, 1, Commons.NotationSymbols.None)
+                new NoteInternal(NoteQualityInternal.F, 1, Commons.NotationSymbols.DoubleSharp),
+                new NoteInternal(NoteQualityInternal.G, 1, Commons.NotationSymbols.None)
             },
             new[]
             {
-                new Note(NoteQuality.B, 1, Commons.NotationSymbols.Sharp),
-                new Note(NoteQuality.C, 2, Commons.NotationSymbols.None)
+                new NoteInternal(NoteQualityInternal.B, 1, Commons.NotationSymbols.Sharp),
+                new NoteInternal(NoteQualityInternal.C, 2, Commons.NotationSymbols.None)
             },
             new[]
             {
-                new Note(NoteQuality.B, 1, Commons.NotationSymbols.DoubleSharp),
-                new Note(NoteQuality.C, 2, Commons.NotationSymbols.Sharp)
+                new NoteInternal(NoteQualityInternal.B, 1, Commons.NotationSymbols.DoubleSharp),
+                new NoteInternal(NoteQualityInternal.C, 2, Commons.NotationSymbols.Sharp)
             },
             new[]
             {
-                new Note(NoteQuality.B, 1, Commons.NotationSymbols.DoubleSharp),
-                new Note(NoteQuality.D, 2, Commons.NotationSymbols.Flat)
+                new NoteInternal(NoteQualityInternal.B, 1, Commons.NotationSymbols.DoubleSharp),
+                new NoteInternal(NoteQualityInternal.D, 2, Commons.NotationSymbols.Flat)
             }
         };
         return validEnharmonicClusters[testCaseIndex];
     }
 
-    private static Note[] GetInvalidTestCases(int testCaseIndex)
+    private static NoteInternal[] GetInvalidTestCases(int testCaseIndex)
     {
-        List<Note[]> validEnharmonicClusters = new()
+        List<NoteInternal[]> validEnharmonicClusters = new()
         {
             new[]
             {
-                new Note(NoteQuality.D, 1, Commons.NotationSymbols.None),
-                new Note(NoteQuality.C, 1, Commons.NotationSymbols.None)
+                new NoteInternal(NoteQualityInternal.D, 1, Commons.NotationSymbols.None),
+                new NoteInternal(NoteQualityInternal.C, 1, Commons.NotationSymbols.None)
             },
             new[]
             {
-                new Note(NoteQuality.C, 1, Commons.NotationSymbols.Sharp),
-                new Note(NoteQuality.D, 2, Commons.NotationSymbols.Flat)
+                new NoteInternal(NoteQualityInternal.C, 1, Commons.NotationSymbols.Sharp),
+                new NoteInternal(NoteQualityInternal.D, 2, Commons.NotationSymbols.Flat)
             },
             new[]
             {
-                new Note(NoteQuality.E, 1, Commons.NotationSymbols.Flat),
-                new Note(NoteQuality.E, 1, Commons.NotationSymbols.Sharp)
+                new NoteInternal(NoteQualityInternal.E, 1, Commons.NotationSymbols.Flat),
+                new NoteInternal(NoteQualityInternal.E, 1, Commons.NotationSymbols.Sharp)
             }
         };
         return validEnharmonicClusters[testCaseIndex];
@@ -112,7 +112,7 @@ internal class NoteEnharmonicsCreationTest : TestBase
     {
         void ValidCall()
         {
-            new NoteEnharmonics(GetValidTestCases(validCombinationTestCaseNumber));
+            new NoteEnharmonicsInternal(GetValidTestCases(validCombinationTestCaseNumber));
         }
 
         Assert.DoesNotThrow(ValidCall);
@@ -126,7 +126,7 @@ internal class NoteEnharmonicsCreationTest : TestBase
     {
         void InvalidCall()
         {
-            new NoteEnharmonics(GetInvalidTestCases(invalidCombinationTestCaseNumber));
+            new NoteEnharmonicsInternal(GetInvalidTestCases(invalidCombinationTestCaseNumber));
         }
 
         Assert.Throws<ArgumentException>(InvalidCall);

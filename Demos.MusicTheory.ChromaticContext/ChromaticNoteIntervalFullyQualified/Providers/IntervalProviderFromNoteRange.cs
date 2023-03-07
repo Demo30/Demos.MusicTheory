@@ -21,20 +21,20 @@ internal class IntervalProviderFromNoteRange
         _indexSpanProvider = indexSpanProvider;
     }
 
-    public Interval GetIntervals(NoteRange range)
+    public IntervalInternal GetIntervals(NoteRangeInternal rangeInternal)
     {
         return _indexSpanProvider
-            .GetIntervals(range.ChromaticIndexSpan)
+            .GetIntervals(rangeInternal.ChromaticIndexSpan)
             .Intervals
-            .Single(i => i.DiatonicScaleDegree == GetDiatonicDegreeSpan(range));
+            .Single(i => i.DiatonicScaleDegree == GetDiatonicDegreeSpan(rangeInternal));
     }
 
-    private static int GetDiatonicDegreeSpan(NoteRange range)
+    private static int GetDiatonicDegreeSpan(NoteRangeInternal rangeInternal)
     {
-        var subOctaves = range.ChromaticIndexSpan / ChromaticContextConstants.ChromaticStepsFullOctave;
+        var subOctaves = rangeInternal.ChromaticIndexSpan / ChromaticContextConstants.ChromaticStepsFullOctave;
         var subOctavesDiatonicDegrees = subOctaves * ChromaticContextConstants.DiatonicStepsInOctave;
         var baseDiatonicDifference =
-            Math.Abs((int) range.NoteStart.Quality - (int) range.NoteEnd.Quality) + 1;
+            Math.Abs((int) rangeInternal.NoteInternalStart.QualityInternal - (int) rangeInternal.NoteInternalEnd.QualityInternal) + 1;
         return subOctavesDiatonicDegrees + baseDiatonicDifference;
     }
 }

@@ -1,45 +1,45 @@
 ﻿using Demos.MusicTheory.ChromaticContext.Constants;
 using System.Collections.Generic;
 using System.Linq;
-using static Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Interval;
+using static Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.IntervalInternal;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
 
 internal class IntervalProviderFromIndexSpan
 {
-    public IntervalEnharmonics GetIntervals(int chromaticIndexSpan)
+    public IntervalEnharmonicsInternal GetIntervals(int chromaticIndexSpan)
     {
-        var intervalEnharmonics = new List<Interval>();
+        var intervalEnharmonics = new List<IntervalInternal>();
         var analysis = Analyse(chromaticIndexSpan);
 
         if (analysis.IsBlackKey)
         {
-            intervalEnharmonics.Add(new Interval(analysis.MainDiatonicScaleDegree, IntervalQuality.Augmented));
+            intervalEnharmonics.Add(new IntervalInternal(analysis.MainDiatonicScaleDegree, IntervalQualityInternal.Augmented));
 
             var nextDiatonicScaleDegree = analysis.MainDiatonicScaleDegree + 1;
-            var quality = IsPerfectType(nextDiatonicScaleDegree) ? IntervalQuality.Diminished : IntervalQuality.Minor;
+            var quality = IsPerfectType(nextDiatonicScaleDegree) ? IntervalQualityInternal.Diminished : IntervalQualityInternal.Minor;
 
-            intervalEnharmonics.Add(new Interval(nextDiatonicScaleDegree, quality));
+            intervalEnharmonics.Add(new IntervalInternal(nextDiatonicScaleDegree, quality));
         }
         else
         {
             var quality = analysis.IsPerfectType
-                ? IntervalQuality.Perfect
-                : IntervalQuality.Major;
+                ? IntervalQualityInternal.Perfect
+                : IntervalQualityInternal.Major;
 
-            intervalEnharmonics.Add(new Interval(analysis.MainDiatonicScaleDegree, quality));
+            intervalEnharmonics.Add(new IntervalInternal(analysis.MainDiatonicScaleDegree, quality));
 
-            if (analysis.BaseDiatonicScaleDegree != (int) NoteQuality.F)
-                intervalEnharmonics.Add(new Interval(analysis.MainDiatonicScaleDegree + 1,
-                    IntervalQuality.Diminished));
+            if (analysis.BaseDiatonicScaleDegree != (int) NoteQualityInternal.F)
+                intervalEnharmonics.Add(new IntervalInternal(analysis.MainDiatonicScaleDegree + 1,
+                    IntervalQualityInternal.Diminished));
 
-            if (new[] {(int) NoteQuality.C, (int) NoteQuality.F}.Contains(analysis
+            if (new[] {(int) NoteQualityInternal.C, (int) NoteQualityInternal.F}.Contains(analysis
                     .BaseDiatonicScaleDegree) && analysis.MainDiatonicScaleDegree > 1)
-                intervalEnharmonics.Add(new Interval(analysis.MainDiatonicScaleDegree - 1,
-                    IntervalQuality.Augmented));
+                intervalEnharmonics.Add(new IntervalInternal(analysis.MainDiatonicScaleDegree - 1,
+                    IntervalQualityInternal.Augmented));
         }
 
-        return new IntervalEnharmonics(intervalEnharmonics.ToArray());
+        return new IntervalEnharmonicsInternal(intervalEnharmonics.ToArray());
     }
 
     private static SpanAnalysisReport Analyse(int chromaticIndexSpan)
@@ -53,8 +53,8 @@ internal class IntervalProviderFromIndexSpan
         var isBlackKey =
             baseChromaticIndexSpan > 0 &&
             (
-                baseIntervalBaseNumber <= (int) NoteQuality.E && !IsOddNumber(baseChromaticIndexSpan) ||
-                baseIntervalBaseNumber > (int) NoteQuality.E && IsOddNumber(baseChromaticIndexSpan)
+                baseIntervalBaseNumber <= (int) NoteQualityInternal.E && !IsOddNumber(baseChromaticIndexSpan) ||
+                baseIntervalBaseNumber > (int) NoteQualityInternal.E && IsOddNumber(baseChromaticIndexSpan)
             );
 
         return new SpanAnalysisReport

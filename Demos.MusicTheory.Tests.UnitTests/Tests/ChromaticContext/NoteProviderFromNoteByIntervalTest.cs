@@ -18,30 +18,30 @@ internal class NoteProviderFromNoteByIntervalTest : TestBase
     public void ValidResults(OneDimensionalDirection direction)
     {
         // Given
-        const NoteQuality calledQuality = NoteQuality.D;
+        const NoteQualityInternal calledQuality = NoteQualityInternal.D;
         const int calledOrder = 5;
         const NotationSymbols calledModifier = NotationSymbols.None;
-        var calledInterval = new Interval(3, IntervalQuality.Augmented);
+        var calledInterval = new IntervalInternal(3, IntervalQualityInternal.Augmented);
 
-        var expectedResult = new NoteEnharmonics(new[]
+        var expectedResult = new NoteEnharmonicsInternal(new[]
         {
-            new Note(NoteQuality.C, 0, NotationSymbols.Sharp),
-            new Note(NoteQuality.D, 0, NotationSymbols.Flat)
+            new NoteInternal(NoteQualityInternal.C, 0, NotationSymbols.Sharp),
+            new NoteInternal(NoteQualityInternal.D, 0, NotationSymbols.Flat)
         });
 
-        Note note = new(calledQuality, calledOrder, calledModifier);
+        NoteInternal noteInternal = new(calledQuality, calledOrder, calledModifier);
         var mockProviderFromNoteBySpan = new Mock<INoteProviderFromIndex>();
         mockProviderFromNoteBySpan
             .Setup(p => p.GetEnharmonics(It.IsAny<int>()))
             .Returns(expectedResult);
 
-        var expectedChromaticIndexArgument = note.ChromaticContextIndex + (direction == OneDimensionalDirection.RIGHT
+        var expectedChromaticIndexArgument = noteInternal.ChromaticContextIndex + (direction == OneDimensionalDirection.RIGHT
             ? calledInterval.SemitoneCount
             : -calledInterval.SemitoneCount);
 
         // When
         var provider = new NoteProviderFromNoteByInterval(mockProviderFromNoteBySpan.Object);
-        var cluster = provider.GetEnharmonics(note, calledInterval, direction);
+        var cluster = provider.GetEnharmonics(noteInternal, calledInterval, direction);
 
         // Then
         mockProviderFromNoteBySpan.Verify(c => c.GetEnharmonics(expectedChromaticIndexArgument), Times.Once);

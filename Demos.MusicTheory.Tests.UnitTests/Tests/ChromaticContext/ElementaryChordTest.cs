@@ -41,27 +41,27 @@ internal class ElementaryChordTest
     private static IEnumerable<TestCaseData> GetDataForTestInversions()
     {
         yield return new TestCaseData(
-            new ElementaryChord(new ChordStructure(new[] {new Interval(2, IntervalQuality.Major)})),
+            new ElementaryChord(new ChordStructure(new[] {new IntervalInternal(2, IntervalQualityInternal.Major)})),
             new[]
             {
-                new ChordStructure(new[] { new Interval(2, IntervalQuality.Major) })
+                new ChordStructure(new[] { new IntervalInternal(2, IntervalQualityInternal.Major) })
             });
 
         yield return new TestCaseData(
-            new ElementaryChord(new ChordStructure(new[] { new Interval(2, IntervalQuality.Major), new Interval(3, IntervalQuality.Minor) })),
+            new ElementaryChord(new ChordStructure(new[] { new IntervalInternal(2, IntervalQualityInternal.Major), new IntervalInternal(3, IntervalQualityInternal.Minor) })),
             new[]
             {
-                new ChordStructure(new[] { new Interval(2, IntervalQuality.Major), new Interval(3, IntervalQuality.Minor) }),
-                new ChordStructure(new[] { new Interval(3, IntervalQuality.Minor), new Interval(2, IntervalQuality.Major) })
+                new ChordStructure(new[] { new IntervalInternal(2, IntervalQualityInternal.Major), new IntervalInternal(3, IntervalQualityInternal.Minor) }),
+                new ChordStructure(new[] { new IntervalInternal(3, IntervalQualityInternal.Minor), new IntervalInternal(2, IntervalQualityInternal.Major) })
             });
         
         yield return new TestCaseData(
-            new ElementaryChord(new ChordStructure(new[] { new Interval(2, IntervalQuality.Major), new Interval(3, IntervalQuality.Minor), new Interval(2, IntervalQuality.Minor) })),
+            new ElementaryChord(new ChordStructure(new[] { new IntervalInternal(2, IntervalQualityInternal.Major), new IntervalInternal(3, IntervalQualityInternal.Minor), new IntervalInternal(2, IntervalQualityInternal.Minor) })),
             new[]
             {
-                new ChordStructure(new[] { new Interval(2, IntervalQuality.Major), new Interval(3, IntervalQuality.Minor), new Interval(2, IntervalQuality.Minor) }),
-                new ChordStructure(new[] { new Interval(2, IntervalQuality.Minor), new Interval(2, IntervalQuality.Major), new Interval(3, IntervalQuality.Minor) }),
-                new ChordStructure(new[] { new Interval(3, IntervalQuality.Minor), new Interval(2, IntervalQuality.Minor), new Interval(2, IntervalQuality.Major) }),
+                new ChordStructure(new[] { new IntervalInternal(2, IntervalQualityInternal.Major), new IntervalInternal(3, IntervalQualityInternal.Minor), new IntervalInternal(2, IntervalQualityInternal.Minor) }),
+                new ChordStructure(new[] { new IntervalInternal(2, IntervalQualityInternal.Minor), new IntervalInternal(2, IntervalQualityInternal.Major), new IntervalInternal(3, IntervalQualityInternal.Minor) }),
+                new ChordStructure(new[] { new IntervalInternal(3, IntervalQualityInternal.Minor), new IntervalInternal(2, IntervalQualityInternal.Minor), new IntervalInternal(2, IntervalQualityInternal.Major) }),
             });
     }
     

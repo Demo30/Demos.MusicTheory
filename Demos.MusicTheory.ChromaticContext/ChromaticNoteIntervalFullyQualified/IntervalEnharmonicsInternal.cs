@@ -4,13 +4,13 @@ using System.Linq;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
 
-internal class IntervalEnharmonics : IChromaticIndexSpan
+internal class IntervalEnharmonicsInternal : IChromaticIndexSpan
 {
     public int ChromaticIndexSpan => Intervals.First().ChromaticIndexSpan;
 
     public int SemitoneCount => Intervals.First().SemitoneCount;
 
-    public Interval[] Intervals
+    public IntervalInternal[] Intervals
     {
         get => _intervals;
         private init
@@ -20,14 +20,14 @@ internal class IntervalEnharmonics : IChromaticIndexSpan
         }
     }
 
-    private readonly Interval[] _intervals;
+    private readonly IntervalInternal[] _intervals;
 
-    public IntervalEnharmonics(Interval[] intervals)
+    public IntervalEnharmonicsInternal(IntervalInternal[] intervals)
     {
         Intervals = intervals;
     }
 
-    private static void Validate(Interval[] cluster)
+    private static void Validate(IntervalInternal[] cluster)
     {
         if (cluster == null || !cluster.Any())
             throw new ArgumentNullException(nameof(cluster));

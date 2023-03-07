@@ -8,9 +8,10 @@ namespace Demos.MusicTheory.Setup;
 
 public static class MusicTheorySetup
 {
+    internal static bool IsInitialized => ServicesManager.ServicesProvider.Services.Count > 0; 
     public static void Setup()
     {
-        if (ServicesManager.ServicesProvider.Services.Count > 0)
+        if (IsInitialized)
             throw new ServiceInitializationException();
 
         var provider = ServicesManager.ServicesProvider;

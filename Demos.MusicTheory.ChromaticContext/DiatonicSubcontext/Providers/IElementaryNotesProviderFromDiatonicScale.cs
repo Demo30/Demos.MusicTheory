@@ -4,5 +4,5 @@ namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 
 internal interface IElementaryNotesProviderFromDiatonicScale
 {
-    public IEnumerable<ElementaryNote> GetChromaticElementaryNotes(DiatonicScale key);
+    public IEnumerable<ElementaryNoteInternal> GetChromaticElementaryNotes(DiatonicScale key);
 }

@@ -2,5 +2,5 @@
 
 internal interface INoteProviderFromIndex
 {
-    public NoteEnharmonics GetEnharmonics(int chromaticIndex);
+    public NoteEnharmonicsInternal GetEnharmonics(int chromaticIndex);
 }

@@ -17,9 +17,9 @@ internal class NoteProviderFromNoteByInterval
         _providerByIndex = providerByIndex;
     }
 
-    public NoteEnharmonics GetEnharmonics(Note note, IChromaticIndexSpan interval, OneDimensionalDirection direction)
+    public NoteEnharmonicsInternal GetEnharmonics(NoteInternal noteInternal, ChromaticNote.IntervalInternal intervalInternal, OneDimensionalDirection direction)
     {
-        return _providerByIndex.GetEnharmonics(GetSpannedIndex(note, interval, direction));
+        return _providerByIndex.GetEnharmonics(GetSpannedIndex(noteInternal, intervalInternal, direction));
     }
 
     private static int GetSpannedIndex(IChromaticEntity note, IChromaticIndexSpan interval, OneDimensionalDirection direction)

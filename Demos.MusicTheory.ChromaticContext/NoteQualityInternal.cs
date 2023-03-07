@@ -1,6 +1,6 @@
 ﻿namespace Demos.MusicTheory.ChromaticContext;
 
-internal enum NoteQuality
+internal enum NoteQualityInternal
 {
     // Enum indexes are used in the logic
     Unknown = 0,

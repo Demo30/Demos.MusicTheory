@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 
-internal class NoteEnharmonics : ChromaticEntity
+internal class NoteEnharmonicsInternal : ChromaticEntity
 {
-    public Note[] Notes { get; }
+    public NoteInternal[] Notes { get; }
 
-    public NoteEnharmonics(Note[] enharmonicNotes) : base(GetChromaticContextIndex(enharmonicNotes))
+    public NoteEnharmonicsInternal(NoteInternal[] enharmonicNotes) : base(GetChromaticContextIndex(enharmonicNotes))
     {
         if ((enharmonicNotes?.Length ?? 0) == 0)
             throw new ArgumentNullException(nameof(enharmonicNotes));
@@ -16,12 +16,12 @@ internal class NoteEnharmonics : ChromaticEntity
         Notes = enharmonicNotes;
     }
 
-    private static int GetChromaticContextIndex(Note[] enharmonicNotes)
+    private static int GetChromaticContextIndex(NoteInternal[] enharmonicNotes)
     {
         return enharmonicNotes?.Length > 0 ? enharmonicNotes.First().ChromaticContextIndex : -1;
     }
 
-    private static void CheckEnharmonicNoteCompatibility(Note[] enharmonicNotes)
+    private static void CheckEnharmonicNoteCompatibility(NoteInternal[] enharmonicNotes)
     {
         var valid = enharmonicNotes
             .Select(en => en.ChromaticContextIndex)

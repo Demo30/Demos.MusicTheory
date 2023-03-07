@@ -12,57 +12,49 @@ namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext;
 
 internal class DiatonicChord : ElementaryChord
 {
-    private readonly Lazy<NoteProviderFromNoteByInterval> _noteProviderFromNoteByInterval;
     public DiatonicChordQuality Quality { get; }
-    public Note BaseNote { get; }
+    public NoteInternal BaseNoteInternal { get; }
 
-    public DiatonicChord(Note baseNote, DiatonicChordQuality quality) : 
-        this(baseNote, quality, new Lazy<NoteProviderFromNoteByInterval>(ServicesManager.GetService<NoteProviderFromNoteByInterval>))
+    public DiatonicChord(NoteInternal baseNoteInternal, DiatonicChordQuality quality) : base(GetChordStructure(quality))
     {
-        BaseNote = baseNote ?? throw new ArgumentNullException(nameof(baseNote));
+        BaseNoteInternal = baseNoteInternal ?? throw new ArgumentNullException(nameof(baseNoteInternal));
         Quality = quality;
     }
 
-    internal DiatonicChord(Note baseNote, DiatonicChordQuality quality, Lazy<NoteProviderFromNoteByInterval> noteProviderFromNoteByInterval) : base(GetChordStructure(quality))
-    {
-        _noteProviderFromNoteByInterval = noteProviderFromNoteByInterval;
-    }
+    public IList<NoteInternal> ChordNotes => GetNoteSequenceFromChordStructure(MainChordStructure, BaseNoteInternal);
 
-    public IList<Note> ChordNotes => GetNoteSequenceFromChordStructure(MainChordStructure, BaseNote);
-
-    public IEnumerable<IList<Note>> Inversions()
+    public IEnumerable<IList<NoteInternal>> Inversions()
     {
         return GetChordStructureInversions()
             .Select((chordStructure, index) => GetNoteSequenceFromChordStructure(chordStructure, ChordNotes[index]));
     }
 
-    private IList<Note> GetNoteSequenceFromChordStructure(ChordStructure chordStructure, Note baseNote)
+    private IList<NoteInternal> GetNoteSequenceFromChordStructure(ChordStructure chordStructure, NoteInternal baseNoteInternal)
     {
-        var result = new List<Note> {BaseNote};
+        var result = new List<NoteInternal> {BaseNoteInternal};
 
         for(var intervalIndex = 0; intervalIndex < chordStructure.OrderedIntervalStructure.Count; intervalIndex++)
         {
             var interval = chordStructure.OrderedIntervalStructure[intervalIndex];
             var referenceNote = result.Last();
-            var nextNoteEnharmonics = _noteProviderFromNoteByInterval
-                .Value
-                .GetEnharmonics(referenceNote, interval, OneDimensionalDirection.RIGHT)
+            var nextNoteEnharmonics = ServicesManager.GetService<NoteProviderFromNoteBySpan>()
+                .GetEnharmonics(referenceNote, interval.ChromaticIndexSpan, OneDimensionalDirection.RIGHT)
                 .Notes;
-            result.Add(GetPreferredNote(nextNoteEnharmonics, intervalIndex, baseNote));
+            result.Add(GetPreferredNote(nextNoteEnharmonics, intervalIndex, baseNoteInternal));
         }
 
         return result;
     }
 
-    private Note GetPreferredNote(IEnumerable<Note> enharmonics, int intervalIndex, Note baseNote)
+    private NoteInternal GetPreferredNote(IEnumerable<NoteInternal> enharmonics, int intervalIndex, NoteInternal baseNoteInternal)
     {
         var notes = enharmonics.ToArray();
         return notes.Single(n =>
         {
-            var enharmonicNoteQualityIndex = (int)n.Quality;
+            var enharmonicNoteQualityIndex = (int)n.QualityInternal;
             
             // the chord is assumed to be constructed from evenly distant notes in thirds
-            var expectedNoteQualityIndexBase = (int)baseNote.Quality + ((intervalIndex + 1) * 2);
+            var expectedNoteQualityIndexBase = (int)baseNoteInternal.QualityInternal + ((intervalIndex + 1) * 2);
             var expectedNoteQualityIndex = ((expectedNoteQualityIndexBase - 1) % Constants.ChromaticContextConstants.DiatonicStepsInOctave) + 1;
             
             return enharmonicNoteQualityIndex == expectedNoteQualityIndex;
@@ -73,10 +65,10 @@ internal class DiatonicChord : ElementaryChord
     {
         var mappings = new Dictionary<DiatonicChordQuality, ChordStructure>
         {
-            { DiatonicChordQuality.MajorTriad, new ChordStructure(new [] { new Interval(3, IntervalQuality.Major), new Interval(3, IntervalQuality.Minor) }) },
-            { DiatonicChordQuality.MinorTriad, new ChordStructure(new [] { new Interval(3, IntervalQuality.Minor), new Interval(3, IntervalQuality.Major) }) },
-            { DiatonicChordQuality.AugmentedTriad, new ChordStructure(new [] { new Interval(3, IntervalQuality.Major), new Interval(3, IntervalQuality.Major) }) },
-            { DiatonicChordQuality.DiminishedTriad, new ChordStructure(new [] { new Interval(3, IntervalQuality.Minor), new Interval(3, IntervalQuality.Minor) }) },
+            { DiatonicChordQuality.MajorTriad, new ChordStructure(new [] { new IntervalInternal(3, IntervalQualityInternal.Major), new IntervalInternal(3, IntervalQualityInternal.Minor) }) },
+            { DiatonicChordQuality.MinorTriad, new ChordStructure(new [] { new IntervalInternal(3, IntervalQualityInternal.Minor), new IntervalInternal(3, IntervalQualityInternal.Major) }) },
+            { DiatonicChordQuality.AugmentedTriad, new ChordStructure(new [] { new IntervalInternal(3, IntervalQualityInternal.Major), new IntervalInternal(3, IntervalQualityInternal.Major) }) },
+            { DiatonicChordQuality.DiminishedTriad, new ChordStructure(new [] { new IntervalInternal(3, IntervalQualityInternal.Minor), new IntervalInternal(3, IntervalQualityInternal.Minor) }) },
         };
 
         return mappings[quality];

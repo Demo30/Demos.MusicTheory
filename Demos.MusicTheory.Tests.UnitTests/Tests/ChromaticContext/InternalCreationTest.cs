@@ -9,93 +9,93 @@ namespace Demos.MusicTheory.Tests.UnitTests.Tests.ChromaticContext;
 internal class InternalCreationTest
 {
     [Theory]
-    [TestCase(1, IntervalQuality.Perfect)]
-    [TestCase(1, IntervalQuality.Augmented)]
-    [TestCase(2, IntervalQuality.Minor)]
-    [TestCase(2, IntervalQuality.Major)]
-    [TestCase(2, IntervalQuality.Augmented)]
-    [TestCase(2, IntervalQuality.Diminished)]
-    [TestCase(3, IntervalQuality.Minor)]
-    [TestCase(3, IntervalQuality.Major)]
-    [TestCase(3, IntervalQuality.Augmented)]
-    [TestCase(3, IntervalQuality.Diminished)]
-    [TestCase(4, IntervalQuality.Perfect)]
-    [TestCase(4, IntervalQuality.Augmented)]
-    [TestCase(4, IntervalQuality.Diminished)]
-    [TestCase(5, IntervalQuality.Perfect)]
-    [TestCase(5, IntervalQuality.Augmented)]
-    [TestCase(5, IntervalQuality.Diminished)]
-    [TestCase(6, IntervalQuality.Minor)]
-    [TestCase(6, IntervalQuality.Major)]
-    [TestCase(6, IntervalQuality.Augmented)]
-    [TestCase(6, IntervalQuality.Diminished)]
-    [TestCase(7, IntervalQuality.Minor)]
-    [TestCase(7, IntervalQuality.Major)]
-    [TestCase(7, IntervalQuality.Augmented)]
-    [TestCase(7, IntervalQuality.Diminished)]
-    [TestCase(8, IntervalQuality.Perfect)]
-    [TestCase(8, IntervalQuality.Augmented)]
-    [TestCase(8, IntervalQuality.Diminished)]
+    [TestCase(1, IntervalQualityInternal.Perfect)]
+    [TestCase(1, IntervalQualityInternal.Augmented)]
+    [TestCase(2, IntervalQualityInternal.Minor)]
+    [TestCase(2, IntervalQualityInternal.Major)]
+    [TestCase(2, IntervalQualityInternal.Augmented)]
+    [TestCase(2, IntervalQualityInternal.Diminished)]
+    [TestCase(3, IntervalQualityInternal.Minor)]
+    [TestCase(3, IntervalQualityInternal.Major)]
+    [TestCase(3, IntervalQualityInternal.Augmented)]
+    [TestCase(3, IntervalQualityInternal.Diminished)]
+    [TestCase(4, IntervalQualityInternal.Perfect)]
+    [TestCase(4, IntervalQualityInternal.Augmented)]
+    [TestCase(4, IntervalQualityInternal.Diminished)]
+    [TestCase(5, IntervalQualityInternal.Perfect)]
+    [TestCase(5, IntervalQualityInternal.Augmented)]
+    [TestCase(5, IntervalQualityInternal.Diminished)]
+    [TestCase(6, IntervalQualityInternal.Minor)]
+    [TestCase(6, IntervalQualityInternal.Major)]
+    [TestCase(6, IntervalQualityInternal.Augmented)]
+    [TestCase(6, IntervalQualityInternal.Diminished)]
+    [TestCase(7, IntervalQualityInternal.Minor)]
+    [TestCase(7, IntervalQualityInternal.Major)]
+    [TestCase(7, IntervalQualityInternal.Augmented)]
+    [TestCase(7, IntervalQualityInternal.Diminished)]
+    [TestCase(8, IntervalQualityInternal.Perfect)]
+    [TestCase(8, IntervalQualityInternal.Augmented)]
+    [TestCase(8, IntervalQualityInternal.Diminished)]
     public void ValidCreationArgumentsOneOctave(int intervalBaseNumber,
-        IntervalQuality intervalChromaticQuality)
+        IntervalQualityInternal intervalChromaticQualityInternal)
     {
         void ValidCreation()
         {
-            new Interval(intervalBaseNumber, intervalChromaticQuality);
+            new IntervalInternal(intervalBaseNumber, intervalChromaticQualityInternal);
         }
 
         Assert.DoesNotThrow(ValidCreation);
     }
 
     [Theory]
-    [TestCase(9, IntervalQuality.Minor)]
-    [TestCase(9, IntervalQuality.Major)]
-    [TestCase(9, IntervalQuality.Augmented)]
-    [TestCase(9, IntervalQuality.Diminished)]
-    [TestCase(10, IntervalQuality.Minor)]
-    [TestCase(10, IntervalQuality.Major)]
-    [TestCase(10, IntervalQuality.Augmented)]
-    [TestCase(10, IntervalQuality.Diminished)]
-    [TestCase(11, IntervalQuality.Perfect)]
-    [TestCase(11, IntervalQuality.Augmented)]
-    [TestCase(11, IntervalQuality.Diminished)]
-    [TestCase(15, IntervalQuality.Perfect)]
-    [TestCase(15, IntervalQuality.Augmented)]
-    [TestCase(15, IntervalQuality.Diminished)]
-    [TestCase(16, IntervalQuality.Minor)]
-    [TestCase(16, IntervalQuality.Major)]
-    [TestCase(16, IntervalQuality.Augmented)]
-    [TestCase(16, IntervalQuality.Diminished)]
+    [TestCase(9, IntervalQualityInternal.Minor)]
+    [TestCase(9, IntervalQualityInternal.Major)]
+    [TestCase(9, IntervalQualityInternal.Augmented)]
+    [TestCase(9, IntervalQualityInternal.Diminished)]
+    [TestCase(10, IntervalQualityInternal.Minor)]
+    [TestCase(10, IntervalQualityInternal.Major)]
+    [TestCase(10, IntervalQualityInternal.Augmented)]
+    [TestCase(10, IntervalQualityInternal.Diminished)]
+    [TestCase(11, IntervalQualityInternal.Perfect)]
+    [TestCase(11, IntervalQualityInternal.Augmented)]
+    [TestCase(11, IntervalQualityInternal.Diminished)]
+    [TestCase(15, IntervalQualityInternal.Perfect)]
+    [TestCase(15, IntervalQualityInternal.Augmented)]
+    [TestCase(15, IntervalQualityInternal.Diminished)]
+    [TestCase(16, IntervalQualityInternal.Minor)]
+    [TestCase(16, IntervalQualityInternal.Major)]
+    [TestCase(16, IntervalQualityInternal.Augmented)]
+    [TestCase(16, IntervalQualityInternal.Diminished)]
     public void ValidCreationArgumentsCompoundOctave(int intervalBaseNumber,
-        IntervalQuality intervalChromaticQuality)
+        IntervalQualityInternal intervalChromaticQualityInternal)
     {
         void ValidCreation()
         {
-            new Interval(intervalBaseNumber, intervalChromaticQuality);
+            new IntervalInternal(intervalBaseNumber, intervalChromaticQualityInternal);
         }
 
         Assert.DoesNotThrow(ValidCreation);
     }
 
     [Theory]
-    [TestCase(0, IntervalQuality.Perfect)]
-    [TestCase(0, IntervalQuality.Minor)]
-    [TestCase(0, IntervalQuality.Major)]
-    [TestCase(0, IntervalQuality.Augmented)]
-    [TestCase(0, IntervalQuality.Diminished)]
-    [TestCase(1, IntervalQuality.Diminished)]
-    [TestCase(1, IntervalQuality.Major)]
-    [TestCase(1, IntervalQuality.Minor)]
-    [TestCase(2, IntervalQuality.Perfect)]
-    [TestCase(3, IntervalQuality.Perfect)]
-    [TestCase(4, IntervalQuality.Major)]
-    [TestCase(4, IntervalQuality.Minor)]
+    [TestCase(0, IntervalQualityInternal.Perfect)]
+    [TestCase(0, IntervalQualityInternal.Minor)]
+    [TestCase(0, IntervalQualityInternal.Major)]
+    [TestCase(0, IntervalQualityInternal.Augmented)]
+    [TestCase(0, IntervalQualityInternal.Diminished)]
+    [TestCase(1, IntervalQualityInternal.Diminished)]
+    [TestCase(1, IntervalQualityInternal.Major)]
+    [TestCase(1, IntervalQualityInternal.Minor)]
+    [TestCase(2, IntervalQualityInternal.Perfect)]
+    [TestCase(3, IntervalQualityInternal.Perfect)]
+    [TestCase(4, IntervalQualityInternal.Major)]
+    [TestCase(4, IntervalQualityInternal.Minor)]
     public void InvalidCreationArgumentsOneOctave(int intervalBaseNumber,
-        IntervalQuality intervalChromaticQuality)
+        IntervalQualityInternal intervalChromaticQualityInternal)
     {
         void InvalidCreation()
         {
-            new Interval(intervalBaseNumber, intervalChromaticQuality);
+            new IntervalInternal(intervalBaseNumber, intervalChromaticQualityInternal);
         }
 
         Assert.Throws(Is.InstanceOf<Exception>(), InvalidCreation);

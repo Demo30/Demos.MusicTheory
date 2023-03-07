@@ -23,82 +23,82 @@ internal class NoteProviderFromNoteByDiatonicOffsetTest : TestBase
 
     [Test]
     [TestCaseSource(nameof(ShouldReturnNoteForGivenScaleAndOffsetDataTestCases))]
-    public void ShouldReturnNoteForGivenScaleAndOffsetData(DiatonicScale scale, Note referenceNote, int diatonicSteps, Note expectedNote)
+    public void ShouldReturnNoteForGivenScaleAndOffsetData(DiatonicScale scale, NoteInternal referenceNoteInternal, int diatonicSteps, NoteInternal expectedNoteInternal)
     {
         // Given
 
         // When
-        var note = _provider.GetNote(scale, referenceNote, diatonicSteps);
+        var note = _provider.GetNote(scale, referenceNoteInternal, diatonicSteps);
 
         // Then
-        note.Should().BeEquivalentTo(expectedNote);
+        note.Should().BeEquivalentTo(expectedNoteInternal);
     }
 
     static IEnumerable<TestCaseData> ShouldReturnNoteForGivenScaleAndOffsetDataTestCases()
     {
         yield return new TestCaseData(
-            new DiatonicScale(NoteQuality.C, NotationSymbols.None, DiatonicScaleType.Major),
-            new Note(NoteQuality.C, 1, NotationSymbols.None),
+            new DiatonicScale(NoteQualityInternal.C, NotationSymbols.None, DiatonicScaleType.Major),
+            new NoteInternal(NoteQualityInternal.C, 1, NotationSymbols.None),
             1,
-            new Note(NoteQuality.D, 1, NotationSymbols.None));
+            new NoteInternal(NoteQualityInternal.D, 1, NotationSymbols.None));
         
         yield return new TestCaseData(
-            new DiatonicScale(NoteQuality.C, NotationSymbols.None, DiatonicScaleType.Major),
-            new Note(NoteQuality.C, 1, NotationSymbols.None),
+            new DiatonicScale(NoteQualityInternal.C, NotationSymbols.None, DiatonicScaleType.Major),
+            new NoteInternal(NoteQualityInternal.C, 1, NotationSymbols.None),
             3,
-            new Note(NoteQuality.F, 1, NotationSymbols.None));
+            new NoteInternal(NoteQualityInternal.F, 1, NotationSymbols.None));
         
         yield return new TestCaseData(
-            new DiatonicScale(NoteQuality.C, NotationSymbols.None, DiatonicScaleType.Major),
-            new Note(NoteQuality.C, 1, NotationSymbols.None),
+            new DiatonicScale(NoteQualityInternal.C, NotationSymbols.None, DiatonicScaleType.Major),
+            new NoteInternal(NoteQualityInternal.C, 1, NotationSymbols.None),
             7,
-            new Note(NoteQuality.C, 2, NotationSymbols.None));
+            new NoteInternal(NoteQualityInternal.C, 2, NotationSymbols.None));
         
         yield return new TestCaseData(
-            new DiatonicScale(NoteQuality.C, NotationSymbols.None, DiatonicScaleType.Major),
-            new Note(NoteQuality.C, 1, NotationSymbols.None),
+            new DiatonicScale(NoteQualityInternal.C, NotationSymbols.None, DiatonicScaleType.Major),
+            new NoteInternal(NoteQualityInternal.C, 1, NotationSymbols.None),
             14,
-            new Note(NoteQuality.C, 3, NotationSymbols.None));
+            new NoteInternal(NoteQualityInternal.C, 3, NotationSymbols.None));
         
         yield return new TestCaseData(
-            new DiatonicScale(NoteQuality.C, NotationSymbols.None, DiatonicScaleType.Major),
-            new Note(NoteQuality.C, 2, NotationSymbols.None),
+            new DiatonicScale(NoteQualityInternal.C, NotationSymbols.None, DiatonicScaleType.Major),
+            new NoteInternal(NoteQualityInternal.C, 2, NotationSymbols.None),
             7,
-            new Note(NoteQuality.C, 3, NotationSymbols.None));
+            new NoteInternal(NoteQualityInternal.C, 3, NotationSymbols.None));
         
         yield return new TestCaseData(
-            new DiatonicScale(NoteQuality.C, NotationSymbols.None, DiatonicScaleType.Major),
-            new Note(NoteQuality.C, 2, NotationSymbols.None),
+            new DiatonicScale(NoteQualityInternal.C, NotationSymbols.None, DiatonicScaleType.Major),
+            new NoteInternal(NoteQualityInternal.C, 2, NotationSymbols.None),
             -7,
-            new Note(NoteQuality.C, 1, NotationSymbols.None));
+            new NoteInternal(NoteQualityInternal.C, 1, NotationSymbols.None));
         
         yield return new TestCaseData(
-            new DiatonicScale(NoteQuality.C, NotationSymbols.None, DiatonicScaleType.Major),
-            new Note(NoteQuality.E, 2, NotationSymbols.None),
+            new DiatonicScale(NoteQualityInternal.C, NotationSymbols.None, DiatonicScaleType.Major),
+            new NoteInternal(NoteQualityInternal.E, 2, NotationSymbols.None),
             2,
-            new Note(NoteQuality.G, 2, NotationSymbols.None));
+            new NoteInternal(NoteQualityInternal.G, 2, NotationSymbols.None));
         
         yield return new TestCaseData(
-            new DiatonicScale(NoteQuality.G, NotationSymbols.None, DiatonicScaleType.Major),
-            new Note(NoteQuality.G, 2, NotationSymbols.None),
+            new DiatonicScale(NoteQualityInternal.G, NotationSymbols.None, DiatonicScaleType.Major),
+            new NoteInternal(NoteQualityInternal.G, 2, NotationSymbols.None),
             7,
-            new Note(NoteQuality.G, 3, NotationSymbols.None));
+            new NoteInternal(NoteQualityInternal.G, 3, NotationSymbols.None));
         
         yield return new TestCaseData(
-            new DiatonicScale(NoteQuality.G, NotationSymbols.None, DiatonicScaleType.Major),
-            new Note(NoteQuality.G, 2, NotationSymbols.None),
+            new DiatonicScale(NoteQualityInternal.G, NotationSymbols.None, DiatonicScaleType.Major),
+            new NoteInternal(NoteQualityInternal.G, 2, NotationSymbols.None),
             6,
-            new Note(NoteQuality.F, 3, NotationSymbols.Sharp));
+            new NoteInternal(NoteQualityInternal.F, 3, NotationSymbols.Sharp));
     }
     
     [Test]
     [TestCaseSource(nameof(ShouldThrowErrorWhenNoteOutsideTheScaleIsProvidedTestCases))]
-    public void ShouldThrowErrorWhenNoteOutsideTheScaleIsProvided(DiatonicScale scale, Note referenceNote)
+    public void ShouldThrowErrorWhenNoteOutsideTheScaleIsProvided(DiatonicScale scale, NoteInternal referenceNoteInternal)
     {
         // Given
 
         // When
-        var call = () => _provider.GetNote(scale, referenceNote, 1);
+        var call = () => _provider.GetNote(scale, referenceNoteInternal, 1);
 
         // Then
         call.Should().Throw<ArgumentException>();
@@ -107,7 +107,7 @@ internal class NoteProviderFromNoteByDiatonicOffsetTest : TestBase
     static IEnumerable<TestCaseData> ShouldThrowErrorWhenNoteOutsideTheScaleIsProvidedTestCases()
     {
         yield return new TestCaseData(
-            new DiatonicScale(NoteQuality.G, NotationSymbols.None, DiatonicScaleType.Major),
-            new Note(NoteQuality.F, 1, NotationSymbols.None));
+            new DiatonicScale(NoteQualityInternal.G, NotationSymbols.None, DiatonicScaleType.Major),
+            new NoteInternal(NoteQualityInternal.F, 1, NotationSymbols.None));
     }
 }

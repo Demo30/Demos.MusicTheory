@@ -23,23 +23,23 @@ internal class NoteProviderFromNoteByIntervalTest : TestBase
     [Theory]
     [TestCaseSource(nameof(GetTestCases))]
     public void ValidResults(
-        NoteQuality noteQuality,
+        NoteQualityInternal noteQualityInternal,
         int order,
         NotationSymbols modifier,
-        Interval interval,
+        IntervalInternal intervalInternal,
         OneDimensionalDirection direction,
-        NoteQuality expectedNoteQuality,
+        NoteQualityInternal expectedNoteQualityInternal,
         int expectedOrder,
         NotationSymbols expectedModifier)
     {
         // Given
-        Note note = new(noteQuality, order, modifier);
+        NoteInternal noteInternal = new(noteQualityInternal, order, modifier);
 
         // When
-        var cluster = _provider!.GetEnharmonics(note, interval, direction);
+        var cluster = _provider!.GetEnharmonics(noteInternal, intervalInternal, direction);
 
         // Then
-        var expectedNote = new Note(expectedNoteQuality, expectedOrder, expectedModifier);
+        var expectedNote = new NoteInternal(expectedNoteQualityInternal, expectedOrder, expectedModifier);
         cluster.Notes.Should().ContainSingle(n => n.IsEqualByContent(expectedNote));
         cluster.ChromaticContextIndex.Should().Be(expectedNote.ChromaticContextIndex);
     }
@@ -48,227 +48,227 @@ internal class NoteProviderFromNoteByIntervalTest : TestBase
     {
         yield return new TestCaseData
         (
-            NoteQuality.C, 1, NotationSymbols.None,
-            new Interval(2, IntervalQuality.Minor), OneDimensionalDirection.RIGHT,
-            NoteQuality.D, 1, NotationSymbols.Flat
+            NoteQualityInternal.C, 1, NotationSymbols.None,
+            new IntervalInternal(2, IntervalQualityInternal.Minor), OneDimensionalDirection.RIGHT,
+            NoteQualityInternal.D, 1, NotationSymbols.Flat
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 1, NotationSymbols.None,
-            new Interval(2, IntervalQuality.Minor), OneDimensionalDirection.RIGHT,
-            NoteQuality.C, 1, NotationSymbols.Sharp
+            NoteQualityInternal.C, 1, NotationSymbols.None,
+            new IntervalInternal(2, IntervalQualityInternal.Minor), OneDimensionalDirection.RIGHT,
+            NoteQualityInternal.C, 1, NotationSymbols.Sharp
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 1, NotationSymbols.None,
-            new Interval(2, IntervalQuality.Major), OneDimensionalDirection.RIGHT,
-            NoteQuality.D, 1, NotationSymbols.None
+            NoteQualityInternal.C, 1, NotationSymbols.None,
+            new IntervalInternal(2, IntervalQualityInternal.Major), OneDimensionalDirection.RIGHT,
+            NoteQualityInternal.D, 1, NotationSymbols.None
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.None,
-            new Interval(2, IntervalQuality.Minor), OneDimensionalDirection.RIGHT,
-            NoteQuality.D, 0, NotationSymbols.Flat
+            NoteQualityInternal.C, 0, NotationSymbols.None,
+            new IntervalInternal(2, IntervalQualityInternal.Minor), OneDimensionalDirection.RIGHT,
+            NoteQualityInternal.D, 0, NotationSymbols.Flat
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.None,
-            new Interval(2, IntervalQuality.Minor), OneDimensionalDirection.RIGHT,
-            NoteQuality.C, 0, NotationSymbols.Sharp
+            NoteQualityInternal.C, 0, NotationSymbols.None,
+            new IntervalInternal(2, IntervalQualityInternal.Minor), OneDimensionalDirection.RIGHT,
+            NoteQualityInternal.C, 0, NotationSymbols.Sharp
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.None,
-            new Interval(1, IntervalQuality.Perfect),
+            NoteQualityInternal.C, 0, NotationSymbols.None,
+            new IntervalInternal(1, IntervalQualityInternal.Perfect),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.C, 0, NotationSymbols.None
+            NoteQualityInternal.C, 0, NotationSymbols.None
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.None,
-            new Interval(8, IntervalQuality.Perfect),
+            NoteQualityInternal.C, 0, NotationSymbols.None,
+            new IntervalInternal(8, IntervalQualityInternal.Perfect),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.C, 1, NotationSymbols.None
+            NoteQualityInternal.C, 1, NotationSymbols.None
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.Sharp,
-            new Interval(1, IntervalQuality.Perfect),
+            NoteQualityInternal.C, 0, NotationSymbols.Sharp,
+            new IntervalInternal(1, IntervalQualityInternal.Perfect),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.C, 0, NotationSymbols.Sharp
+            NoteQualityInternal.C, 0, NotationSymbols.Sharp
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.Sharp,
-            new Interval(2, IntervalQuality.Major), OneDimensionalDirection.RIGHT,
-            NoteQuality.D, 0, NotationSymbols.Sharp
+            NoteQualityInternal.C, 0, NotationSymbols.Sharp,
+            new IntervalInternal(2, IntervalQualityInternal.Major), OneDimensionalDirection.RIGHT,
+            NoteQualityInternal.D, 0, NotationSymbols.Sharp
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.Sharp,
-            new Interval(2, IntervalQuality.Major), OneDimensionalDirection.RIGHT,
-            NoteQuality.E, 0, NotationSymbols.Flat
+            NoteQualityInternal.C, 0, NotationSymbols.Sharp,
+            new IntervalInternal(2, IntervalQualityInternal.Major), OneDimensionalDirection.RIGHT,
+            NoteQualityInternal.E, 0, NotationSymbols.Flat
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.Sharp,
-            new Interval(2, IntervalQuality.Major), OneDimensionalDirection.RIGHT,
-            NoteQuality.F, 0, NotationSymbols.DoubleFlat
+            NoteQualityInternal.C, 0, NotationSymbols.Sharp,
+            new IntervalInternal(2, IntervalQualityInternal.Major), OneDimensionalDirection.RIGHT,
+            NoteQualityInternal.F, 0, NotationSymbols.DoubleFlat
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.None,
-            new Interval(3, IntervalQuality.Minor), OneDimensionalDirection.RIGHT,
-            NoteQuality.D, 0, NotationSymbols.Sharp
+            NoteQualityInternal.C, 0, NotationSymbols.None,
+            new IntervalInternal(3, IntervalQualityInternal.Minor), OneDimensionalDirection.RIGHT,
+            NoteQualityInternal.D, 0, NotationSymbols.Sharp
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.None,
-            new Interval(2, IntervalQuality.Augmented),
+            NoteQualityInternal.C, 0, NotationSymbols.None,
+            new IntervalInternal(2, IntervalQualityInternal.Augmented),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.D, 0, NotationSymbols.Sharp
+            NoteQualityInternal.D, 0, NotationSymbols.Sharp
         );
 
         yield return new TestCaseData(
-            NoteQuality.C, 0, NotationSymbols.None,
-            new Interval(3, IntervalQuality.Minor), OneDimensionalDirection.RIGHT,
-            NoteQuality.E, 0, NotationSymbols.Flat
+            NoteQualityInternal.C, 0, NotationSymbols.None,
+            new IntervalInternal(3, IntervalQualityInternal.Minor), OneDimensionalDirection.RIGHT,
+            NoteQualityInternal.E, 0, NotationSymbols.Flat
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.None,
-            new Interval(4, IntervalQuality.Perfect),
+            NoteQualityInternal.C, 0, NotationSymbols.None,
+            new IntervalInternal(4, IntervalQualityInternal.Perfect),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.F, 0, NotationSymbols.None
+            NoteQualityInternal.F, 0, NotationSymbols.None
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.None,
-            new Interval(4, IntervalQuality.Augmented),
+            NoteQualityInternal.C, 0, NotationSymbols.None,
+            new IntervalInternal(4, IntervalQualityInternal.Augmented),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.F, 0, NotationSymbols.Sharp
+            NoteQualityInternal.F, 0, NotationSymbols.Sharp
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.None,
-            new Interval(4, IntervalQuality.Augmented),
+            NoteQualityInternal.C, 0, NotationSymbols.None,
+            new IntervalInternal(4, IntervalQualityInternal.Augmented),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.G, 0, NotationSymbols.Flat
+            NoteQualityInternal.G, 0, NotationSymbols.Flat
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.None,
-            new Interval(5, IntervalQuality.Perfect),
+            NoteQualityInternal.C, 0, NotationSymbols.None,
+            new IntervalInternal(5, IntervalQualityInternal.Perfect),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.G, 0, NotationSymbols.None
+            NoteQualityInternal.G, 0, NotationSymbols.None
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 0, NotationSymbols.None,
-            new Interval(12, IntervalQuality.Perfect),
+            NoteQualityInternal.C, 0, NotationSymbols.None,
+            new IntervalInternal(12, IntervalQualityInternal.Perfect),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.G, 1, NotationSymbols.None
+            NoteQualityInternal.G, 1, NotationSymbols.None
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.D, 1, NotationSymbols.Flat,
-            new Interval(2, IntervalQuality.Minor), OneDimensionalDirection.LEFT,
-            NoteQuality.C, 1, NotationSymbols.None
+            NoteQualityInternal.D, 1, NotationSymbols.Flat,
+            new IntervalInternal(2, IntervalQualityInternal.Minor), OneDimensionalDirection.LEFT,
+            NoteQualityInternal.C, 1, NotationSymbols.None
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 1, NotationSymbols.Sharp,
-            new Interval(2, IntervalQuality.Minor), OneDimensionalDirection.LEFT,
-            NoteQuality.C, 1, NotationSymbols.None
+            NoteQualityInternal.C, 1, NotationSymbols.Sharp,
+            new IntervalInternal(2, IntervalQualityInternal.Minor), OneDimensionalDirection.LEFT,
+            NoteQualityInternal.C, 1, NotationSymbols.None
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.D, 1, NotationSymbols.None,
-            new Interval(2, IntervalQuality.Major), OneDimensionalDirection.LEFT,
-            NoteQuality.C, 1, NotationSymbols.None
+            NoteQualityInternal.D, 1, NotationSymbols.None,
+            new IntervalInternal(2, IntervalQualityInternal.Major), OneDimensionalDirection.LEFT,
+            NoteQualityInternal.C, 1, NotationSymbols.None
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.D, 0, NotationSymbols.Flat,
-            new Interval(2, IntervalQuality.Minor), OneDimensionalDirection.LEFT,
-            NoteQuality.C, 0, NotationSymbols.None
+            NoteQualityInternal.D, 0, NotationSymbols.Flat,
+            new IntervalInternal(2, IntervalQualityInternal.Minor), OneDimensionalDirection.LEFT,
+            NoteQualityInternal.C, 0, NotationSymbols.None
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.G, 0, NotationSymbols.None,
-            new Interval(5, IntervalQuality.Perfect),
+            NoteQualityInternal.G, 0, NotationSymbols.None,
+            new IntervalInternal(5, IntervalQualityInternal.Perfect),
             OneDimensionalDirection.LEFT,
-            NoteQuality.C, 0, NotationSymbols.None
+            NoteQualityInternal.C, 0, NotationSymbols.None
         );
 
         yield return new TestCaseData
         (
-            NoteQuality.C, 1, NotationSymbols.None,
-            new Interval(8, IntervalQuality.Perfect),
+            NoteQualityInternal.C, 1, NotationSymbols.None,
+            new IntervalInternal(8, IntervalQualityInternal.Perfect),
             OneDimensionalDirection.LEFT,
-            NoteQuality.C, 0, NotationSymbols.None
+            NoteQualityInternal.C, 0, NotationSymbols.None
         );
         
         yield return new TestCaseData
         (
-            NoteQuality.G, 1, NotationSymbols.None,
-            new Interval(3, IntervalQuality.Minor),
+            NoteQualityInternal.G, 1, NotationSymbols.None,
+            new IntervalInternal(3, IntervalQualityInternal.Minor),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.C, 2, NotationSymbols.DoubleFlat
+            NoteQualityInternal.C, 2, NotationSymbols.DoubleFlat
         );
         
         yield return new TestCaseData
         (
-            NoteQuality.G, 1, NotationSymbols.None,
-            new Interval(3, IntervalQuality.Minor),
+            NoteQualityInternal.G, 1, NotationSymbols.None,
+            new IntervalInternal(3, IntervalQualityInternal.Minor),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.B, 1, NotationSymbols.Flat
+            NoteQualityInternal.B, 1, NotationSymbols.Flat
         );
         
         yield return new TestCaseData
         (
-            NoteQuality.G, 1, NotationSymbols.None,
-            new Interval(3, IntervalQuality.Minor),
+            NoteQualityInternal.G, 1, NotationSymbols.None,
+            new IntervalInternal(3, IntervalQualityInternal.Minor),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.A, 1, NotationSymbols.Sharp
+            NoteQualityInternal.A, 1, NotationSymbols.Sharp
         );
         
         yield return new TestCaseData
         (
-            NoteQuality.F, 1, NotationSymbols.DoubleSharp,
-            new Interval(3, IntervalQuality.Minor),
+            NoteQualityInternal.F, 1, NotationSymbols.DoubleSharp,
+            new IntervalInternal(3, IntervalQualityInternal.Minor),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.C, 2, NotationSymbols.DoubleFlat
+            NoteQualityInternal.C, 2, NotationSymbols.DoubleFlat
         );
         
         yield return new TestCaseData
         (
-            NoteQuality.F, 1, NotationSymbols.DoubleSharp,
-            new Interval(3, IntervalQuality.Minor),
+            NoteQualityInternal.F, 1, NotationSymbols.DoubleSharp,
+            new IntervalInternal(3, IntervalQualityInternal.Minor),
             OneDimensionalDirection.RIGHT,
-            NoteQuality.A, 1, NotationSymbols.Sharp
+            NoteQualityInternal.A, 1, NotationSymbols.Sharp
         );
     }
 }
