@@ -3,7 +3,7 @@ using Demos.MusicTheory.Mappers;
 
 namespace Demos.MusicTheory;
 
-public class Interval
+public partial class Interval
 {
     private IntervalInternal _intervalInternal;
 
@@ -38,4 +38,20 @@ public class Interval
 
 
     #endregion
+}
+
+public partial class Interval
+{
+    public static Interval PerfectUnison => new(1, IntervalQuality.Perfect);
+    public static Interval MinorSecond => new(2, IntervalQuality.Minor);
+    public static Interval MajorSecond => new(2, IntervalQuality.Major);
+    public static Interval MinorThird => new(3, IntervalQuality.Minor);
+    public static Interval MajorThird => new(3, IntervalQuality.Major);
+    public static Interval PerfectFourth => new(4, IntervalQuality.Perfect);
+    public static Interval PerfectFifth => new(5, IntervalQuality.Perfect);
+    public static Interval MinorSixth => new(6, IntervalQuality.Minor);
+    public static Interval MajorSixth => new(6, IntervalQuality.Major);
+    public static Interval MinorSeventh => new(7, IntervalQuality.Minor);
+    public static Interval MajorSeventh => new(7, IntervalQuality.Major);
+    public static Interval PerfectOctave => new(8, IntervalQuality.Perfect);
 }
