@@ -20,8 +20,7 @@ internal class NoteProviderFromNoteBySpan
 
     public NoteEnharmonicsInternal GetEnharmonics(NoteInternal noteInternal, int chromaticIndexSpan, OneDimensionalDirection direction)
     {
-        return _providerFromIndex.GetEnharmonics(GetSpannedChromaticIndex(noteInternal, chromaticIndexSpan,
-            direction));
+        return _providerFromIndex.GetEnharmonics(GetSpannedChromaticIndex(noteInternal, chromaticIndexSpan, direction));
     }
 
     private static int GetSpannedChromaticIndex(IChromaticEntity note, int chromaticIndexSpan, OneDimensionalDirection direction)

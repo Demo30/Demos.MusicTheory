@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.MusicTheory.Services"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.MusicTheory.Tests.IntegrationTests", "Demos.MusicTheory.Tests.IntegrationTests\Demos.MusicTheory.Tests.IntegrationTests.csproj", "{29642177-A443-4AA1-9904-922DFF37C935}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.MusicTheory.Tests.PublicIntegration", "Demos.MusicTheory.Tests.PublicIntegration\Demos.MusicTheory.Tests.PublicIntegration.csproj", "{F22C347A-C0C6-4B91-A9BD-30423D072FDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{29642177-A443-4AA1-9904-922DFF37C935}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29642177-A443-4AA1-9904-922DFF37C935}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29642177-A443-4AA1-9904-922DFF37C935}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F22C347A-C0C6-4B91-A9BD-30423D072FDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F22C347A-C0C6-4B91-A9BD-30423D072FDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F22C347A-C0C6-4B91-A9BD-30423D072FDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F22C347A-C0C6-4B91-A9BD-30423D072FDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
