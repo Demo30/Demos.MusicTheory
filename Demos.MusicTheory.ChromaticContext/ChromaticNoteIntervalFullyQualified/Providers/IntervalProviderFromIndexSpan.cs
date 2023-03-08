@@ -74,7 +74,7 @@ internal class IntervalProviderFromIndexSpan
         return number % 2 == 0;
     }
 
-    private struct SpanAnalysisReport
+    private record SpanAnalysisReport
     {
         public int ChromaticIndexSpan { get; set; }
         public bool IsBlackKey { get; set; }

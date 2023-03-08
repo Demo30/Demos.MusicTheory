@@ -27,12 +27,20 @@ public class Note
 
     #region Note services
 
-    public IEnumerable<Note> GetEnharmonicNotesByChromaticDistance(int chromaticDistance, Direction direction = Direction.Right) =>
-        MusicTheoryService.Instance.GetNotesByChromaticDistance(this, chromaticDistance, direction);
+    public IEnumerable<Note> GetEnharmonics() =>
+        MusicTheoryService.Instance.GetNotesByInterval(this, Interval.PerfectUnison);
+
+    public IEnumerable<Note> GetEnharmonicNotesBySemitoneDistance(int semitoneCount, Direction direction = Direction.Right) =>
+        MusicTheoryService.Instance.GetNotesBySemitonesDistance(this, semitoneCount, direction);
 
     public IEnumerable<Note> GetEnharmonicNotesByInterval(Interval interval, Direction direction = Direction.Right) =>
         MusicTheoryService.Instance.GetNotesByInterval(this, interval, direction);
 
+    public int GetSemitoneDistanceFromOtherNote(Note secondNote) =>
+        MusicTheoryService.Instance.GetSemitoneCountBetweenNotes(this, secondNote);
+    
+    public Interval GetIntervalFromOtherNote(Note secondNote) =>
+        MusicTheoryService.Instance.GetIntervalBetweenNotes(this, secondNote);
 
     #endregion
 }

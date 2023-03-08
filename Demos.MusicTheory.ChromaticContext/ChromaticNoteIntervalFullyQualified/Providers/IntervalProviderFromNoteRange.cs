@@ -21,7 +21,7 @@ internal class IntervalProviderFromNoteRange
         _indexSpanProvider = indexSpanProvider;
     }
 
-    public IntervalInternal GetIntervals(NoteRangeInternal rangeInternal)
+    public IntervalInternal GetInterval(NoteRangeInternal rangeInternal)
     {
         return _indexSpanProvider
             .GetIntervals(rangeInternal.ChromaticIndexSpan)

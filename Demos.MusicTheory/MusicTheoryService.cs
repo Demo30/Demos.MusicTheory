@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
@@ -44,10 +45,10 @@ public class MusicTheoryService
         _noteProviderFromNoteByDiatonicOffset = new NoteProviderFromNoteByDiatonicOffset();
     }
 
-    public IEnumerable<Note> GetNotesByChromaticDistance(Note sourceNote, int chromaticDistance, Direction direction = Direction.Right) =>
+    public IEnumerable<Note> GetNotesBySemitonesDistance(Note sourceNote, int semitoneCount, Direction direction = Direction.Right) =>
         _noteProviderFromNoteBySpan.GetEnharmonics(
                 sourceNote.NoteInternal,
-                chromaticDistance,
+                semitoneCount,
                 NoteMapper.Map(direction))
             .Notes
             .Select(x => new Note(NoteMapper.Map(x.QualityInternal), NoteMapper.Map(x.Modifier), (uint) x.Order));
@@ -60,5 +61,22 @@ public class MusicTheoryService
                 NoteMapper.Map(direction))
             .Notes
             .Select(x => new Note(NoteMapper.Map(x.QualityInternal), NoteMapper.Map(x.Modifier), (uint) x.Order));
-    
+
+    public IEnumerable<Interval> GetIntervalsBySemitoneDistance(int semitoneCount) =>
+        _intervalProviderFromIndexSpan
+            .GetIntervals(semitoneCount)
+            .Intervals
+            .Select(i => new Interval(i.SemitoneCount, IntervalMapper.Map(i.QualityInternal)));
+
+    public int GetSemitoneCountBetweenNotes(Note firstNote, Note secondNote) =>
+        new NoteRangeInternal(firstNote.NoteInternal, secondNote.NoteInternal)
+            .ChromaticIndexSpan;
+
+    public Interval GetIntervalBetweenNotes(Note firstNote, Note secondNote)
+    {
+        var interval = _intervalProviderFromNoteRange
+            .GetInterval(new NoteRangeInternal(firstNote.NoteInternal, secondNote.NoteInternal));
+        return new Interval(interval.SemitoneCount, IntervalMapper.Map(interval.QualityInternal));
+    }
+        
 }

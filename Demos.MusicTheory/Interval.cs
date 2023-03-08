@@ -1,4 +1,5 @@
-﻿using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
+﻿using System.Collections.Generic;
+using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
 using Demos.MusicTheory.Mappers;
 
 namespace Demos.MusicTheory;
@@ -32,8 +33,9 @@ public partial class Interval
     #endregion
 
     #region Interval services
-    
-    //public static Interval GetIntervalFromChromaticDistance(int chromaticDistance) => MusicTheoryService.Instance.
+
+    public static IEnumerable<Interval> GetIntervalsByChromaticDistance(int chromaticDistance) =>
+        MusicTheoryService.Instance.GetIntervalsBySemitoneDistance(chromaticDistance);
 
 
 

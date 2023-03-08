@@ -15,7 +15,7 @@ internal class ServicesTest
     }
     
     [Test]
-    public void TestServices()
+    public void RegisteredServicesHaveExpectedCount()
     {
         // Given
         MusicTheorySetup.Setup();
@@ -24,11 +24,11 @@ internal class ServicesTest
         var keys = ServicesManager.ServicesProvider.Services.Keys;
         
         // Then
-        keys.Should().HaveCount(5); // TODO: this is kinda stupid, annotate with attribute maybe
+        keys.Should().HaveCount(5);
     }
     
     [Test]
-    public void TestServices2()
+    public void AllRegisteredServicesCanBeInstantiated()
     {
         // Given
         MusicTheorySetup.Setup();

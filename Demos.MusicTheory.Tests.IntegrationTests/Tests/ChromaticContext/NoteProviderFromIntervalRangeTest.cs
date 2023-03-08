@@ -33,7 +33,7 @@ internal class NoteProviderFromIntervalRangeTest : TestBase
             new NoteInternal(quality2, octaveOrder2, modifier2));
 
         // When
-        var result = _provider!.GetIntervals(range);
+        var result = _provider!.GetInterval(range);
 
         // Then
         result.Should().NotBeNull();
