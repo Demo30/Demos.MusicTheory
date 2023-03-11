@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 namespace Demos.MusicTheory.Tests.PublicIntegration;
 
+[TestFixture]
 internal abstract class TestBase
 {
     [OneTimeSetUp]

@@ -7,7 +7,7 @@
 [☑][☑] Mít notu a dostat kolekci všech enharmonických ekvivalentů (C♯ => C♯, Db; D => Ebb, C♯♯)
 [☑][☑] Mít notu a vzdálenost od noty v půltónech a dostat kolekci všech enharmonických ekvivalentů (C, 1 => C♯, Db; C, 3 => D♯, Eb)
 [✅] Mít rozmezí dvou not (C1-F1) a určit, jaký mezi sebou mají rozestup v půltónech.
-	-  je tam bug B3-C4...
+	-  nepodporuji A3#-C4bb
 [☑] Mít rozmezí dvou not (C1-F1) a určit, jaký mezi sebou mají intervalový rozestup (P5) (nikoliv cluster!)
 [☑][☑] Mít vzdálenost v chromatických krocích a dostat kolekci všech odpovídajících enharmonicky ekvivalentních intervalů.
 

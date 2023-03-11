@@ -4,6 +4,7 @@ using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
+using Demos.MusicTheory.ChromaticContext.DiatonicSubcontext;
 using Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 using Demos.MusicTheory.Mappers;
 using Demos.MusicTheory.Setup;
@@ -79,5 +80,8 @@ public class MusicTheoryService
         
         return IntervalMapper.Map(interval);
     }
-        
+
+    public IEnumerable<NoteQuality> GetElementaryNotesByScale(Scale scale) =>
+        _elementaryNotesProviderFromDiatonicScale.GetChromaticElementaryNotes(ScaleMapper.Map(scale))
+            .Select(x => NoteMapper.Map(x.QualityInternal));
 }
