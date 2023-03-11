@@ -15,4 +15,6 @@ internal class NoteRangeInternal
         NoteInternalStart = internalStart;
         NoteInternalEnd = internalEnd;
     }
+
+    public override string ToString() => $"{NoteInternalStart}-{NoteInternalEnd}";
 }

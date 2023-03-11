@@ -51,22 +51,22 @@ public class MusicTheoryService
                 semitoneCount,
                 NoteMapper.Map(direction))
             .Notes
-            .Select(x => new Note(NoteMapper.Map(x.QualityInternal), NoteMapper.Map(x.Modifier), (uint) x.Order));
+            .Select(NoteMapper.Map);
 
 
     public IEnumerable<Note> GetNotesByInterval(Note sourceNote, Interval interval, Direction direction = Direction.Right) =>
         _noteProviderFromNoteByInterval.GetEnharmonics(
                 sourceNote.NoteInternal,
-                new IntervalInternal(interval.DiatonicDegree, IntervalMapper.Map(interval.Quality)),
-                NoteMapper.Map(direction))
+                IntervalMapper.Map(interval),
+                GeneralMapper.Map(direction))
             .Notes
-            .Select(x => new Note(NoteMapper.Map(x.QualityInternal), NoteMapper.Map(x.Modifier), (uint) x.Order));
+            .Select(NoteMapper.Map);
 
     public IEnumerable<Interval> GetIntervalsBySemitoneDistance(int semitoneCount) =>
         _intervalProviderFromIndexSpan
             .GetIntervals(semitoneCount)
             .Intervals
-            .Select(i => new Interval(i.SemitoneCount, IntervalMapper.Map(i.QualityInternal)));
+            .Select(IntervalMapper.Map);
 
     public int GetSemitoneCountBetweenNotes(Note firstNote, Note secondNote) =>
         new NoteRangeInternal(firstNote.NoteInternal, secondNote.NoteInternal)
@@ -76,7 +76,8 @@ public class MusicTheoryService
     {
         var interval = _intervalProviderFromNoteRange
             .GetInterval(new NoteRangeInternal(firstNote.NoteInternal, secondNote.NoteInternal));
-        return new Interval(interval.SemitoneCount, IntervalMapper.Map(interval.QualityInternal));
+        
+        return IntervalMapper.Map(interval);
     }
         
 }

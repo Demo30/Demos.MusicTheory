@@ -18,6 +18,7 @@ internal class IntervalProviderFromNoteRangeTest : TestBase
         ServicesManager.ServicesProvider.RegisterService(() => new IntervalProviderFromIndexSpan());        
     }
 
+    // TODO: I am currently unable to support interval such as AAAA3: https://music.stackexchange.com/questions/42513/what-is-the-interval-from-c-double-flat-to-e-double-sharp-called
     public static IEnumerable<TestCaseData> GetTestCaseData()
     {
         yield return new TestCaseData(
@@ -49,6 +50,72 @@ internal class IntervalProviderFromNoteRangeTest : TestBase
                 new NoteInternal(NoteQualityInternal.C, 4, NotationSymbols.None),
                 new NoteInternal(NoteQualityInternal.B, 4, NotationSymbols.None)),
             new IntervalInternal(7, IntervalQualityInternal.Major));
+        
+        yield return new TestCaseData(
+            new NoteRangeInternal(
+                new NoteInternal(NoteQualityInternal.C, 4, NotationSymbols.None),
+                new NoteInternal(NoteQualityInternal.C, 4, NotationSymbols.None)),
+            new IntervalInternal(1, IntervalQualityInternal.Perfect));
+        
+        yield return new TestCaseData(
+            new NoteRangeInternal(
+                new NoteInternal(NoteQualityInternal.D, 4, NotationSymbols.None),
+                new NoteInternal(NoteQualityInternal.D, 4, NotationSymbols.None)),
+            new IntervalInternal(1, IntervalQualityInternal.Perfect));
+        
+        yield return new TestCaseData(
+            new NoteRangeInternal(
+                new NoteInternal(NoteQualityInternal.D, 3, NotationSymbols.None),
+                new NoteInternal(NoteQualityInternal.D, 4, NotationSymbols.None)),
+            new IntervalInternal(8, IntervalQualityInternal.Perfect));
+        
+        yield return new TestCaseData(
+            new NoteRangeInternal(
+                new NoteInternal(NoteQualityInternal.C, 3, NotationSymbols.None),
+                new NoteInternal(NoteQualityInternal.D, 4, NotationSymbols.None)),
+            new IntervalInternal(9, IntervalQualityInternal.Major));
+        
+        yield return new TestCaseData(
+            new NoteRangeInternal(
+                new NoteInternal(NoteQualityInternal.D, 4, NotationSymbols.None),
+                new NoteInternal(NoteQualityInternal.C, 4, NotationSymbols.None)),
+            new IntervalInternal(2, IntervalQualityInternal.Major));
+        
+        yield return new TestCaseData(
+            new NoteRangeInternal(
+                new NoteInternal(NoteQualityInternal.C, 4, NotationSymbols.Sharp),
+                new NoteInternal(NoteQualityInternal.D, 4, NotationSymbols.Sharp)),
+            new IntervalInternal(2, IntervalQualityInternal.Major));
+
+        yield return new TestCaseData(
+            new NoteRangeInternal(
+                new NoteInternal(NoteQualityInternal.A, 3, NotationSymbols.Sharp),
+                new NoteInternal(NoteQualityInternal.C, 4, NotationSymbols.None)),
+            new IntervalInternal(3, IntervalQualityInternal.Diminished));
+        
+        yield return new TestCaseData(
+            new NoteRangeInternal(
+                new NoteInternal(NoteQualityInternal.C, 4, NotationSymbols.None),
+                new NoteInternal(NoteQualityInternal.A, 3, NotationSymbols.Sharp)),
+            new IntervalInternal(3, IntervalQualityInternal.Diminished));
+        
+        yield return new TestCaseData(
+            new NoteRangeInternal(
+                new NoteInternal(NoteQualityInternal.A, 3, NotationSymbols.None),
+                new NoteInternal(NoteQualityInternal.C, 4, NotationSymbols.Flat)),
+            new IntervalInternal(3, IntervalQualityInternal.Diminished));
+        
+        yield return new TestCaseData(
+            new NoteRangeInternal(
+                new NoteInternal(NoteQualityInternal.C, 4, NotationSymbols.Flat),
+                new NoteInternal(NoteQualityInternal.A, 3, NotationSymbols.None)),
+            new IntervalInternal(3, IntervalQualityInternal.Diminished));
+        
+        yield return new TestCaseData(
+            new NoteRangeInternal(
+                new NoteInternal(NoteQualityInternal.A, 3, NotationSymbols.DoubleSharp),
+                new NoteInternal(NoteQualityInternal.C, 4, NotationSymbols.Flat)),
+            new IntervalInternal(3, IntervalQualityInternal.Diminished));
     }
     
     [Theory]

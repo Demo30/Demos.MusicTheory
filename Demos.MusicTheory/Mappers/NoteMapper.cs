@@ -1,11 +1,13 @@
 ﻿using System;
 using Demos.MusicTheory.ChromaticContext;
+using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 using Demos.MusicTheory.Commons;
 
 namespace Demos.MusicTheory.Mappers;
 
 internal static class NoteMapper
 {
+    public static Note Map(NoteInternal noteInternal) => new Note(Map(noteInternal.QualityInternal), Map(noteInternal.Modifier), (uint)noteInternal.Order);
     public static NoteQualityInternal Map(NoteQuality noteQuality) =>
         noteQuality switch
         {

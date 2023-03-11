@@ -23,6 +23,24 @@ public class Note
     
     public NoteModifier NoteModifier => NoteMapper.Map(_noteInternal.Modifier);
 
+    public override string ToString() => _noteInternal.ToString();
+
+    #endregion
+
+    #region operators
+
+    public static bool operator >(Note a, Note b) => a._noteInternal > b._noteInternal;
+    
+    public static bool operator <(Note a, Note b) => a._noteInternal < b._noteInternal;
+    
+    public static bool operator ==(Note a, Note b) => a._noteInternal == b._noteInternal;
+    
+    public static bool operator !=(Note a, Note b) => a._noteInternal != b._noteInternal;
+    
+    public static bool operator <=(Note a, Note b) => a._noteInternal <= b._noteInternal;
+    
+    public static bool operator >=(Note a, Note b) => a._noteInternal >= b._noteInternal;
+
     #endregion
 
     #region Note services

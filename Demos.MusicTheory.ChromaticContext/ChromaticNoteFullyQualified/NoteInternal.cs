@@ -24,8 +24,17 @@ internal class NoteInternal : NoteBase
             comparedNoteInternal.ModifierBase == ModifierBase;
     }
 
-    public override string ToString()
-    {
-        return $"{QualityInternalBase}{OrderBase}{GetModifierString(ModifierBase)}";
-    }
+    public override string ToString() => $"{QualityInternalBase}{OrderBase}{GetModifierString(ModifierBase)}";
+
+    public static bool operator >(NoteInternal a, NoteInternal b) => a.ChromaticContextIndex > b.ChromaticContextIndex;
+    
+    public static bool operator <(NoteInternal a, NoteInternal b) => a.ChromaticContextIndex < b.ChromaticContextIndex;
+    
+    public static bool operator ==(NoteInternal a, NoteInternal b) => a.ChromaticContextIndex == b.ChromaticContextIndex;
+    
+    public static bool operator !=(NoteInternal a, NoteInternal b) => !(a == b);
+    
+    public static bool operator <=(NoteInternal a, NoteInternal b) => a.ChromaticContextIndex <= b.ChromaticContextIndex;
+    
+    public static bool operator >=(NoteInternal a, NoteInternal b) => a.ChromaticContextIndex >= b.ChromaticContextIndex;
 }

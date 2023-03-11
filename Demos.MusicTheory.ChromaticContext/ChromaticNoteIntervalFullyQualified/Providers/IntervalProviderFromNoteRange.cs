@@ -23,18 +23,54 @@ internal class IntervalProviderFromNoteRange
 
     public IntervalInternal GetInterval(NoteRangeInternal rangeInternal)
     {
-        return _indexSpanProvider
+        var rangeDiatonicScaleDegree = GetDiatonicDegreeSpan(rangeInternal);
+        
+        // TODO: wouldn't it be easier to try to calculate these directly?
+        var interval = _indexSpanProvider
             .GetIntervals(rangeInternal.ChromaticIndexSpan)
             .Intervals
-            .Single(i => i.DiatonicScaleDegree == GetDiatonicDegreeSpan(rangeInternal));
+            .SingleOrDefault(i => i.DiatonicScaleDegree == rangeDiatonicScaleDegree);
+
+        if (interval is null)
+        {
+            throw new ApplicationException($"No suitable interval found for note range: {rangeInternal.NoteInternalStart}-{rangeInternal.NoteInternalEnd}.");
+        }
+
+        return interval;
     }
 
     private static int GetDiatonicDegreeSpan(NoteRangeInternal rangeInternal)
     {
+        var startNote = rangeInternal.NoteInternalStart;
+        var endNote = rangeInternal.NoteInternalEnd;
+        
+        var startNoteDiatonicDegree = (int) startNote.QualityInternal;
+        var endNoteDiatonicDegree = (int) endNote.QualityInternal;
+
+        var shouldSwitch =
+            startNote > endNote ||
+            (startNote == endNote && startNote.Order > endNote.Order) ||
+            (startNote == endNote && startNote.Order == endNote.Order && startNoteDiatonicDegree > endNoteDiatonicDegree);
+
+        if (shouldSwitch)
+        {
+            var normalizedRange = new NoteRangeInternal(rangeInternal.NoteInternalEnd, rangeInternal.NoteInternalStart);
+            return GetDiatonicDegreeSpan(normalizedRange);
+        }
+        
         var subOctaves = rangeInternal.ChromaticIndexSpan / ChromaticContextConstants.ChromaticStepsFullOctave;
         var subOctavesDiatonicDegrees = subOctaves * ChromaticContextConstants.DiatonicStepsInOctave;
-        var baseDiatonicDifference =
-            Math.Abs((int) rangeInternal.NoteInternalStart.QualityInternal - (int) rangeInternal.NoteInternalEnd.QualityInternal) + 1;
-        return subOctavesDiatonicDegrees + baseDiatonicDifference;
+        
+        int baseDiatonicDifference;
+        if (rangeInternal.NoteInternalStart <= rangeInternal.NoteInternalEnd && startNoteDiatonicDegree <= endNoteDiatonicDegree)
+        {
+            baseDiatonicDifference = endNoteDiatonicDegree - startNoteDiatonicDegree;
+        }
+        else
+        {
+            baseDiatonicDifference = (endNoteDiatonicDegree + 7) - startNoteDiatonicDegree;
+        }
+
+        return subOctavesDiatonicDegrees + (baseDiatonicDifference + 1);
     }
 }

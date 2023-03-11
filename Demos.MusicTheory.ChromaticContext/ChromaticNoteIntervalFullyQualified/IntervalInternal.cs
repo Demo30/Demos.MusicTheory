@@ -7,13 +7,13 @@ namespace Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified
 internal class IntervalInternal : ElementaryInterval
 {
     public IntervalQualityInternal QualityInternal { get; }
-    
+
     /// <summary>
     /// Subtracts compound octave intervals from the overall base number.
     /// </summary>
     /// <returns></returns>
     public int SimpleBaseNumber => GetSimpleBaseNumber(DiatonicScaleDegree);
-    
+
     /// <summary>
     /// Basic interval number identification such as: second, third, sixth etc.
     /// </summary>
@@ -46,12 +46,14 @@ internal class IntervalInternal : ElementaryInterval
     {
         return new[] {1, 4, 5}.Contains(GetSimpleBaseNumber(intervalBaseNumber));
     }
-    
-    private readonly int _diatonicScaleDegree;
-    
-    private static int GetChromaticIndexSpan(int intervalBaseNumber, IntervalQualityInternal qualityInternal) => CalculateChromaticIndexSpan(intervalBaseNumber, qualityInternal);
 
-    public IntervalInternal(int intervalBaseNumber, IntervalQualityInternal qualityInternal) : base(GetChromaticIndexSpan(intervalBaseNumber, qualityInternal))
+    private readonly int _diatonicScaleDegree;
+
+    private static int GetChromaticIndexSpan(int intervalBaseNumber, IntervalQualityInternal qualityInternal) =>
+        CalculateChromaticIndexSpan(intervalBaseNumber, qualityInternal);
+
+    public IntervalInternal(int intervalBaseNumber, IntervalQualityInternal qualityInternal) : base(
+        GetChromaticIndexSpan(intervalBaseNumber, qualityInternal))
     {
         if (!IsNumberQualityCombinationValid(intervalBaseNumber, qualityInternal))
             throw new ArgumentException("Invalid combination of interval base number and quality.");
@@ -59,7 +61,7 @@ internal class IntervalInternal : ElementaryInterval
         QualityInternal = qualityInternal;
         DiatonicScaleDegree = intervalBaseNumber;
     }
-    
+
     private static int CalculateChromaticIndexSpan(int intervalBaseNumber, IntervalQualityInternal qualityInternal)
     {
         var basicSemitoneCountCorrections = GetBasicSemitoneCountCorrections(intervalBaseNumber);
@@ -80,20 +82,21 @@ internal class IntervalInternal : ElementaryInterval
     /// </summary>
     /// <param name="intervalBaseNumber"></param>
     /// <returns></returns>
-    private static int GetSimpleBaseNumber(int intervalBaseNumber) => intervalBaseNumber - GetSubOctaves(intervalBaseNumber) * 7;
+    private static int GetSimpleBaseNumber(int intervalBaseNumber) =>
+        intervalBaseNumber - GetSubOctaves(intervalBaseNumber) * 7;
 
     private static int GetSubOctaves(int intervalBaseNumber) => (intervalBaseNumber - 1) / 7;
-    
+
     private static Dictionary<IntervalQualityInternal, int> GetBasicSemitoneCountCorrections(int intervalBaseNumber)
     {
-        var diffs = new Dictionary<IntervalQualityInternal, int>()
+        var diffs = new Dictionary<IntervalQualityInternal, int>
         {
             {IntervalQualityInternal.Perfect, 0},
             {IntervalQualityInternal.Major, 0},
             {IntervalQualityInternal.Minor, -1},
-            {IntervalQualityInternal.Augmented, 1}
+            {IntervalQualityInternal.Augmented, 1},
         };
-        
+
         if (intervalBaseNumber == 1)
             diffs[IntervalQualityInternal.Diminished] = 0;
         else if (IsPerfectType(intervalBaseNumber))
@@ -111,30 +114,46 @@ internal class IntervalInternal : ElementaryInterval
 
     private bool IsNumberQualityCombinationValid(int diatonicScaleDegree, IntervalQualityInternal qualityInternal)
     {
-        var primaDeviation = 
+        var primaDeviation =
             diatonicScaleDegree == 1 &&
             qualityInternal == IntervalQualityInternal.Diminished;
-        
-        return 
+
+        return
             !primaDeviation &&
             GetValidIntervalChromaticQualitiesForDiatonicScaleDegree(diatonicScaleDegree).Contains(qualityInternal);
     }
 
-    private IEnumerable<IntervalQualityInternal> GetValidIntervalChromaticQualitiesForDiatonicScaleDegree(int diatonicScaleDegree)
+    private IEnumerable<IntervalQualityInternal> GetValidIntervalChromaticQualitiesForDiatonicScaleDegree(
+        int diatonicScaleDegree)
     {
-        return IsPerfectType(diatonicScaleDegree) ?
-            new[]
+        return IsPerfectType(diatonicScaleDegree)
+            ? new[]
             {
                 IntervalQualityInternal.Perfect,
                 IntervalQualityInternal.Diminished,
                 IntervalQualityInternal.Augmented
-            } :
-            new[]
+            }
+            : new[]
             {
                 IntervalQualityInternal.Major,
                 IntervalQualityInternal.Minor,
                 IntervalQualityInternal.Diminished,
-                IntervalQualityInternal.Augmented
+                IntervalQualityInternal.Augmented,
             };
+    }
+
+    public override string ToString() => $"{GetIntervalQualityNotation(QualityInternal)}{_diatonicScaleDegree}";
+
+    private static string GetIntervalQualityNotation(IntervalQualityInternal qualityInternal)
+    {
+        return qualityInternal switch
+        {
+            IntervalQualityInternal.Perfect => "P",
+            IntervalQualityInternal.Minor => "m",
+            IntervalQualityInternal.Major => "M",
+            IntervalQualityInternal.Augmented => "A",
+            IntervalQualityInternal.Diminished => "d",
+            _ => throw new InvalidOperationException()
+        };
     }
 }

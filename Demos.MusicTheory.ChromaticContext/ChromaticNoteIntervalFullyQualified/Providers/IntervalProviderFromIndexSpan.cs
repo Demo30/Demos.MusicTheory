@@ -30,13 +30,15 @@ internal class IntervalProviderFromIndexSpan
             intervalEnharmonics.Add(new IntervalInternal(analysis.MainDiatonicScaleDegree, quality));
 
             if (analysis.BaseDiatonicScaleDegree != (int) NoteQualityInternal.F)
-                intervalEnharmonics.Add(new IntervalInternal(analysis.MainDiatonicScaleDegree + 1,
-                    IntervalQualityInternal.Diminished));
+            {
+                intervalEnharmonics.Add(new IntervalInternal(analysis.MainDiatonicScaleDegree + 1, IntervalQualityInternal.Diminished));
+            }
 
-            if (new[] {(int) NoteQualityInternal.C, (int) NoteQualityInternal.F}.Contains(analysis
-                    .BaseDiatonicScaleDegree) && analysis.MainDiatonicScaleDegree > 1)
-                intervalEnharmonics.Add(new IntervalInternal(analysis.MainDiatonicScaleDegree - 1,
-                    IntervalQualityInternal.Augmented));
+            if (new[] {(int) NoteQualityInternal.C, (int) NoteQualityInternal.F}.Contains(analysis.BaseDiatonicScaleDegree)
+                && analysis.MainDiatonicScaleDegree > 1)
+            {
+                intervalEnharmonics.Add(new IntervalInternal(analysis.MainDiatonicScaleDegree - 1, IntervalQualityInternal.Augmented)); ;
+            }
         }
 
         return new IntervalEnharmonicsInternal(intervalEnharmonics.ToArray());

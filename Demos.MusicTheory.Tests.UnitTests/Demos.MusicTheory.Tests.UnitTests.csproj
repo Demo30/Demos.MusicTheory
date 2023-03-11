@@ -5,6 +5,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <LangVersion>11</LangVersion>
     <PackageId>Demos.MusicTheory.Tests.UnitTests</PackageId>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

@@ -10,9 +10,13 @@ internal class NotesTests : TestBase
     public static IEnumerable<TestCaseData> NotesDistanceInIntervalTestCases()
     {
         yield return new TestCaseData(new Note(NoteQuality.C, NoteModifier.Natural, 4), new Note(NoteQuality.B, NoteModifier.Natural, 3), Interval.MinorSecond);
-        yield return new TestCaseData(new Note(NoteQuality.C, NoteModifier.Natural, 4), new Note(NoteQuality.B, NoteModifier.Sharp, 3), Interval.PerfectUnison);
+        yield return new TestCaseData(new Note(NoteQuality.C, NoteModifier.Natural, 4), new Note(NoteQuality.B, NoteModifier.Sharp, 3), Interval.DiminishedSecond);
+        yield return new TestCaseData(new Note(NoteQuality.B, NoteModifier.Sharp, 3), new Note(NoteQuality.C, NoteModifier.Natural, 4), Interval.DiminishedSecond);
+        yield return new TestCaseData(new Note(NoteQuality.B, NoteModifier.DoubleSharp, 3), new Note(NoteQuality.C, NoteModifier.Sharp, 4), Interval.DiminishedSecond);
+        yield return new TestCaseData(new Note(NoteQuality.C, NoteModifier.Sharp, 4), new Note(NoteQuality.D, NoteModifier.Flat, 4), Interval.DiminishedSecond);
+        yield return new TestCaseData(new Note(NoteQuality.C, NoteModifier.Natural, 4), new Note(NoteQuality.D, NoteModifier.DoubleFlat, 4), Interval.DiminishedSecond);
         yield return new TestCaseData(new Note(NoteQuality.C, NoteModifier.Natural, 4), new Note(NoteQuality.C, NoteModifier.Natural, 4), Interval.PerfectUnison);
-        yield return new TestCaseData(new Note(NoteQuality.C, NoteModifier.Natural, 4), new Note(NoteQuality.C, NoteModifier.Sharp, 4), Interval.MinorSecond);
+        yield return new TestCaseData(new Note(NoteQuality.C, NoteModifier.Natural, 4), new Note(NoteQuality.C, NoteModifier.Sharp, 4), Interval.AugmentedUnison);
         yield return new TestCaseData(new Note(NoteQuality.C, NoteModifier.Natural, 4), new Note(NoteQuality.D, NoteModifier.Natural, 4), Interval.MajorSecond);
         yield return new TestCaseData(new Note(NoteQuality.C, NoteModifier.Natural, 4), new Note(NoteQuality.E, NoteModifier.Natural, 4), Interval.MajorThird);
     }
@@ -25,7 +29,7 @@ internal class NotesTests : TestBase
         var interval = startNote.GetIntervalFromOtherNote(endNote);
 
         // Then
-        interval.Should().Be(expectedInterval);
+        interval.Should().BeEquivalentTo(expectedInterval);
     }
     
     #endregion
