@@ -24,7 +24,7 @@ internal class ServicesTest
         var keys = ServicesManager.ServicesProvider.Services.Keys;
         
         // Then
-        keys.Should().HaveCount(5);
+        keys.Should().HaveCount(6);
     }
     
     [Test]

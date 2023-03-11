@@ -2,6 +2,7 @@
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
 using Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 using Demos.MusicTheory.ChromaticContext.Helpers;
+using Demos.MusicTheory.ChromaticContext.Providers;
 using Demos.MusicTheory.Services;
 
 namespace Demos.MusicTheory.Setup;
@@ -34,6 +35,7 @@ public static class MusicTheorySetup
         provider.RegisterService(() => new NoteProviderFromNoteByInterval());
         provider.RegisterService(() => new NoteProviderFromIndex());
         provider.RegisterService(() => new IntervalProviderFromIndexSpan());
-        provider.RegisterService(() => new ElementaryNoteFromDiatonicScaleKeySignatureProvider()); 
+        provider.RegisterService(() => new ElementaryNoteFromDiatonicScaleKeySignatureProvider());
+        provider.RegisterService(() => new DiatonicDegreeFromNoteRangeProvider());
     }
 }

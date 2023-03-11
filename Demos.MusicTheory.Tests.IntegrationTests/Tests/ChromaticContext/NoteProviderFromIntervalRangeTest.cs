@@ -2,6 +2,7 @@
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
+using Demos.MusicTheory.ChromaticContext.Providers;
 using Demos.MusicTheory.Commons;
 using FluentAssertions;
 using NUnit.Framework;
@@ -17,6 +18,7 @@ internal class NoteProviderFromIntervalRangeTest : TestBase
     public void SetUp()
     {
         RegisterService<IntervalProviderFromIndexSpan>();
+        RegisterService<DiatonicDegreeFromNoteRangeProvider>();
         _provider = new IntervalProviderFromNoteRange();
     }
 
