@@ -1,4 +1,6 @@
-﻿namespace Demos.MusicTheory.Services;
+﻿using System;
+
+namespace Demos.MusicTheory.Services;
 
 internal static class ServicesManager
 {

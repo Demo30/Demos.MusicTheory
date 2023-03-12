@@ -1,4 +1,5 @@
-﻿using Demos.MusicTheory.ChromaticContext;
+﻿using System;
+using Demos.MusicTheory.ChromaticContext;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers;
 using Demos.MusicTheory.ChromaticContext.Constants;

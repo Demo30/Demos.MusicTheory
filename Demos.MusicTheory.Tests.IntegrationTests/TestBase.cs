@@ -1,4 +1,5 @@
-﻿using Demos.MusicTheory.ChromaticContext.Helpers;
+﻿using System;
+using Demos.MusicTheory.ChromaticContext.Helpers;
 using Demos.MusicTheory.Services;
 using NUnit.Framework;
 

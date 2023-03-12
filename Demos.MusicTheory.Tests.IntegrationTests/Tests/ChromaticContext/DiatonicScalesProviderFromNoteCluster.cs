@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Demos.MusicTheory.ChromaticContext;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 using Demos.MusicTheory.ChromaticContext.DiatonicSubcontext;

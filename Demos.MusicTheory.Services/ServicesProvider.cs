@@ -1,5 +1,8 @@
 ﻿#nullable enable
 
+using System;
+using System.Collections.Generic;
+
 namespace Demos.MusicTheory.Services;
 
 internal class ServicesProvider

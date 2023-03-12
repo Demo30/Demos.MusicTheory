@@ -1,4 +1,6 @@
-﻿using Demos.MusicTheory.ChromaticContext;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Demos.MusicTheory.ChromaticContext;
 using Demos.MusicTheory.ChromaticContext.DiatonicSubcontext;
 using Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 using Demos.MusicTheory.Commons;
