@@ -1,4 +1,7 @@
 cd .\Demos.MusicTheory\
+
+dotnet build -c Release .\Demos.MusicTheory.csproj
+
 dotnet pack -c Release -p:NuspecFile=.\.nuspec -o .\..\NugetPackageBuilds\
 
 @echo off

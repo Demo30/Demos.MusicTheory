@@ -1,4 +1,4 @@
-﻿using Demos.MusicTheory.Abstractions.Commons;
+﻿using Demos.MusicTheory.Commons;
 
 namespace Demos.MusicTheory.ChromaticContext;
 
