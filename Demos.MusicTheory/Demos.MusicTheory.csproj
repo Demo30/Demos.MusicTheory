@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <LangVersion>11</LangVersion>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>2.0.0</PackageVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -15,5 +15,10 @@
     <ProjectReference Include="..\Demos.MusicTheory.Services\Demos.MusicTheory.Services.csproj" />
     <ProjectReference Include="..\Demos.MusicTheory.Setup\Demos.MusicTheory.Setup.csproj" />
   </ItemGroup>
+
+
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
 
 </Project>
