@@ -2,11 +2,10 @@
 using System.Linq;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers;
-using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
-using Demos.MusicTheory.ChromaticContext.DiatonicSubcontext;
 using Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 using Demos.MusicTheory.Mappers;
+using Demos.MusicTheory.MidiAdapter;
 using Demos.MusicTheory.Setup;
 
 namespace Demos.MusicTheory;
@@ -28,6 +27,8 @@ public class MusicTheoryService
     private readonly IElementaryNoteFromDiatonicScaleKeySignatureProvider _elementaryNoteFromDiatonicScaleKeySignatureProvider;
     private readonly IElementaryNotesProviderFromDiatonicScale _elementaryNotesProviderFromDiatonicScale;
     private readonly NoteProviderFromNoteByDiatonicOffset _noteProviderFromNoteByDiatonicOffset;
+
+    private readonly NoteFromMidiProvider _noteFromMidiProvider;
     
     public MusicTheoryService()
     {
@@ -44,6 +45,8 @@ public class MusicTheoryService
         _elementaryNoteFromDiatonicScaleKeySignatureProvider = new ElementaryNoteFromDiatonicScaleKeySignatureProvider();
         _elementaryNotesProviderFromDiatonicScale = new ElementaryNotesProviderFromDiatonicScale();
         _noteProviderFromNoteByDiatonicOffset = new NoteProviderFromNoteByDiatonicOffset();
+
+        _noteFromMidiProvider = new NoteFromMidiProvider();
     }
 
     public IEnumerable<Note> GetNotesBySemitonesDistance(Note sourceNote, int semitoneCount, Direction direction = Direction.Right) =>
@@ -84,4 +87,9 @@ public class MusicTheoryService
     public IEnumerable<NoteQuality> GetElementaryNotesByScale(Scale scale) =>
         _elementaryNotesProviderFromDiatonicScale.GetChromaticElementaryNotes(ScaleMapper.Map(scale))
             .Select(x => NoteMapper.Map(x.QualityInternal));
+
+    public IEnumerable<Note> GetEnharmonicNotesFromMidiIndex(int midiIndex) =>
+        _noteFromMidiProvider.GetEnharmonicNotesFromMidiIndex(midiIndex)
+            .Notes
+            .Select(NoteMapper.Map);
 }

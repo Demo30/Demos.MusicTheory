@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Demos.MusicTheory.ChromaticContext\Demos.MusicTheory.ChromaticContext.csproj" />
+    <ProjectReference Include="..\Demos.MusicTheory.MidiAdapter\Demos.MusicTheory.MidiAdapter.csproj" />
     <ProjectReference Include="..\Demos.MusicTheory.PhysicalContext\Demos.MusicTheory.PhysicalContext.csproj" />
     <ProjectReference Include="..\Demos.MusicTheory.Services\Demos.MusicTheory.Services.csproj" />
     <ProjectReference Include="..\Demos.MusicTheory.Setup\Demos.MusicTheory.Setup.csproj" />

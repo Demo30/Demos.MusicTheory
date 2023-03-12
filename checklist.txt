@@ -39,6 +39,14 @@
 [❓] Mít cluster plně identifikovaných not a dostat kolekci jim vyhovujících akordů
 	[bude vyžadovat další zamyšlení, protože pojmeme-li akordy dostečně obecně, pak je nejasné, z jakého supersetu vybíráme]
 
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+⬛ Propojení s fyzickým kontextem
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+
+[☑] Mít možnost z midi indexu získat notu
+[🔲] Mít možnost z noty získat midi index
+[🔲] Mít možnost z noty získat frekvenci v Hz dle ladění (základní stačí)
+
 
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
 ⬛ Další práce

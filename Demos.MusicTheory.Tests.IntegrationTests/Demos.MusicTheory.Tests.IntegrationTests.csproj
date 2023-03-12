@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Demos.MusicTheory.ChromaticContext\Demos.MusicTheory.ChromaticContext.csproj" />
+      <ProjectReference Include="..\Demos.MusicTheory.MidiAdapter\Demos.MusicTheory.MidiAdapter.csproj" />
     </ItemGroup>
 
 </Project>
