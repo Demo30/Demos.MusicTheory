@@ -6,12 +6,7 @@ namespace Demos.MusicTheory;
 
 public class Note
 {
-    public override int GetHashCode()
-    {
-        return _noteInternal.GetHashCode();
-    }
-
-    private NoteInternal _noteInternal;
+    private readonly NoteInternal _noteInternal;
 
     internal NoteInternal NoteInternal => _noteInternal;
     
@@ -53,6 +48,11 @@ public class Note
         if (obj.GetType() != GetType()) return false;
         
         return _noteInternal == ((Note) obj)._noteInternal;
+    }
+    
+    public override int GetHashCode()
+    {
+        return _noteInternal.GetHashCode();
     }
 
     #endregion

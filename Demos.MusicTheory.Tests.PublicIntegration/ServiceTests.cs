@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 namespace Demos.MusicTheory.Tests.PublicIntegration;
 
+[TestFixture]
 internal class ServiceTests : TestBase
 {
     public static IEnumerable<TestCaseData> GetElementaryNotesFromScaleTestCases()

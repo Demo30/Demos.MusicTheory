@@ -113,4 +113,10 @@ public class MusicTheoryService
         _diatonicScalesProviderFromNoteCluster
             .GetDiatonicScales(notes.Select(NoteMapper.Map))
             .Select(ScaleMapper.Map);
+
+    public IEnumerable<Scale> GetScalesByChord(Chord chord) =>
+        _diatonicScalesProviderFromNoteCluster
+            .GetDiatonicScales(chord.ChordNotes.Select(NoteMapper.Map))
+            .Select(ScaleMapper.Map);
+
 }

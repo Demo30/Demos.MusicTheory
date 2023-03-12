@@ -9,7 +9,7 @@ internal class NoteEnharmonicsInternal : ChromaticEntity
 
     public NoteEnharmonicsInternal(NoteInternal[] enharmonicNotes) : base(GetChromaticContextIndex(enharmonicNotes))
     {
-        if ((enharmonicNotes?.Length ?? 0) == 0)
+        if (enharmonicNotes.Length == 0)
             throw new ArgumentNullException(nameof(enharmonicNotes));
 
         CheckEnharmonicNoteCompatibility(enharmonicNotes);

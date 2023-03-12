@@ -17,7 +17,7 @@
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
 [☑][✅] Mít tóninu (C major) a vypsat všechny její základní noty (C, D, E, F, G, A, B).
 	[✅ lze jednoduše získat z kvalifikovaných]
-[✅][✅] Mít tóninu (G major) a vypsat všechny její noty (C2, D2, E2, F♯2, G2, A2, B2) v daném řádu (2).
+[☑][✅] Mít tóninu (G major) a vypsat všechny její noty (C2, D2, E2, F♯2, G2, A2, B2) v daném řádu (2).
 	[✅ vlastně podivný požadavek + lze jednoduše získat z kvalifikovaných]
 [☑][☑] Mít tóninu (G major) a vypsat všechny její základní kvalifikované noty v pořadí od toniky (G, A, B, C, D, E, F♯).
 [☑][☑] Mít tóninu (C major) a vypsat notu vzdálenou určitý počet diatonických kroků od zvolené noty či dostat error, pokud zvolená nota nepatří do tóniny. (E2 + 6 => D3).
@@ -33,9 +33,8 @@
 	[☑] augmented, diminished triads
 	[🔲] seventh and other
 [✅] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat cluster jejích inverzí.
-	[🔲] To už tam zdá se je, ale potřeba ověřit
-[✅] Mít akord a dostat kolekci tónin, do kterých spadají
-	[✅ funkce pouze obaluje funkcionalitu získání tónin z kolekce not <= zde jde tedy pouze o získání not z akordu]
+	[🔲❗] Něco tam je, ale je to zabugované
+[☑][✅] Mít akord a dostat kolekci tónin, do kterých spadají
 [❓] Mít cluster plně identifikovaných not a dostat kolekci jim vyhovujících akordů
 	[bude vyžadovat další zamyšlení, protože pojmeme-li akordy dostečně obecně, pak je nejasné, z jakého supersetu vybíráme]
 
