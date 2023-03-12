@@ -38,5 +38,7 @@ public static class MusicTheorySetup
         provider.RegisterService(() => new ElementaryNoteFromDiatonicScaleKeySignatureProvider());
         provider.RegisterService(() => new DiatonicDegreeFromNoteRangeProvider());
         provider.RegisterService(() => new NoteProviderFromIndex());
+        provider.RegisterService(() => new DiatonicScalesProviderFromNoteCluster());
+        provider.RegisterService(() => new ElementaryNotesProviderFromDiatonicScale());
     }
 }

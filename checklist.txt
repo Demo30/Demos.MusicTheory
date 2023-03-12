@@ -15,14 +15,14 @@
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
 ⬛ Práce s tóninami
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
-[✅] Mít tóninu (C major) a vypsat všechny její základní noty (C, D, E, F, G, A, B).
+[☑][✅] Mít tóninu (C major) a vypsat všechny její základní noty (C, D, E, F, G, A, B).
 	[✅ lze jednoduše získat z kvalifikovaných]
-[✅] Mít tóninu (G major) a vypsat všechny její noty (C2, D2, E2, F♯2, G2, A2, B2) v daném řádu (2).
+[✅][✅] Mít tóninu (G major) a vypsat všechny její noty (C2, D2, E2, F♯2, G2, A2, B2) v daném řádu (2).
 	[✅ vlastně podivný požadavek + lze jednoduše získat z kvalifikovaných]
-[☑] Mít tóninu (G major) a vypsat všechny její základní kvalifikované noty v pořadí od toniky (G, A, B, C, D, E, F♯).
-[☑] Mít tóninu (C major) a vypsat notu vzdálenou určitý počet diatonických kroků od zvolené noty či dostat error, pokud zvolená nota nepatří do tóniny. (E2 + 6 => D3).
-[☑] Mít kolekci základních not (E, G, C) a získat kolekci všech tónin, do kterých spadají (minimálně C a možná další hehe...)
-[☑] Mít kolekci plně identifikovaných not (E2, G2, C2) a získat kolekci všech tónin, do kterých spadají
+[☑][☑] Mít tóninu (G major) a vypsat všechny její základní kvalifikované noty v pořadí od toniky (G, A, B, C, D, E, F♯).
+[☑][☑] Mít tóninu (C major) a vypsat notu vzdálenou určitý počet diatonických kroků od zvolené noty či dostat error, pokud zvolená nota nepatří do tóniny. (E2 + 6 => D3).
+[☑][☑] Mít kolekci základních not (E, G, C) a získat kolekci všech tónin, do kterých spadají (minimálně C a možná další hehe...)
+[☑][☑] Mít kolekci plně identifikovaných not (E2, G2, C2) a získat kolekci všech tónin, do kterých spadají
 
 
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
@@ -43,7 +43,7 @@
 ⬛ Propojení s fyzickým kontextem
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
 
-[☑] Mít možnost z midi indexu získat notu
+[☑][☑] Mít možnost z midi indexu získat notu
 [🔲] Mít možnost z noty získat midi index
 [🔲] Mít možnost z noty získat frekvenci v Hz dle ladění (základní stačí)
 

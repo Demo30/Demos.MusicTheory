@@ -7,14 +7,14 @@ namespace Demos.MusicTheory.ChromaticContext.DiatonicSubcontext.Providers;
 
 internal sealed class ElementaryNotesProviderFromDiatonicScale : IElementaryNotesProviderFromDiatonicScale
 {
-    private readonly Lazy<IElementaryNoteFromDiatonicScaleKeySignatureProvider> _provider;
+    private readonly Lazy<ElementaryNoteFromDiatonicScaleKeySignatureProvider> _provider;
 
-    public ElementaryNotesProviderFromDiatonicScale() : this(new Lazy<IElementaryNoteFromDiatonicScaleKeySignatureProvider>(ServicesManager.GetService<ElementaryNoteFromDiatonicScaleKeySignatureProvider>))
+    public ElementaryNotesProviderFromDiatonicScale() : this(new Lazy<ElementaryNoteFromDiatonicScaleKeySignatureProvider>(ServicesManager.GetService<ElementaryNoteFromDiatonicScaleKeySignatureProvider>))
     {
         
     }
 
-    internal ElementaryNotesProviderFromDiatonicScale(Lazy<IElementaryNoteFromDiatonicScaleKeySignatureProvider> provider)
+    internal ElementaryNotesProviderFromDiatonicScale(Lazy<ElementaryNoteFromDiatonicScaleKeySignatureProvider> provider)
     {
         _provider = provider;
     }

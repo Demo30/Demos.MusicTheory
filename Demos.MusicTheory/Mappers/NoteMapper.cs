@@ -7,7 +7,9 @@ namespace Demos.MusicTheory.Mappers;
 
 internal static class NoteMapper
 {
-    public static Note Map(NoteInternal noteInternal) => new Note(Map(noteInternal.QualityInternal), Map(noteInternal.Modifier), (uint)noteInternal.Order);
+    public static Note Map(NoteInternal noteInternal) => new(Map(noteInternal.QualityInternal), Map(noteInternal.Modifier), (uint)noteInternal.Order);
+    public static NoteInternal Map(Note note) => new(Map(note.NoteQuality), (int)note.Order, Map(note.NoteModifier));
+    
     public static NoteQualityInternal Map(NoteQuality noteQuality) =>
         noteQuality switch
         {

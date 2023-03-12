@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Demos.MusicTheory.ChromaticContext;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteFullyQualified.Providers;
 using Demos.MusicTheory.ChromaticContext.ChromaticNoteIntervalFullyQualified.Providers;
@@ -88,8 +89,28 @@ public class MusicTheoryService
         _elementaryNotesProviderFromDiatonicScale.GetChromaticElementaryNotes(ScaleMapper.Map(scale))
             .Select(x => NoteMapper.Map(x.QualityInternal));
 
+    public IEnumerable<Note> GetNotesByScale(Scale scale, uint order = 4) =>
+        _elementaryNotesProviderFromDiatonicScale
+            .GetChromaticElementaryNotes(ScaleMapper.Map(scale))
+            .Select(en => new Note(NoteMapper.Map(en.QualityInternal), NoteMapper.Map(en.Modifier), order));
+
     public IEnumerable<Note> GetEnharmonicNotesFromMidiIndex(int midiIndex) =>
         _noteFromMidiProvider.GetEnharmonicNotesFromMidiIndex(midiIndex)
             .Notes
             .Select(NoteMapper.Map);
+    
+    public Note GetNoteByDiatonicStepsFromNoteWithinScale(Scale scale, Note referenceNote, int diatonicSteps /*, Direction direction = Direction.Right*/) =>
+        NoteMapper.Map(
+            _noteProviderFromNoteByDiatonicOffset.GetNote(ScaleMapper.Map(scale), NoteMapper.Map(referenceNote), diatonicSteps));
+
+    public IEnumerable<Scale> GetScalesByElementaryNotes(IEnumerable<(NoteQuality quality, NoteModifier modifier)> elementaryNotes) =>
+        _diatonicScalesProviderFromNoteCluster
+            .GetDiatonicScales(elementaryNotes.Select(en =>
+                new ElementaryNoteInternal(NoteMapper.Map(en.quality), NoteMapper.Map(en.modifier))))
+            .Select(ScaleMapper.Map);
+    
+    public IEnumerable<Scale> GetScalesByNotes(IEnumerable<Note> notes) =>
+        _diatonicScalesProviderFromNoteCluster
+            .GetDiatonicScales(notes.Select(NoteMapper.Map))
+            .Select(ScaleMapper.Map);
 }

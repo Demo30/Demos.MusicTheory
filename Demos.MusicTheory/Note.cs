@@ -6,6 +6,11 @@ namespace Demos.MusicTheory;
 
 public class Note
 {
+    public override int GetHashCode()
+    {
+        return _noteInternal.GetHashCode();
+    }
+
     private NoteInternal _noteInternal;
 
     internal NoteInternal NoteInternal => _noteInternal;
@@ -41,6 +46,15 @@ public class Note
     
     public static bool operator >=(Note a, Note b) => a._noteInternal >= b._noteInternal;
 
+    public override bool Equals(object? obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != GetType()) return false;
+        
+        return _noteInternal == ((Note) obj)._noteInternal;
+    }
+
     #endregion
 
     #region Note services
@@ -59,6 +73,9 @@ public class Note
     
     public Interval GetIntervalFromOtherNote(Note secondNote) =>
         MusicTheoryService.Instance.GetIntervalBetweenNotes(this, secondNote);
+
+    public Note GetNoteByDiatonicStepsWithinScale(Scale scale, int diatonicSteps) =>
+        MusicTheoryService.Instance.GetNoteByDiatonicStepsFromNoteWithinScale(scale, this, diatonicSteps);
 
     #endregion
 }

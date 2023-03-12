@@ -20,5 +20,14 @@ public class Scale
     
     public ScaleQuality Type => ScaleMapper.Map(_diatonicScale.DiatonicScaleType);
 
+    public override string ToString()
+    {
+        var modifier = NoteMapper.Map(_diatonicScale.Modifier);
+        var modifierString = modifier == NoteModifier.Natural ? "" : modifier.ToString();
+        
+        return $"{NoteMapper.Map(_diatonicScale.QualityInternal)}{modifierString} {_diatonicScale.DiatonicScaleType}";
+    }
+        
+
     #endregion
 }
