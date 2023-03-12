@@ -1,0 +1,8 @@
+.vs/
+*.suo
+*.user
+WIP
+bin
+obj
+packages
+NugetPackageBuilds

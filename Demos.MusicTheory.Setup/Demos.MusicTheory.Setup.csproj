@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Demos.MusicTheory.ChromaticContext\Demos.MusicTheory.ChromaticContext.csproj" />
+      <ProjectReference Include="..\Demos.MusicTheory.Commons\Demos.MusicTheory.Commons.csproj" />
+      <ProjectReference Include="..\Demos.MusicTheory.PhysicalContext\Demos.MusicTheory.PhysicalContext.csproj" />
+      <ProjectReference Include="..\Demos.MusicTheory.Services\Demos.MusicTheory.Services.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <LangVersion>11</LangVersion>
+    <PackageVersion>2.0.0</PackageVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Demos.MusicTheory.ChromaticContext\Demos.MusicTheory.ChromaticContext.csproj" />
+    <ProjectReference Include="..\Demos.MusicTheory.MidiAdapter\Demos.MusicTheory.MidiAdapter.csproj" />
+    <ProjectReference Include="..\Demos.MusicTheory.PhysicalContext\Demos.MusicTheory.PhysicalContext.csproj" />
+    <ProjectReference Include="..\Demos.MusicTheory.Services\Demos.MusicTheory.Services.csproj" />
+    <ProjectReference Include="..\Demos.MusicTheory.Setup\Demos.MusicTheory.Setup.csproj" />
+  </ItemGroup>
+
+
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+</Project>

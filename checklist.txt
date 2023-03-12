@@ -1,0 +1,53 @@
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+⬛ Práce s notami a intervaly
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+[☑][☑] Mít možnost pracovat s notami identifikovanými ve smyslu: C♯2
+[☑][☑] Mít možnost pracovat s intervaly identifikovanými ve smyslu: M3, m3, P5, dim5
+[☑][☑] Mít možnost získat notu (C♯2) pomocí pokročení v intervalu (M3, m3, dim5) směrem výš či níž.
+[☑][☑] Mít notu a dostat kolekci všech enharmonických ekvivalentů (C♯ => C♯, Db; D => Ebb, C♯♯)
+[☑][☑] Mít notu a vzdálenost od noty v půltónech a dostat kolekci všech enharmonických ekvivalentů (C, 1 => C♯, Db; C, 3 => D♯, Eb)
+[✅] Mít rozmezí dvou not (C1-F1) a určit, jaký mezi sebou mají rozestup v půltónech.
+	-  nepodporuji A3#-C4bb
+[☑] Mít rozmezí dvou not (C1-F1) a určit, jaký mezi sebou mají intervalový rozestup (P5) (nikoliv cluster!)
+[☑][☑] Mít vzdálenost v chromatických krocích a dostat kolekci všech odpovídajících enharmonicky ekvivalentních intervalů.
+
+
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+⬛ Práce s tóninami
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+[☑][✅] Mít tóninu (C major) a vypsat všechny její základní noty (C, D, E, F, G, A, B).
+	[✅ lze jednoduše získat z kvalifikovaných]
+[☑][✅] Mít tóninu (G major) a vypsat všechny její noty (C2, D2, E2, F♯2, G2, A2, B2) v daném řádu (2).
+	[✅ vlastně podivný požadavek + lze jednoduše získat z kvalifikovaných]
+[☑][☑] Mít tóninu (G major) a vypsat všechny její základní kvalifikované noty v pořadí od toniky (G, A, B, C, D, E, F♯).
+[☑][☑] Mít tóninu (C major) a vypsat notu vzdálenou určitý počet diatonických kroků od zvolené noty či dostat error, pokud zvolená nota nepatří do tóniny. (E2 + 6 => D3).
+[☑][☑] Mít kolekci základních not (E, G, C) a získat kolekci všech tónin, do kterých spadají (minimálně C a možná další hehe...)
+[☑][☑] Mít kolekci plně identifikovaných not (E2, G2, C2) a získat kolekci všech tónin, do kterých spadají
+
+
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+⬛ Práce s akordy
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+[☑] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat jejich skladbu v notách (C, E, G)
+	[☑] minor, major triad
+	[☑] augmented, diminished triads
+	[🔲] seventh and other
+[✅] Mít možnost pracovat s akordy identifikovanými ve smyslu (Cmaj, Cmaj7) a dostat cluster jejích inverzí.
+	[🔲❗] Něco tam je, ale je to zabugované
+[☑][✅] Mít akord a dostat kolekci tónin, do kterých spadají
+[❓] Mít cluster plně identifikovaných not a dostat kolekci jim vyhovujících akordů
+	[bude vyžadovat další zamyšlení, protože pojmeme-li akordy dostečně obecně, pak je nejasné, z jakého supersetu vybíráme]
+
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+⬛ Propojení s fyzickým kontextem
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+
+[☑][☑] Mít možnost z midi indexu získat notu
+[🔲] Mít možnost z noty získat midi index
+[🔲] Mít možnost z noty získat frekvenci v Hz dle ladění (základní stačí)
+
+
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+⬛ Další práce
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+[ ] further development would probably need to adhere to music set theory (https://en.wikipedia.org/wiki/Set_theory_(music)) terms, concepts and findings in general.
